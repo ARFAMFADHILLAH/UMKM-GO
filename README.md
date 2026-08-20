@@ -1,12 +1,11 @@
 # UMKM-Go
 
-Website direktori UMKM Indonesia untuk lomba. Monorepo berisi **backend API** dan **frontend web**.
+Website direktori UMKM Indonesia=. Monorepo berisi **backend API** dan **frontend web**.
 
 ## Struktur
 
 - **`backend/`** — REST API Laravel 13 + Sanctum (PHP 8.4+). Dokumentasi lengkap ada di `backend/README.md`.
 - **`frontend/`** — Aplikasi web React 19 + Vite + Tailwind CSS v4.
-- **`CATATAN-BACKEND.md`** — Daftar hal yang perlu dibenahi/ditambahin backend oleh tim backend (baca ya!).
 
 ## Menjalankan
 
