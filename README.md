@@ -1,10 +1,10 @@
-# UMKM-Go 🛖
+# UMKM-Go
 
 Website direktori UMKM Indonesia untuk lomba. Monorepo berisi **backend API** dan **frontend web**.
 
 ## Struktur
 
-- **`backend/`** — REST API Laravel 13 + Sanctum (PHP 8.3+). Dokumentasi lengkap ada di `backend/README.md`.
+- **`backend/`** — REST API Laravel 13 + Sanctum (PHP 8.4+). Dokumentasi lengkap ada di `backend/README.md`.
 - **`frontend/`** — Aplikasi web React 19 + Vite + Tailwind CSS v4.
 - **`CATATAN-BACKEND.md`** — Daftar hal yang perlu dibenahi/ditambahin backend oleh tim backend (baca ya!).
 
@@ -50,5 +50,5 @@ Buka http://localhost:5173. Vite sudah mem-proxy `/api` dan `/storage` ke `local
 
 ## Desain
 
-Palet warna terracotta-panas, font *Fraunces* (display serif) + *Plus Jakarta Sans* (body),
+Palet warna terracotta-panas, font *Inter Tight* (display) + *Inter* (body),
 dengan aksen hijau WhatsApp. Jika font tidak termuat (offline), fallback ke system font.
