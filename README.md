@@ -1,6 +1,6 @@
 # UMKM-Go
 
-Website direktori UMKM Indonesia=. Monorepo berisi **backend API** dan **frontend web**.
+Website direktori UMKM Indonesia. Monorepo berisi **backend API** dan **frontend web**.
 
 ## Struktur
 
