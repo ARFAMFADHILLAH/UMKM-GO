@@ -35,7 +35,7 @@ Buka http://localhost:5173. Vite sudah mem-proxy `/api` dan `/storage` ke `local
 
 | Email | Password |
 |---|---|
-| `budi@gmail.com` | `password` |
+| `tempemendoanmasadam@gmail.com` | `tempemendo@nmas@d4m26` |
 
 ## Fitur Frontend
 

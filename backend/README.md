@@ -59,7 +59,9 @@ Server akan berjalan di `http://localhost:8000`.
 
 | Email | Password |
 |---|---|
-| `budi@gmail.com` | `password` |
+| `tempemendoanmasadam@gmail.com` | `tempemendo@nmas@d4m26` |
+
+Seeder mengisi 15 UMKM milik 2 user (10 milik akun demo di atas, 5 milik `ratnawijaya@gmail.com`) yang tersebar di berbagai kota di Indonesia — lengkap dengan gambar sampul (placeholder yang digenerate otomatis ke `storage/app/public/umkms`) serta koordinat latitude/longitude untuk peta.
 
 ## Dokumentasi API
 
@@ -81,6 +83,7 @@ Base URL: `http://localhost:8000/api`
 |---|---|---|
 | `POST` | `/api/logout` | Logout dan hapus token aktif |
 | `GET` | `/api/me` | Info user yang sedang login |
+| `GET` | `/api/my-umkms` | Daftar UMKM milik user login (paginasi) |
 | `POST` | `/api/umkms` | Daftarkan UMKM baru |
 | `POST` | `/api/umkms/{id}` | Ubah UMKM (owner saja, gunakan `_method=PUT` untuk upload gambar) |
 | `DELETE` | `/api/umkms/{id}` | Hapus UMKM (owner saja) |
@@ -102,9 +105,9 @@ POST /api/register
 Content-Type: application/json
 
 {
-  "name": "Budi Mulya",
-  "email": "budi@gmail.com",
-  "password": "password"
+  "name": "Adam Prasetyo",
+  "email": "tempemendoanmasadam@gmail.com",
+  "password": "tempemendo@nmas@d4m26"
 }
 ```
 
@@ -117,7 +120,7 @@ Content-Type: application/json
   "data": {
     "id": 1,
     "name": "Budi Mulya",
-    "email": "budi@gmail.com"
+    "email": "tempemendoanmasadam@gmail.com"
   },
   "access_token": "1|xxxxxxxxxxxxxxxxxxxxxxxx",
   "token_type": "Bearer"
@@ -131,8 +134,8 @@ POST /api/login
 Content-Type: application/json
 
 {
-  "email": "budi@gmail.com",
-  "password": "password"
+  "email": "tempemendoanmasadam@gmail.com",
+  "password": "tempemendo@nmas@d4m26"
 }
 ```
 
@@ -142,7 +145,7 @@ Content-Type: application/json
 {
   "success": true,
   "message": "Login berhasil",
-  "data": { "id": 1, "name": "Budi Mulya", "email": "budi@gmail.com" },
+  "data": { "id": 1, "name": "Adam Prasetyo", "email": "tempemendoanmasadam@gmail.com" },
   "access_token": "1|xxxxxxxxxxxxxxxxxxxxxxxx",
   "token_type": "Bearer"
 }
@@ -159,31 +162,44 @@ Authorization: Bearer 1|xxxxxxxxxxxxxxxxxxxxxxxx
 
 ```json
 {
-  "current_page": 1,
   "data": [
     {
       "id": 1,
-      "name": "Kripik Tempe Oemah",
-      "slug": "kripik-tempe-oemah",
-      "description": "Keripik tempe renyah khas buatan rumah dengan bumbu rempah pilihan tanpa pengawet.",
-      "address": "Jl. Merdeka No. 45, Kecamatan Lowokwaru",
+      "user_id": 1,
+      "name": "Tempe Mendoan Mas Adam",
+      "slug": "tempe-mendoan-mas-adam",
+      "description": "Mendoan tempe goreng tepung renyah khas Banyumas, digoreng dadakan setiap pesanan.",
+      "address": "Jl. Kawi Atas No. 24, Lowokwaru",
       "province": "Jawa Timur",
       "city": "Kota Malang",
       "phone_whatsapp": "6281234567890",
-      "instagram": "kripiktempe_oemah",
+      "instagram": "tempemendoan.masadam",
       "website_url": null,
-      "image_cover": "http://localhost:8000/storage/umkms/xxx.jpg",
-      "latitude": null,
-      "longitude": null,
+      "image_cover": "http://localhost:8000/storage/umkms/tempe-mendoan-mas-adam.jpg",
+      "latitude": -7.9553,
+      "longitude": 112.621,
       "category": { "id": 1, "name": "Kuliner", "slug": "kuliner" },
       "created_at": "2026-08-20 10:00:00"
     }
   ],
-  "last_page": 1,
-  "per_page": 10,
-  "total": 1
+  "links": { "...": "tautan paginasi" },
+  "meta": {
+    "current_page": 1,
+    "last_page": 2,
+    "per_page": 10,
+    "total": 15
+  }
 }
 ```
+
+**Daftar UMKM milik user login**
+
+```http
+GET /api/my-umkms
+Authorization: Bearer 1|xxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+**Response:** bentuk paginasi sama persis dengan `GET /api/umkms`, hanya berisi UMKM milik user yang sedang login (tanpa filter `is_verified`).
 
 **Daftarkan UMKM (multipart/form-data)**
 
@@ -232,7 +248,7 @@ database/
 ├── migrations/                     # users, categories, umkms, personal_access_tokens, dll
 ├── seeders/
 │   ├── CategorySeeder.php          # 5 kategori default
-│   └── UmkmSeeder.php              # Contoh user & UMKM
+│   └── UmkmSeeder.php              # 2 user demo & 15 UMKM (gambar + koordinat)
 routes/
 └── api.php                         # Definisi endpoint API
 ```

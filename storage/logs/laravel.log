@@ -1,0 +1,411 @@
+[2026-08-20 07:09:06] local.ERROR: Too many arguments to "make:model" command, expected arguments "name". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Too many arguments to \"make:model\" command, expected arguments \"name\". at /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Input/ArgvInput.php:199)
+[stacktrace]
+#0 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Input/ArgvInput.php(92): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument()
+#1 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Input/ArgvInput.php(77): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#2 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Input/Input.php(53): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Command/Command.php(238): Symfony\\Component\\Console\\Input\\Input->bind()
+#4 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php(261): Symfony\\Component\\Console\\Command\\Command->run()
+#5 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(1144): Illuminate\\Console\\Command->run()
+#6 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(379): Symfony\\Component\\Console\\Application->doRunCommand()
+#7 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(218): Symfony\\Component\\Console\\Application->doRun()
+#8 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony\\Component\\Console\\Application->run()
+#9 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1242): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/artisan(16): Illuminate\\Foundation\\Application->handleCommand()
+#11 {main}
+"} 
+[2026-08-20 07:09:32] local.ERROR: Too many arguments to "make:model" command, expected arguments "name". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Too many arguments to \"make:model\" command, expected arguments \"name\". at /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Input/ArgvInput.php:199)
+[stacktrace]
+#0 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Input/ArgvInput.php(92): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument()
+#1 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Input/ArgvInput.php(77): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#2 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Input/Input.php(53): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Command/Command.php(238): Symfony\\Component\\Console\\Input\\Input->bind()
+#4 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php(261): Symfony\\Component\\Console\\Command\\Command->run()
+#5 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(1144): Illuminate\\Console\\Command->run()
+#6 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(379): Symfony\\Component\\Console\\Application->doRunCommand()
+#7 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(218): Symfony\\Component\\Console\\Application->doRun()
+#8 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony\\Component\\Console\\Application->run()
+#9 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1242): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/artisan(16): Illuminate\\Foundation\\Application->handleCommand()
+#11 {main}
+"} 
+[2026-08-20 07:10:19] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:10:19] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:10:48] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:11:19] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:11:30] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:11:30] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:11:31] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:11:31] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:11:32] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:11:33] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Schema::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:11:50] local.ERROR: SQLSTATE[HY000] [1045] Access denied for user 'arfa'@'localhost' (using password: YES) (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: direktori_umkm, SQL: select exists (select 1 from information_schema.tables where table_schema = schema() and table_name = 'migrations' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED')) as `exists`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'arfa'@'localhost' (using password: YES) (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: direktori_umkm, SQL: select exists (select 1 from information_schema.tables where table_schema = schema() and table_name = 'migrations' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED')) as `exists`) at /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php:857)
+[stacktrace]
+#0 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(1037): Illuminate\\Database\\Connection->runQueryCallback()
+#1 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(1016): Illuminate\\Database\\Connection->tryAgainIfCausedByLostConnection()
+#2 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(815): Illuminate\\Database\\Connection->handleQueryException()
+#3 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(426): Illuminate\\Database\\Connection->run()
+#4 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(371): Illuminate\\Database\\Connection->select()
+#5 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(388): Illuminate\\Database\\Connection->selectOne()
+#6 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(176): Illuminate\\Database\\Connection->scalar()
+#7 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Migrations/DatabaseMigrationRepository.php(185): Illuminate\\Database\\Schema\\Builder->hasTable()
+#8 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(797): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#9 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(166): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#10 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/helpers.php(328): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->{closure:Illuminate\\Database\\Console\\Migrations\\MigrateCommand::repositoryExists():166}()
+#11 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(166): retry()
+#12 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(142): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->repositoryExists()
+#13 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(112): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#14 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(672): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->{closure:Illuminate\\Database\\Console\\Migrations\\MigrateCommand::runMigrations():111}()
+#15 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(111): Illuminate\\Database\\Migrations\\Migrator->usingConnection()
+#16 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(90): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
+#17 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#18 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#19 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure()
+#20 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#21 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/Container.php(801): Illuminate\\Container\\BoundMethod::call()
+#22 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php(292): Illuminate\\Container\\Container->call()
+#23 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Command/Command.php(284): Illuminate\\Console\\Command->execute()
+#24 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php(261): Symfony\\Component\\Console\\Command\\Command->run()
+#25 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(1144): Illuminate\\Console\\Command->run()
+#26 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(379): Symfony\\Component\\Console\\Application->doRunCommand()
+#27 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(218): Symfony\\Component\\Console\\Application->doRun()
+#28 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony\\Component\\Console\\Application->run()
+#29 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1242): Illuminate\\Foundation\\Console\\Kernel->handle()
+#30 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/artisan(16): Illuminate\\Foundation\\Application->handleCommand()
+#31 {main}
+
+[previous exception] [object] (PDOException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'arfa'@'localhost' (using password: YES) at /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:67)
+[stacktrace]
+#0 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(67): PDO::connect()
+#1 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(85): Illuminate\\Database\\Connectors\\Connector->createPdoConnection()
+#2 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(48): Illuminate\\Database\\Connectors\\Connector->tryAgainIfCausedByLostConnection()
+#3 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connectors/MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection()
+#4 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php(220): Illuminate\\Database\\Connectors\\MySqlConnector->connect()
+#5 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->{closure:Illuminate\\Database\\Connectors\\ConnectionFactory::createPdoResolverWithHosts():213}()
+#6 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(1297): call_user_func()
+#7 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(1335): Illuminate\\Database\\Connection->getPdo()
+#8 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(542): Illuminate\\Database\\Connection->getReadPdo()
+#9 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(435): Illuminate\\Database\\Connection->getPdoForSelect()
+#10 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(846): Illuminate\\Database\\Connection->{closure:Illuminate\\Database\\Connection::select():426}()
+#11 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(1037): Illuminate\\Database\\Connection->runQueryCallback()
+#12 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(1016): Illuminate\\Database\\Connection->tryAgainIfCausedByLostConnection()
+#13 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(815): Illuminate\\Database\\Connection->handleQueryException()
+#14 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(426): Illuminate\\Database\\Connection->run()
+#15 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(371): Illuminate\\Database\\Connection->select()
+#16 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php(388): Illuminate\\Database\\Connection->selectOne()
+#17 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(176): Illuminate\\Database\\Connection->scalar()
+#18 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Migrations/DatabaseMigrationRepository.php(185): Illuminate\\Database\\Schema\\Builder->hasTable()
+#19 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(797): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#20 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(166): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#21 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/helpers.php(328): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->{closure:Illuminate\\Database\\Console\\Migrations\\MigrateCommand::repositoryExists():166}()
+#22 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(166): retry()
+#23 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(142): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->repositoryExists()
+#24 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(112): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#25 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(672): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->{closure:Illuminate\\Database\\Console\\Migrations\\MigrateCommand::runMigrations():111}()
+#26 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(111): Illuminate\\Database\\Migrations\\Migrator->usingConnection()
+#27 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(90): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
+#28 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#29 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#30 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure()
+#31 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#32 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Container/Container.php(801): Illuminate\\Container\\BoundMethod::call()
+#33 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php(292): Illuminate\\Container\\Container->call()
+#34 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Command/Command.php(284): Illuminate\\Console\\Command->execute()
+#35 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php(261): Symfony\\Component\\Console\\Command\\Command->run()
+#36 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(1144): Illuminate\\Console\\Command->run()
+#37 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(379): Symfony\\Component\\Console\\Application->doRunCommand()
+#38 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/symfony/console/Application.php(218): Symfony\\Component\\Console\\Application->doRun()
+#39 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony\\Component\\Console\\Application->run()
+#40 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1242): Illuminate\\Foundation\\Console\\Kernel->handle()
+#41 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/artisan(16): Illuminate\\Foundation\\Application->handleCommand()
+#42 {main}
+"} 
+[2026-08-20 07:42:27] local.ERROR: Call to undefined method App\Models\User::createToken() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\User::createToken() at /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:67)
+[stacktrace]
+#0 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
+#1 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2844): Illuminate\\Database\\Eloquent\\Model->forwardCallTo()
+#2 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/app/Http/Controllers/API/AuthController.php(28): Illuminate\\Database\\Eloquent\\Model->__call()
+#3 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\\Http\\Controllers\\API\\AuthController->register()
+#4 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php(276): Illuminate\\Routing\\ControllerDispatcher->dispatch()
+#5 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php(216): Illuminate\\Routing\\Route->runController()
+#6 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\\Routing\\Route->run()
+#7 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Router->{closure:Illuminate\\Routing\\Router::runRouteWithinStack():821}()
+#8 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(52): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#9 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#10 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#11 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\\Pipeline\\Pipeline->then()
+#12 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\\Routing\\Router->runRouteWithinStack()
+#13 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\\Routing\\Router->runRoute()
+#14 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\\Routing\\Router->dispatchToRoute()
+#15 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch()
+#16 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}()
+#17 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#18 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#19 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#20 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#21 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#22 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#23 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#24 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePostSize->handle()
+#25 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#26 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#27 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#28 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#29 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#30 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#31 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#32 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle()
+#33 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(28): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#34 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle()
+#35 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#36 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then()
+#37 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#38 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1227): Illuminate\\Foundation\\Http\\Kernel->handle()
+#39 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest()
+#40 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('...')
+#41 {main}
+"} 
+[2026-08-20 07:45:31] local.ERROR: Call to undefined method App\Models\User::tokens() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\User::tokens() at /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:67)
+[stacktrace]
+#0 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
+#1 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2844): Illuminate\\Database\\Eloquent\\Model->forwardCallTo()
+#2 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/app/Http/Controllers/API/AuthController.php(57): Illuminate\\Database\\Eloquent\\Model->__call()
+#3 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\\Http\\Controllers\\API\\AuthController->login()
+#4 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php(276): Illuminate\\Routing\\ControllerDispatcher->dispatch()
+#5 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php(216): Illuminate\\Routing\\Route->runController()
+#6 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\\Routing\\Route->run()
+#7 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Router->{closure:Illuminate\\Routing\\Router::runRouteWithinStack():821}()
+#8 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(52): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#9 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#10 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#11 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\\Pipeline\\Pipeline->then()
+#12 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\\Routing\\Router->runRouteWithinStack()
+#13 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\\Routing\\Router->runRoute()
+#14 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\\Routing\\Router->dispatchToRoute()
+#15 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch()
+#16 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}()
+#17 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#18 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#19 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#20 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#21 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#22 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#23 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#24 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePostSize->handle()
+#25 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#26 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#27 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#28 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#29 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#30 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#31 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#32 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle()
+#33 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(28): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#34 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle()
+#35 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#36 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then()
+#37 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#38 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1227): Illuminate\\Foundation\\Http\\Kernel->handle()
+#39 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest()
+#40 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('...')
+#41 {main}
+"} 
+[2026-08-20 07:46:22] local.ERROR: Call to undefined method App\Models\User::createToken() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\User::createToken() at /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:67)
+[stacktrace]
+#0 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
+#1 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2844): Illuminate\\Database\\Eloquent\\Model->forwardCallTo()
+#2 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/app/Http/Controllers/API/AuthController.php(28): Illuminate\\Database\\Eloquent\\Model->__call()
+#3 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\\Http\\Controllers\\API\\AuthController->register()
+#4 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php(276): Illuminate\\Routing\\ControllerDispatcher->dispatch()
+#5 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php(216): Illuminate\\Routing\\Route->runController()
+#6 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\\Routing\\Route->run()
+#7 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Router->{closure:Illuminate\\Routing\\Router::runRouteWithinStack():821}()
+#8 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(52): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#9 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#10 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#11 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\\Pipeline\\Pipeline->then()
+#12 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\\Routing\\Router->runRouteWithinStack()
+#13 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\\Routing\\Router->runRoute()
+#14 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\\Routing\\Router->dispatchToRoute()
+#15 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch()
+#16 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}()
+#17 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#18 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#19 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#20 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#21 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#22 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#23 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#24 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePostSize->handle()
+#25 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#26 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#27 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#28 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#29 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#30 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#31 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#32 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle()
+#33 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(28): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#34 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle()
+#35 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#36 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then()
+#37 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#38 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1227): Illuminate\\Foundation\\Http\\Kernel->handle()
+#39 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest()
+#40 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('...')
+#41 {main}
+"} 
+[2026-08-20 07:47:25] local.ERROR: Call to undefined method App\Models\User::createToken() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\User::createToken() at /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:67)
+[stacktrace]
+#0 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
+#1 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2844): Illuminate\\Database\\Eloquent\\Model->forwardCallTo()
+#2 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/app/Http/Controllers/API/AuthController.php(28): Illuminate\\Database\\Eloquent\\Model->__call()
+#3 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\\Http\\Controllers\\API\\AuthController->register()
+#4 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php(276): Illuminate\\Routing\\ControllerDispatcher->dispatch()
+#5 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php(216): Illuminate\\Routing\\Route->runController()
+#6 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\\Routing\\Route->run()
+#7 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Router->{closure:Illuminate\\Routing\\Router::runRouteWithinStack():821}()
+#8 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(52): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#9 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#10 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#11 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\\Pipeline\\Pipeline->then()
+#12 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\\Routing\\Router->runRouteWithinStack()
+#13 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\\Routing\\Router->runRoute()
+#14 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\\Routing\\Router->dispatchToRoute()
+#15 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch()
+#16 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}()
+#17 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#18 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#19 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#20 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#21 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#22 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#23 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#24 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePostSize->handle()
+#25 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#26 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#27 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#28 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#29 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#30 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#31 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#32 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle()
+#33 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(28): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#34 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle()
+#35 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#36 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then()
+#37 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#38 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1227): Illuminate\\Foundation\\Http\\Kernel->handle()
+#39 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest()
+#40 /home/arfa-muhammad-fadhillah/Documents/Project/direktori-umkm-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('...')
+#41 {main}
+"} 
+[2026-08-20 07:57:50] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Route::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Route::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-20 07:58:38] local.ERROR: Uncaught Error: Call to undefined method Illuminate\Support\Facades\Route::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Call to undefined method Illuminate\\Support\\Facades\\Route::getTable() in Command line code:26
+Stack trace:
+#0 {main}
+  thrown at Command line code:26)
+[stacktrace]
+#0 {main}
+"} 

@@ -18,8 +18,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
 
+    Route::get('/my-umkms', [UmkmController::class, 'myUmkms']);
+
     Route::post('/umkms', [UmkmController::class, 'store']);
     Route::post('/umkms/{id}', [UmkmController::class, 'update']); // Method POST (dengan _method=PUT jika upload file)
     Route::delete('/umkms/{id}', [UmkmController::class, 'destroy']);
 });
-

@@ -137,7 +137,7 @@ export default function Login() {
         </Link>
       </p>
       <p className="mt-3 rounded-xl bg-brand-50 px-4 py-3 text-center text-xs text-brand-800">
-        Akun demo: <span className="font-bold">budi@gmail.com</span> / <span className="font-bold">password</span>
+        Akun demo: <span className="font-bold">tempemendoanmasadam@gmail.com</span> / <span className="font-bold">tempemendo@nmas@d4m26</span>
       </p>
     </AuthShell>
   )
