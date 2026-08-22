@@ -1,20 +1,34 @@
 import { useCallback, useRef, useState } from 'react'
-import { ImagePlus, X } from 'lucide-react'
+import { AlertCircle, ImagePlus, X } from 'lucide-react'
+
+const ACCEPTED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
+const MAX_SIZE = 2 * 1024 * 1024
 
 export default function FileDropzone({
   initialPreview = null,
   onFile,
-  accept = 'image/*',
   className = '',
 }) {
   const inputRef = useRef(null)
   const [preview, setPreview] = useState(initialPreview)
   const [dragging, setDragging] = useState(false)
+  const [error, setError] = useState(null)
   const isBlobPreview = preview?.startsWith('blob:') ?? false
 
   const handleFiles = useCallback((files) => {
     const f = files?.[0]
     if (!f) return
+
+    if (!ACCEPTED_TYPES.has(f.type)) {
+      setError('Format tidak didukung. Gunakan JPEG, PNG, atau WEBP.')
+      return
+    }
+    if (f.size > MAX_SIZE) {
+      setError(`Ukuran gambar ${(f.size / 1024 / 1024).toFixed(1)} MB — maksimal 2 MB.`)
+      return
+    }
+
+    setError(null)
     setPreview((prev) => {
       if (prev?.startsWith('blob:')) URL.revokeObjectURL(prev)
       return URL.createObjectURL(f)
@@ -50,9 +64,11 @@ export default function FileDropzone({
           handleFiles(e.dataTransfer.files)
         }}
         className={`relative flex min-h-48 cursor-pointer flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border-2 border-dashed p-6 text-center transition ${
-          dragging
-            ? 'border-brand-500 bg-brand-50'
-            : 'border-ink-900/15 bg-white hover:border-brand-300 hover:bg-brand-50/40'
+          error
+            ? 'border-red-400 bg-red-50/60'
+            : dragging
+              ? 'border-brand-500 bg-brand-50'
+              : 'border-ink-900/15 bg-white hover:border-brand-300 hover:bg-brand-50/40'
         }`}
       >
         {preview ? (
@@ -70,18 +86,27 @@ export default function FileDropzone({
             </span>
             <div>
               <p className="text-sm font-semibold text-ink-900">Tarik &amp; letakkan foto di sini</p>
-              <p className="mt-1 text-xs text-ink-500">atau klik untuk memilih file · JPEG, PNG, WEBP · maks 2 MB</p>
+              <p className="mt-1 text-xs text-ink-500">
+                atau klik untuk memilih file · JPEG, PNG, WEBP · maks 2 MB · disarankan lanskap
+                ±1200×800 px (16:9)
+              </p>
             </div>
           </>
         )}
         <input
           ref={inputRef}
           type="file"
-          accept={accept}
+          accept="image/jpeg,image/png,image/webp"
           className="hidden"
           onChange={(e) => handleFiles(e.target.files)}
         />
       </div>
+
+      {error && (
+        <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-red-600">
+          <AlertCircle className="size-3.5 shrink-0" /> {error}
+        </p>
+      )}
 
       {isBlobPreview && (
         <button type="button" onClick={clear} className="btn btn-ghost mt-2 px-3 py-1.5 text-xs">

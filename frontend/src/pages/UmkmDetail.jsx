@@ -45,6 +45,22 @@ export default function UmkmDetail() {
     }
   }
 
+  const hasCoords = umkm != null && umkm.latitude != null && umkm.longitude != null
+  const mapPins = useMemo(
+    () =>
+      hasCoords && umkm
+        ? [
+            {
+              ...umkm,
+              latitude: Number(umkm.latitude),
+              longitude: Number(umkm.longitude),
+            },
+          ]
+        : [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [umkm?.id, hasCoords],
+  )
+
   if (loading) return <Spinner className="min-h-[50vh]" />
   if (error || !umkm)
     return (
@@ -63,21 +79,6 @@ export default function UmkmDetail() {
 
   const wa = waLink(umkm.phone_whatsapp)
   const ig = instagramLink(umkm.instagram)
-  const hasCoords = umkm.latitude != null && umkm.longitude != null
-  const mapPins = useMemo(
-    () =>
-      hasCoords
-        ? [
-            {
-              ...umkm,
-              latitude: Number(umkm.latitude),
-              longitude: Number(umkm.longitude),
-            },
-          ]
-        : [],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [umkm?.id, hasCoords],
-  )
 
   const infoItems = [
     { label: 'Alamat', value: umkm.address },
@@ -155,18 +156,19 @@ export default function UmkmDetail() {
 
             {hasCoords ? (
               <div className="mt-6">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-ink-400">
-                    <MapPin className="size-4 text-brand-600" /> Lokasi di peta
-                  </p>
-                  <LocateButton />
-                </div>
+                <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-ink-400">
+                  <MapPin className="size-4 text-brand-600" /> Lokasi di peta
+                </p>
                 <div className="mt-3">
                   <UmkmMap
                     center={[Number(umkm.latitude), Number(umkm.longitude)]}
                     zoom={14}
                     pins={mapPins}
-                  />
+                  >
+                    <div className="absolute right-3 top-3 z-[1000]">
+                      <LocateButton />
+                    </div>
+                  </UmkmMap>
                 </div>
               </div>
             ) : (
