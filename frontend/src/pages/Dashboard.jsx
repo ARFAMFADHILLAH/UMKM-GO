@@ -1,62 +1,71 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  AlertTriangle,
-  MapPin,
-  Pencil,
-  Plus,
-  Store,
-  Trash2,
-  Store as StoreIcon,
-} from 'lucide-react'
+import { AlertTriangle, MapPin, Pencil, Plus, Store as StoreIcon, Trash2, TrendingUp } from 'lucide-react'
 import Spinner from '../components/ui/Spinner'
 import EmptyState from '../components/ui/EmptyState'
 import { deleteUmkm, listMyUmkms } from '../lib/api'
 import { invalidateUmkmCache } from '../lib/cities'
 import { useAuth } from '../context/AuthContext'
-import { categoryColor } from '../lib/format'
+import { categoryColor, formatDate } from '../lib/format'
 
-function MyUmkmRow({ umkm, onDelete, busy }) {
-  const cover = umkm.image_cover ? (
-    <img src={umkm.image_cover} alt={umkm.name} className="size-full object-cover" />
-  ) : (
-    <div className={`grid size-full place-items-center ${categoryColor(umkm.category?.name)}`}>
-      <StoreIcon className="size-8 text-white/80" />
+function MetricCard({ icon, iconBg, label, value }) {
+  return (
+    <div className="rounded-2xl border border-ink-900/5 bg-white p-5 shadow-sm">
+      <div className="mb-3 flex items-start justify-between">
+        <div className={`flex size-10 items-center justify-center rounded-xl ${iconBg}`}>{icon}</div>
+        <span className="flex items-center gap-0.5 font-mono text-[10px] font-semibold text-wa-600">
+          <TrendingUp className="size-3" /> aktif
+        </span>
+      </div>
+      <span className="label-caption mb-1 block">{label}</span>
+      <span className="font-display text-2xl font-black leading-none text-ink-900">{value}</span>
     </div>
   )
+}
+
+function MyUmkmRow({ umkm, onDelete, busy }) {
+  const warna = categoryColor(umkm.category?.name)
   return (
-    <li className="card flex items-center gap-4 p-3 sm:p-4">
+    <li className="flex items-center gap-4 rounded-xl border border-ink-900/5 bg-white p-3.5 transition-colors hover:border-ink-900/15">
       <Link
         to={`/umkms/${umkm.slug}`}
-        className="block h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-cream-100 sm:h-24 sm:w-28"
+        className="block size-16 shrink-0 overflow-hidden rounded-lg border border-ink-900/5 bg-cream-100 sm:size-20"
       >
-        {cover}
+        {umkm.image_cover ? (
+          <img src={umkm.image_cover} alt={`Foto ${umkm.name}`} loading="lazy" className="size-full object-cover" />
+        ) : (
+          <span className="grid size-full place-items-center" style={{ backgroundColor: `${warna}14` }}>
+            <StoreIcon className="size-6" style={{ color: warna }} />
+          </span>
+        )}
       </Link>
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           <Link
             to={`/umkms/${umkm.slug}`}
-            className="truncate font-display text-base font-semibold text-ink-900 hover:text-brand-700"
+            className="truncate font-display text-sm font-bold text-ink-900 transition-colors hover:text-brand-500"
           >
             {umkm.name}
           </Link>
-          <span className="rounded-full bg-wa-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-wa-700">
-            Verifikasi
-          </span>
+          {umkm.is_verified != null && (
+            <span className="stamp-verified !py-0 !text-[9px]">
+              {umkm.is_verified ? 'Terverifikasi' : 'Menunggu verifikasi'}
+            </span>
+          )}
         </div>
-        <p className="mt-1 flex items-center gap-1 text-xs text-ink-500">
+        <p className="mt-1 flex items-center gap-1 text-[11px] text-ink-500">
           {umkm.category?.name} · <MapPin className="size-3" /> {umkm.city}, {umkm.province}
         </p>
       </div>
       <div className="flex shrink-0 gap-2">
-        <Link to={`/manage/${umkm.slug}`} className="btn btn-outline px-3 py-2 text-xs">
+        <Link to={`/manage/${umkm.slug}`} className="btn btn-outline !px-3 !py-2 !text-xs">
           <Pencil className="size-3.5" /> Edit
         </Link>
         <button
           type="button"
           disabled={busy}
           onClick={() => onDelete(umkm)}
-          className="btn px-3 py-2 text-xs text-red-600 hover:bg-red-50"
+          className="btn !px-3 !py-2 !text-xs text-red-600 hover:bg-red-50"
         >
           <Trash2 className="size-3.5" /> Hapus
         </button>
@@ -104,10 +113,10 @@ export default function Dashboard() {
     try {
       await deleteUmkm(umkm.id)
       invalidateUmkmCache()
-      setMessage('UMKM berhasil dihapus.')
+      setMessage('Lapak berhasil dihapus.')
       load()
     } catch {
-      setMessage('Gagal menghapus UMKM.')
+      setMessage('Gagal menghapus lapak.')
     } finally {
       setBusyDelete(null)
       setTimeout(() => setMessage(''), 3000)
@@ -115,94 +124,88 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="container-site animate-fade-in py-10 sm:py-12">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+    <div className="container-site space-y-8 py-8">
+      <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600">Dashboard</p>
-          <h1 className="mt-2 flex items-center gap-3 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
-            Halo, {user?.name?.split(' ')[0] || 'Pemilik UMKM'}
-            <span className="grid size-10 place-items-center rounded-xl bg-brand-600 text-white shadow-sm">
-              <StoreIcon className="size-5" />
-            </span>
-          </h1>
-          <p className="mt-2 text-sm text-ink-500">{user?.email}</p>
+          <span className="label-caption">Area pemilik lapak</span>
+          <h1 className="font-display text-3xl font-black tracking-tight text-ink-900">Dashboard Kios</h1>
+          <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-400">{user?.email}</p>
         </div>
-        <Link to="/manage/new" className="btn btn-primary px-5 py-2.5 text-sm">
-          <Plus className="size-4" /> Tambah UMKM Baru
+        <Link to="/manage/new" className="btn btn-primary self-start rounded-xl !px-4 !py-2.5 !text-xs font-bold sm:self-auto">
+          <Plus className="size-4" /> Tambah Lapak Baru
         </Link>
       </div>
 
       {message && (
-        <div className="mt-6 rounded-xl border border-wa-200 bg-wa-50 px-4 py-3 text-sm font-medium text-wa-700">
+        <div className="rounded-xl border border-wa-500/30 bg-wa-500/[0.07] px-4 py-3 text-sm font-medium text-wa-600">
           {message}
         </div>
       )}
 
       {endpointMissing && (
-        <div className="mt-6 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-          <AlertTriangle className="mt-0.5 size-4 shrink-0" />
+        <div className="flex items-start gap-3 rounded-xl border border-accent-400/40 bg-accent-400/[0.08] px-4 py-3 text-sm text-ink-700">
+          <AlertTriangle className="mt-0.5 size-4 shrink-0 text-accent-600" />
           <p>
-            Halaman ini butuh endpoint <code className="rounded bg-amber-100 px-1.5 py-0.5 font-mono text-xs">GET /api/my-umkms</code>{' '}
-            yang belum tersedia di backend. Tambahkan endpoint tersebut (lihat CATATAN-BACKEND.md).
+            Halaman ini butuh endpoint{' '}
+            <code className="rounded bg-ink-100 px-1.5 py-0.5 font-mono text-xs">GET /api/my-umkms</code> yang belum
+            tersedia di backend. Tambahkan endpoint tersebut (lihat CATATAN-BACKEND.md).
           </p>
         </div>
       )}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <div className="card flex items-center gap-4 p-5">
-          <span className="grid size-12 place-items-center rounded-2xl bg-brand-100 text-brand-600">
-            <Store className="size-6" />
-          </span>
-          <div>
-            <p className="font-display text-2xl font-semibold text-ink-900">
-              {loading ? '…' : (total ?? '–')}
-            </p>
-            <p className="text-xs font-medium text-ink-400">UMKM milikmu</p>
-          </div>
-        </div>
-        <div className="card flex items-center gap-4 p-5">
-          <span className="grid size-12 place-items-center rounded-2xl bg-wa-100 text-wa-700">
-            <MapPin className="size-6" />
-          </span>
-          <div>
-            <p className="font-display text-2xl font-semibold text-ink-900">—</p>
-            <p className="text-xs font-medium text-ink-400">Total kunjungan</p>
-          </div>
-        </div>
-        <div className="card flex items-center gap-4 p-5">
-          <span className="grid size-12 place-items-center rounded-2xl bg-amber-100 text-amber-700">
-            <Store className="size-6" />
-          </span>
-          <div>
-            <p className="font-display text-2xl font-semibold text-ink-900">Terbuka</p>
-            <p className="text-xs font-medium text-ink-400">Pendaftaran UMKM</p>
-          </div>
-        </div>
+      {/* Metrik */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <MetricCard
+          icon={<StoreIcon className="size-5" />}
+          iconBg="bg-brand-500/10 text-brand-500"
+          label="Lapak milikmu"
+          value={loading ? '…' : String(total ?? 0)}
+        />
+        <MetricCard
+          icon={<MapPin className="size-5" />}
+          iconBg="bg-agro-500/10 text-agro-500"
+          label="Kota terdaftar"
+          value={loading ? '…' : String(new Set(items.filter((u) => u.city).map((u) => u.city)).size)}
+        />
+        <MetricCard
+          icon={<TrendingUp className="size-5" />}
+          iconBg="bg-accent-400/15 text-accent-600"
+          label="Bergabung sejak"
+          value={user?.created_at ? formatDate(user.created_at) : '—'}
+        />
       </div>
 
-      <section className="mt-10">
-        <h2 className="font-display text-xl font-semibold text-ink-900">UMKM milikmu</h2>
+      {/* Kelola lapak */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-ink-900/5 pb-3">
+          <div>
+            <h3 className="font-display text-lg font-bold text-ink-900">Kelola lapak</h3>
+            <p className="text-xs text-ink-500">Edit profil, lokasi, dan foto lapak milikmu.</p>
+          </div>
+          {!loading && !endpointMissing && (
+            <span className="font-mono text-[11px] font-bold tabular-nums text-ink-500">{items.length} lapak</span>
+          )}
+        </div>
+
         {loading ? (
           <Spinner />
         ) : items.length === 0 && !endpointMissing ? (
-          <div className="mt-4">
-            <EmptyState
-              title="Kamu belum punya UMKM"
-              description="Daftarkan usaha pertamamu sekarang dan tampilkan ke publik."
-              action={
-                <Link to="/manage/new" className="btn btn-primary px-5 py-2.5 text-sm">
-                  <Plus className="size-4" /> Tambah UMKM
-                </Link>
-              }
-            />
-          </div>
-        ) : (
-          <ul className="mt-4 space-y-3">
+          <EmptyState
+            title="Belum ada lapak terdaftar"
+            description="Daftarkan usaha Anda untuk mulai mengelola kios di peta dan menerima order via WhatsApp."
+            action={
+              <Link to="/manage/new" className="btn btn-primary rounded-xl !px-6 !py-2.5 !text-sm font-bold">
+                Daftarkan UMKM Sekarang
+              </Link>
+            }
+          />
+        ) : !endpointMissing ? (
+          <ul className="space-y-2">
             {items.map((u) => (
               <MyUmkmRow key={u.id} umkm={u} onDelete={handleDelete} busy={busyDelete === u.id} />
             ))}
           </ul>
-        )}
+        ) : null}
       </section>
     </div>
   )

@@ -51,3 +51,7 @@ Buka http://localhost:5173. Vite sudah mem-proxy `/api` dan `/storage` ke `local
 
 Palet warna terracotta-panas, font *Inter Tight* (display) + *Inter* (body),
 dengan aksen hijau WhatsApp. Jika font tidak termuat (offline), fallback ke system font.
+
+## Runnning
+
+WAJIB cd backend / frontend terlebih dahulu

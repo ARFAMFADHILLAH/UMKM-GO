@@ -1,91 +1,264 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Terracotta / bata panas — warna utama */
-  --color-brand-50: #fdf6f0;
-  --color-brand-100: #faeadd;
-  --color-brand-200: #f4d0ba;
-  --color-brand-300: #ecaf8d;
-  --color-brand-400: #e2845c;
-  --color-brand-500: #d7683a;
-  --color-brand-600: #c74f28;
-  --color-brand-700: #a53f22;
-  --color-brand-800: #853620;
-  --color-brand-900: #6c2f1e;
+  /* Palet disegarkan: indigo modern sebagai chrome, krem lebih terang/kertas, aksen lebih tajam */
+  --color-brand-500: #1F334F;
+  --color-brand-600: #1A2A42;
+  --color-brand-700: #132033;
+  --color-brand-800: #0C1726;
+  --color-brand-900: #060E1A;
 
-  /* Hijau lokal/hijau WA */
-  --color-wa-50: #f0fdf4;
-  --color-wa-100: #dcfce7;
-  --color-wa-500: #22c55e;
-  --color-wa-600: #16a34a;
-  --color-wa-700: #15803d;
+  --color-accent-400: #F1B23A;
+  --color-accent-500: #E39B17;
+  --color-accent-600: #C07F0F;
 
-  /* Netral hangat */
-  --color-cream-50: #faf8f4;
-  --color-cream-100: #f4efe7;
-  --color-cream-200: #e9e1d4;
-  --color-ink-900: #211a14;
-  --color-ink-700: #46382c;
-  --color-ink-500: #6f5f4f;
-  --color-ink-400: #8a7a6a;
+  --color-wa-500: #1F8A5B;
+  --color-wa-600: #166E48;
+  --color-wa-700: #105638;
 
-  --shadow-card: 0 1px 2px rgb(33 26 20 / 0.04), 0 8px 24px -8px rgb(33 26 20 / 0.12);
-  --shadow-card-hover: 0 2px 4px rgb(33 26 20 / 0.05), 0 16px 40px -12px rgb(33 26 20 / 0.22);
+  --color-cabai-500: #D1432B;
+  --color-cabai-600: #A8321D;
+  --color-fashion-500: #824FA5;
+  --color-fashion-600: #683D85;
+  --color-kerajinan-500: #D1772F;
+  --color-kerajinan-600: #A65A21;
+  --color-agro-500: #78893F;
+  --color-agro-600: #5D6A30;
 
-  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  --animate-fade-in: fade-in 0.4s ease-out both;
+  --color-cream-50: #FBF7EE;
+  --color-cream-100: #F2EBD9;
+  --color-cream-200: #E4D9C1;
+  --color-cream-300: #CFC0A3;
 
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  --color-ink-900: #151914;
+  --color-ink-700: #30362C;
+  --color-ink-500: #5C6256;
+  --color-ink-400: #808573;
+  --color-ink-300: #A8AC9C;
+  --color-ink-200: #D0D3C6;
+  --color-ink-100: #E9EBE3;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
+
   body {
-    @apply bg-cream-50 text-ink-900 font-sans antialiased;
+    background: linear-gradient(180deg, #FBF7EE 0%, #F6F0E3 100%);
+    background-attachment: fixed;
+    letter-spacing: -0.005em;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
   ::selection {
-    @apply bg-brand-200 text-brand-900;
+    background: #F1B23A;
+    color: #151914;
   }
 }
 
 @layer components {
   .container-site {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-1.5 px-3.5 py-2 text-[13px] font-semibold rounded-lg transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer select-none;
   }
+
   .btn-primary {
-    @apply bg-brand-600 text-white shadow-[0_1px_0_rgba(0,0,0,0.08)] hover:bg-brand-700 active:scale-[0.98];
+    @apply bg-ink-900 text-cream-50 hover:bg-brand-500 focus-visible:outline-ink-900 shadow-[0_1px_0_rgba(255,255,255,0.1)_inset,0_3px_8px_-3px_rgba(21,25,20,0.3)] hover:shadow-[0_1px_0_rgba(255,255,255,0.1)_inset,0_8px_20px_-6px_rgba(21,25,20,0.4)] active:translate-y-px;
   }
+
   .btn-wa {
-    @apply bg-wa-600 text-white hover:bg-wa-700 active:scale-[0.98];
+    @apply bg-wa-500 text-white hover:bg-wa-600 focus-visible:outline-wa-600 shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_3px_8px_-3px_rgba(22,110,72,0.4)] hover:shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_8px_18px_-4px_rgba(22,110,72,0.5)] active:translate-y-px font-semibold;
   }
+
+  .btn-accent {
+    @apply bg-accent-400 text-ink-900 hover:bg-accent-500 focus-visible:outline-accent-500 shadow-[0_1px_0_rgba(255,255,255,0.3)_inset,0_3px_10px_-4px_rgba(227,155,23,0.5)] font-bold active:translate-y-px;
+  }
+
   .btn-outline {
-    @apply border border-ink-900/15 bg-white text-ink-900 hover:border-brand-400 hover:text-brand-700;
+    @apply border border-ink-900/10 bg-white text-ink-900 hover:bg-cream-50 hover:border-ink-900/20 focus-visible:outline-brand-500 shadow-sm;
   }
+
   .btn-ghost {
-    @apply text-ink-700 hover:bg-cream-100 hover:text-brand-700;
+    @apply text-ink-700 hover:bg-ink-900/5 hover:text-ink-900 focus-visible:outline-brand-500;
   }
+
   .field {
-    @apply block w-full rounded-xl border border-ink-900/15 bg-white px-4 py-2.5 text-sm text-ink-900 shadow-[0_1px_2px_rgba(33,26,20,0.04)] transition placeholder:text-ink-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/15;
+    @apply w-full border border-ink-900/10 bg-white rounded-lg px-3.5 py-2.5 text-sm text-ink-900 placeholder:text-ink-400/80 focus:outline-none focus:ring-2 focus:ring-ink-900 focus:border-ink-900 transition-all shadow-sm;
   }
+
   .label-caption {
-    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-500;
+    @apply text-[10px] font-mono font-bold text-ink-400 uppercase tracking-[0.14em];
   }
+
   .card {
-    @apply rounded-2xl border border-ink-900/10 bg-white shadow-[var(--shadow-card)];
+    @apply bg-white rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(21,25,20,0.04),0_4px_12px_-6px_rgba(21,25,20,0.08)] border border-ink-900/[0.07] hover:shadow-[0_2px_4px_rgba(21,25,20,0.05),0_12px_28px_-10px_rgba(21,25,20,0.15)] hover:border-ink-900/10 transition-all duration-300 hover:-translate-y-0.5;
+  }
+
+  .stamp-verified {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider text-wa-600 border border-dashed border-wa-500/40 bg-wa-500/[0.07] rounded;
+  }
+
+  /* Badge kategori tegas (rounded-md, bukan pil) */
+  .category-badge {
+    @apply inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider shadow-sm;
+  }
+
+  /* Tag/label eyebrow — tanpa kapsul */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-mono font-bold text-ink-500 uppercase tracking-[0.18em];
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  .eyebrow-accent {
+    @apply text-accent-600;
+  }
+
+  .divider-dot {
+    @apply w-1 h-1 bg-ink-300;
+  }
+}
+
+/* ======== Map Pin (Stall/Kios) — Refined modern look ========= */
+.stall-pin-wrapper {
+  cursor: pointer;
+  transform: translate(-50%, -100%);
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), filter 0.2s;
+  position: relative;
+  user-select: none;
+  will-change: transform;
+}
+
+.stall-pin-wrapper:hover {
+  transform: translate(-50%, -106%) scale(1.08);
+  z-index: 1000 !important;
+  filter: drop-shadow(0 6px 14px rgba(21,25,20,0.25));
+}
+
+.stall-pin-wrapper.selected {
+  transform: translate(-50%, -112%) scale(1.18);
+  z-index: 1001 !important;
+  filter: drop-shadow(0 8px 20px rgba(31,51,79,0.45));
+}
+
+.stall-pin-anchor {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background-color: #151914;
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.stall-pin-anchor.selected {
+  background-color: #F1B23A;
+  box-shadow: 0 0 0 3px #1F334F;
+}
+
+/* Leaflet polish */
+.leaflet-container {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #F2EBD9 !important;
+  outline: none;
+}
+
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px -12px rgba(21,25,20,0.25);
+  border: 1px solid rgba(21,25,20,0.08);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.leaflet-popup-tip {
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid rgba(21,25,20,0.08) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(21,25,20,0.1) !important;
+}
+
+.leaflet-control-zoom a {
+  background: #ffffff !important;
+  color: #151914 !important;
+  border: none !important;
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  font-size: 16px !important;
+  font-weight: 600;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #FBF7EE !important;
+  color: #1F334F !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(255,255,255,0.85) !important;
+  backdrop-filter: blur(8px);
+  font-size: 10px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  padding: 2px 8px !important;
+  border-radius: 6px 0 0 0;
+}
+
+/* Custom scrollbar on panels */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(21,25,20,0.15);
+  border-radius: 99px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(21,25,20,0.25);
+}
+
+/* Subtle grid pattern for dashboard empty states? Tidak — aturan melarang dekoratif.
+   Kami hanya memakai gradien linear very subtle di body */
+
+@keyframes ping-user {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
   }
 }

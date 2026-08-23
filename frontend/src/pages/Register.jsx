@@ -51,13 +51,13 @@ export default function Register() {
       <div className="w-full max-w-md">
         <div className="flex items-center justify-between">
           <Logo />
-          <Link to="/" className="text-xs font-semibold text-ink-400 hover:text-brand-700">Kembali</Link>
+          <Link to="/" className="text-xs font-semibold text-ink-400 hover:text-accent-600">Kembali</Link>
         </div>
-        <h1 className="mt-8 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
+        <h1 className="mt-8 font-display text-3xl font-black tracking-tight text-ink-900 sm:text-4xl">
           Daftar gratis
         </h1>
         <p className="mt-2 text-sm text-ink-500">
-          Buat akun untuk mendaftarkan dan mengelola UMKM milikmu.
+          Buat akun untuk mendaftarkan dan mengelola lapak milikmu.
         </p>
 
         {message && (
@@ -108,7 +108,7 @@ export default function Register() {
             </Field>
           </div>
 
-          <button type="submit" disabled={loading} className="btn btn-primary w-full py-3 text-sm">
+          <button type="submit" disabled={loading} className="btn btn-primary w-full !py-3 !text-sm font-bold">
             <UserPlus className="size-4" />
             {loading ? 'Membuat akun…' : 'Buat Akun'}
           </button>
@@ -116,7 +116,7 @@ export default function Register() {
 
         <p className="mt-6 text-center text-sm text-ink-500">
           Sudah punya akun?{' '}
-          <Link to="/login" className="font-semibold text-brand-600 hover:text-brand-700">
+          <Link to="/login" className="font-semibold text-brand-500 hover:text-brand-700">
             Masuk di sini
           </Link>
         </p>

@@ -1,269 +1,321 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight, MessageCircle as MessageCircleIcon, Search, Store } from 'lucide-react'
-import Select from '../components/ui/Select'
-import SectionHeading from '../components/ui/SectionHeading'
-import UmkmCard from '../components/UmkmCard'
+import { ArrowRight, MapPin, MessageCircle, Search, ShieldCheck, SlidersHorizontal, Sparkles, TrendingUp } from 'lucide-react'
 import CategoryIcon from '../components/ui/CategoryIcon'
+import UmkmCard from '../components/UmkmCard'
+import UmkmMap from '../components/map/UmkmMap'
 import Spinner from '../components/ui/Spinner'
-import { listCategories, listUmkms } from '../lib/api'
-import { gatherCities } from '../lib/cities'
-
-function DecorativeBg() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute -left-32 -top-40 size-[28rem] rounded-full bg-brand-200/50 blur-3xl" />
-      <div className="absolute -right-24 top-24 size-96 rounded-full bg-amber-200/40 blur-3xl" />
-      <svg className="absolute right-[12%] top-24 opacity-[0.07] text-ink-900" width="280" height="280">
-        <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1.3" fill="currentColor" />
-        </pattern>
-        <rect width="280" height="280" fill="url(#dots)" />
-      </svg>
-    </div>
-  )
-}
+import { listCategories } from '../lib/api'
+import { fetchAllUmkms } from '../lib/cities'
+import { formatPhoneWhatsApp, makeWhatsAppLink } from '../lib/format'
 
 export default function Home() {
   const navigate = useNavigate()
+  const [items, setItems] = useState([])
   const [categories, setCategories] = useState([])
-  const [latest, setLatest] = useState([])
-  const [total, setTotal] = useState(0)
-  const [cities, setCities] = useState([])
-  const [query, setQuery] = useState('')
-  const [categoryFilter, setCategoryFilter] = useState('')
   const [loading, setLoading] = useState(true)
+  const [selectedPreviewUmkm, setSelectedPreviewUmkm] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCity, setSelectedCity] = useState('')
 
   useEffect(() => {
-    Promise.all([listCategories(), listUmkms(), gatherCities()])
-      .then(([cats, umkms, cityList]) => {
+    Promise.all([fetchAllUmkms(), listCategories()])
+      .then(([umkms, cats]) => {
+        setItems(umkms)
         setCategories(cats)
-        setLatest(umkms.data ?? [])
-        setTotal(umkms.total ?? umkms.data?.length ?? 0)
-        setCities(cityList)
+        setSelectedPreviewUmkm(umkms.find((u) => u.latitude != null) ?? umkms[0] ?? null)
       })
       .finally(() => setLoading(false))
   }, [])
 
-  const stats = useMemo(
-    () => [
-      { value: total, label: 'UMKM terdaftar' },
-      { value: cities.length, label: 'Kota & kabupaten' },
-      { value: categories.length, label: 'Kategori usaha' },
-    ],
-    [total, cities, categories],
+  const categoriesWithCount = useMemo(
+    () =>
+      categories.map((c) => ({
+        ...c,
+        count: items.filter((i) => i.category?.name === c.name).length,
+      })),
+    [categories, items],
   )
 
-  const goExplore = (e) => {
+  const latestItems = useMemo(() => items.slice(0, 6), [items])
+  const pinsWithCoords = useMemo(() => items.filter((u) => u.latitude != null), [items])
+
+  const handleSearch = (e) => {
     e.preventDefault()
     const params = new URLSearchParams()
-    if (query.trim()) params.set('search', query.trim())
-    if (categoryFilter) params.set('category_id', categoryFilter)
+    if (searchQuery.trim()) params.set('search', searchQuery.trim())
+    if (selectedCity) params.set('city', selectedCity)
     navigate(`/explore?${params.toString()}`)
   }
 
   return (
-    <div className="animate-fade-in">
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b border-ink-900/5">
-        <DecorativeBg />
-        <div className="container-site relative grid gap-10 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-24">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1.5 text-xs font-bold text-brand-700">
-              <span className="size-1.5 rounded-full bg-brand-600" />
-              Direktori UMKM Indonesia
+    <div>
+      {/* 1. HERO — ink pekat, tipografi tebal, chrome bersih */}
+      <section className="relative overflow-hidden bg-ink-900 text-white">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-400/40 to-transparent"
+        />
+        <div className="container-site relative pb-20 pt-10 sm:pb-28 sm:pt-14">
+          <div className="mx-auto max-w-3xl space-y-6 text-center">
+            <span className="eyebrow text-cream-100/70">
+              <ShieldCheck className="size-3.5 text-accent-400" />
+              <span className="text-accent-400">Direktori UMKM Indonesia</span>
             </span>
 
-            <h1
-              className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl lg:text-6xl"
-              style={{ animation: 'fade-up 0.6s 0.05s cubic-bezier(0.22,1,0.36,1) both' }}
-            >
-              Temukan &amp; dukung{' '}
-              <span className="relative inline-block text-brand-600">
-                usaha lokal
-                <svg
-                  className="absolute -bottom-2 left-0 w-full text-brand-400"
-                  viewBox="0 0 120 12"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M2 9C30 3 75 3 118 8"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>{' '}
-              di dekatmu.
+            <h1 className="font-display text-3xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+              Cari lapak lokal di
+              <span className="mt-1 block text-accent-400">sekitar Anda.</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-500">
-              Dari kuliner rumahan, kerajinan tangan, hingga jasa lokal — UMKM-Go merangkum
-              usaha mikro, kecil, dan menengah terbaik di Indonesia dalam satu tempat.
+            <p className="mx-auto max-w-xl text-sm leading-relaxed text-cream-100/70 sm:text-base">
+              Peta interaktif UMKM — kuliner, kriya, fashion, jasa, dan pertanian. Temukan
+              terdekat, hubungi langsung via <span className="font-semibold text-wa-500">WhatsApp</span>,
+              tanpa iklan &amp; tanpa perantara.
             </p>
 
+            {/* Search bar besar */}
             <form
-              onSubmit={goExplore}
-              className="mt-8 flex max-w-xl flex-col gap-2 rounded-2xl bg-white p-2 shadow-[0_2px_4px_rgba(33,26,20,0.06),0_16px_40px_-12px_rgba(33,26,20,0.18)] sm:flex-row sm:items-center sm:rounded-full"
+              onSubmit={handleSearch}
+              className="mx-auto mt-6 flex max-w-2xl flex-col items-stretch gap-2 rounded-2xl bg-white p-2 text-ink-900 shadow-2xl sm:flex-row"
             >
-              <label className="flex flex-1 items-center gap-2 px-3">
+              <div className="flex flex-1 items-center gap-2 px-3">
                 <Search className="size-4 shrink-0 text-ink-400" />
                 <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Cari kuliner, kerajinan, jasa…"
-                  className="w-full bg-transparent py-2 text-sm text-ink-900 outline-none placeholder:text-ink-400"
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Sate klathak, batik tulis, bengkel dinamo..."
+                  className="w-full bg-transparent py-2.5 text-sm placeholder:text-ink-400 focus:outline-none"
                 />
-              </label>
-              <span className="hidden w-px self-stretch bg-ink-900/10 sm:block" />
-              <Select
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
-                className="border-0 bg-transparent shadow-none sm:w-44"
-              >
-                <option value="">Semua kategori</option>
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </Select>
-              <button type="submit" className="btn btn-primary px-6 py-3 text-sm sm:rounded-full">
-                Cari <ArrowRight className="size-4" />
+              </div>
+              <div aria-hidden className="my-2 hidden w-px bg-ink-900/10 sm:block" />
+              <div className="flex items-center gap-1.5 px-2">
+                <MapPin className="size-4 shrink-0 text-accent-500" />
+                <select
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                  className="w-full cursor-pointer bg-transparent py-2.5 text-sm font-semibold text-ink-900 focus:outline-none sm:w-auto"
+                >
+                  <option value="">Semua kota</option>
+                  {[...new Set(items.map((i) => i.city).filter(Boolean))].map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button type="submit" className="btn btn-primary rounded-xl !px-6 !py-3 !text-sm font-bold">
+                Cari Lapak
               </button>
             </form>
 
-            <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <dt className="sr-only">{s.label}</dt>
-                  <dd className="font-display text-3xl font-semibold text-ink-900">
-                    {loading ? '…' : s.value}
-                  </dd>
-                  <dd className="mt-0.5 text-xs font-medium text-ink-400">{s.label}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          <div className="relative hidden lg:block">
-            <div className="relative mx-auto max-w-md rotate-1 rounded-3xl border border-white/60 bg-white/70 p-3 shadow-[0_24px_60px_-24px_rgba(33,26,20,0.3)] backdrop-blur">
-              <div className="grid aspect-square place-items-center overflow-hidden rounded-2xl bg-brand-600">
-                <div className="grid size-full place-items-center opacity-90">
-                  <Store className="size-28 text-white/90" strokeWidth={1.2} />
-                </div>
-              </div>
-              <div className="absolute -right-5 -top-5 grid size-14 rotate-12 place-items-center rounded-2xl bg-wa-500 text-white shadow-lg">
-                <MessageCircleIcon />
-              </div>
-              <div className="absolute -left-4 bottom-8 -rotate-6 rounded-2xl bg-white px-4 py-3 shadow-lg">
-                <p className="font-display text-sm font-semibold text-ink-900">Kripik Tempe Oemah</p>
-                <p className="text-xs text-ink-400">Kota Malang · Jawa Timur</p>
-              </div>
+            {/* Statistik live */}
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 pt-3 font-mono text-[11px] text-cream-100/60">
+              <span className="flex items-center gap-2">
+                <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-accent-400" />
+                <strong className="text-sm font-bold text-white">{items.length}</strong> lapak terdaftar
+              </span>
+              <span>
+                <strong className="text-sm font-bold text-white">{categoriesWithCount.length}</strong> kategori usaha
+              </span>
+              <span>
+                <strong className="text-sm font-bold text-white">{pinsWithCoords.length}</strong> titik di peta
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* KATEGORI */}
-      <section className="container-site py-16 sm:py-20">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading
-            kicker="Jelajahi kategori"
-            title="Usaha apa yang kamu cari?"
-            description="Pilih kategori di bawah untuk memulai pencarian, atau telusuri semua UMKM sekaligus."
-          />
-          <Link to="/explore" className="btn btn-outline px-4 py-2 text-sm">
-            Semua UMKM <ArrowRight className="size-4" />
-          </Link>
-        </div>
-
-        {loading ? (
-          <Spinner />
-        ) : (
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-            {categories.map((c, i) => (
-              <Link
-                key={c.id}
-                to={`/explore?category_id=${c.id}`}
-                className="group card flex flex-col items-start gap-4 p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
-                style={{ animation: `fade-up 0.5s ${i * 0.06}s cubic-bezier(0.22,1,0.36,1) both` }}
-              >
-                <CategoryIcon name={c.name} size="size-7" className="size-12" />
-                <div>
-                  <h3 className="font-display text-base font-semibold text-ink-900 group-hover:text-brand-700">
-                    {c.name}
-                  </h3>
-                  <p className="mt-0.5 text-xs font-medium text-brand-600 opacity-0 transition group-hover:opacity-100">
-                    Jelajahi →
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* UMKM TERBARU */}
-      <section className="border-y border-ink-900/5 bg-white/60 py-16 sm:py-20">
-        <div className="container-site">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading
-              kicker="Baru masuk"
-              title="UMKM terbaru"
-              description="Usaha yang baru saja bergabung dan siap untuk ditemukan."
-            />
-            <Link to="/explore" className="btn btn-ghost px-4 py-2 text-sm">
-              Lihat semua <ArrowRight className="size-4" />
+      {/* 2. Grid kategori mengambang di atas hero */}
+      <section className="container-site relative z-10 -mt-12">
+        <div className="rounded-2xl border border-ink-900/5 bg-white p-4 shadow-[0_20px_60px_-20px_rgba(21,25,20,0.25)] sm:p-6">
+          <div className="mb-4 flex items-center justify-between gap-2">
+            <div>
+              <span className="label-caption">Jelajahi sektor</span>
+              <h2 className="font-display text-lg font-bold text-ink-900">Kategori Usaha</h2>
+            </div>
+            <Link to="/explore" className="flex items-center gap-1 text-xs font-semibold text-ink-900 hover:text-brand-500">
+              Semua lapak <ArrowRight className="size-3.5" />
             </Link>
           </div>
-
           {loading ? (
             <Spinner />
-          ) : latest.length === 0 ? (
-            <p className="mt-10 text-sm text-ink-500">
-              Belum ada UMKM terdaftar. Coba jalankan seeder backend terlebih dahulu.
-            </p>
           ) : (
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {latest.slice(0, 6).map((u, i) => (
-                <div
-                  key={u.id}
-                  style={{ animation: `fade-up 0.5s ${i * 0.05}s cubic-bezier(0.22,1,0.36,1) both` }}
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              {categoriesWithCount.map((cat) => (
+                <Link
+                  key={cat.id}
+                  to={`/explore?category_id=${cat.id}`}
+                  className="group flex items-center gap-3 rounded-xl border border-ink-900/5 p-4 text-left transition-all hover:border-ink-900/15 hover:bg-cream-50/60"
                 >
-                  <UmkmCard umkm={u} />
-                </div>
+                  <CategoryIcon category={cat.name} size="lg" />
+                  <div className="min-w-0">
+                    <span className="block truncate font-display text-sm font-bold text-ink-900">
+                      {cat.name}
+                    </span>
+                    <span className="font-mono text-[11px] text-ink-400">{cat.count} lapak</span>
+                  </div>
+                </Link>
               ))}
             </div>
           )}
         </div>
       </section>
 
-      {/* CTA BAND */}
-      <section className="container-site py-16 sm:py-20">
-        <div className="relative overflow-hidden rounded-3xl bg-ink-900 px-6 py-12 sm:px-12 sm:py-16">
-          <div className="absolute -right-20 -top-24 size-72 rounded-full bg-brand-600/30 blur-3xl" />
-          <div className="absolute -bottom-24 -left-16 size-72 rounded-full bg-wa-600/20 blur-3xl" />
-          <div className="relative grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
+      <div className="h-14" />
+
+      {/* 3. Peta interaktif terbagi */}
+      <section className="container-site">
+        <div className="overflow-hidden rounded-2xl border border-ink-900/5 bg-white shadow-[0_8px_30px_-12px_rgba(21,25,20,0.1)]">
+          <div className="flex flex-col justify-between gap-3 border-b border-ink-900/5 p-5 sm:flex-row sm:items-center sm:p-6">
             <div>
-              <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                Punya usaha sendiri?
-                <br />
-                <span className="text-brand-300">Gratis daftarkan di UMKM-Go.</span>
-              </h2>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-cream-200/70">
-                Tampilkan usaha kamu, bagikan lokasi, dan biarkan pelanggan menghubungi lewat
-                WhatsApp langsung.
+              <span className="eyebrow mb-1.5">Peta live · {pinsWithCoords.length} kios</span>
+              <h2 className="font-display text-xl font-bold text-ink-900">Sebaran kios UMKM saat ini</h2>
+            </div>
+            <Link to="/peta" className="btn btn-primary self-start rounded-xl !px-4 !py-2.5 !text-xs font-bold sm:self-auto">
+              <MapPin className="size-4" />
+              Buka Peta Penuh
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 gap-0 lg:grid-cols-3">
+            <div className="h-[380px] lg:col-span-2 sm:h-[460px]">
+              {loading ? (
+                <Spinner label="Memuat peta…" />
+              ) : (
+                <UmkmMap
+                  items={pinsWithCoords}
+                  selectedUmkm={selectedPreviewUmkm}
+                  onSelectUmkm={setSelectedPreviewUmkm}
+                  zoom={11}
+                  center={
+                    selectedPreviewUmkm?.latitude != null
+                      ? [Number(selectedPreviewUmkm.latitude), Number(selectedPreviewUmkm.longitude)]
+                      : [-2.5489, 118.0149]
+                  }
+                  showCategoryLegend={true}
+                  className="h-full w-full !rounded-none !border-0"
+                />
+              )}
+            </div>
+
+            <aside className="flex min-h-[260px] flex-col justify-between border-t border-ink-900/5 bg-cream-50/40 p-5 lg:border-l lg:border-t-0">
+              {selectedPreviewUmkm ? (
+                <div className="space-y-3">
+                  <span className="eyebrow">Kios yang dipilih</span>
+                  {selectedPreviewUmkm.image_cover && (
+                    <div className="aspect-[16/9] overflow-hidden rounded-xl border border-ink-900/10">
+                      <img
+                        src={selectedPreviewUmkm.image_cover}
+                        alt={`Foto ${selectedPreviewUmkm.name}`}
+                        loading="lazy"
+                        className="size-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="font-display text-base font-bold leading-tight text-ink-900">
+                      {selectedPreviewUmkm.name}
+                    </h3>
+                    <p className="mt-1 line-clamp-2 text-xs text-ink-500">
+                      {selectedPreviewUmkm.description}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 rounded-lg border border-ink-900/5 bg-white p-2.5 font-mono text-[11px]">
+                    <span className="text-ink-500">Kota</span>
+                    <span className="truncate text-right font-bold text-ink-900">
+                      {selectedPreviewUmkm.city}
+                    </span>
+                    <span className="text-ink-500">WhatsApp</span>
+                    <span className="text-right font-bold tabular-nums text-ink-900">
+                      {formatPhoneWhatsApp(selectedPreviewUmkm.phone_whatsapp)}
+                    </span>
+                  </div>
+                  <div className="flex gap-2 pt-1">
+                    <Link
+                      to={`/umkms/${selectedPreviewUmkm.slug}`}
+                      className="btn btn-outline flex-1 rounded-lg !py-2 !text-xs"
+                    >
+                      Detail
+                    </Link>
+                    <a
+                      href={makeWhatsAppLink(selectedPreviewUmkm.phone_whatsapp, selectedPreviewUmkm.name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-wa rounded-lg !py-2 !text-xs"
+                    >
+                      <MessageCircle className="size-4" />
+                      Chat WA
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                <div className="my-auto text-center text-xs text-ink-400">
+                  Klik pin kios di peta untuk melihat detail singkat.
+                </div>
+              )}
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <div className="h-20" />
+
+      {/* 4. Lapak terbaru */}
+      <section className="container-site space-y-6">
+        <div className="flex flex-col justify-between gap-3 border-b border-ink-900/5 pb-4 sm:flex-row sm:items-end">
+          <div>
+            <span className="eyebrow eyebrow-accent mb-1.5">
+              <Sparkles className="size-3.5" />
+              Baru bergabung
+            </span>
+            <h2 className="font-display text-2xl font-black tracking-tight text-ink-900 sm:text-3xl">
+              Lapak UMKM terbaru
+            </h2>
+          </div>
+          <Link to="/explore" className="btn btn-outline self-start rounded-lg !px-4 !py-2 !text-xs">
+            <SlidersHorizontal className="size-3.5" />
+            Lihat {items.length} lapak
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {latestItems.map((umkm) => (
+            <UmkmCard key={umkm.id} umkm={umkm} />
+          ))}
+        </div>
+      </section>
+
+      <div className="h-20" />
+
+      {/* 5. CTA pemilik usaha */}
+      <section className="container-site">
+        <div className="relative overflow-hidden rounded-3xl border border-white/5 bg-ink-900 p-8 text-white shadow-[0_20px_60px_-20px_rgba(21,25,20,0.5)] sm:p-12">
+          <div className="relative grid grid-cols-1 items-center gap-6 md:grid-cols-2">
+            <div>
+              <span className="eyebrow mb-3 text-cream-100/70">
+                <TrendingUp className="size-3 text-accent-400" />
+                <span className="text-accent-400">Untuk pelaku usaha</span>
+              </span>
+              <h3 className="font-display text-2xl font-black leading-tight tracking-tight text-white sm:text-3xl">
+                Pasang titik kios Anda. <br />
+                Terima order langsung via WhatsApp.
+              </h3>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-cream-100/70">
+                Pendaftaran 100% gratis, tanpa biaya komisi. Profil lapak tampil di peta dan
+                direktori, pelanggan terdekat bisa menghubungi Anda dalam satu klik.
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-3 md:justify-end">
-              <Link to="/register" className="btn btn-primary px-6 py-3 text-sm">
-                Daftar Sekarang
+            <div className="flex flex-col items-center gap-3 md:justify-end sm:flex-row">
+              <Link to="/register" className="btn btn-accent w-full rounded-xl !px-6 !py-3 !text-sm font-bold sm:w-auto">
+                Daftarkan Lapak Sekarang
               </Link>
-              <Link to="/peta" className="btn px-6 py-3 text-sm text-white hover:bg-white/10">
-                Lihat Peta
+              <Link
+                to="/dashboard"
+                className="btn w-full rounded-xl border border-white/15 bg-white/10 !px-5 !py-3 !text-sm font-semibold text-white hover:bg-white/20 sm:w-auto"
+              >
+                Masuk Dashboard
               </Link>
             </div>
           </div>

@@ -67,21 +67,21 @@ export default function FileDropzone({
           error
             ? 'border-red-400 bg-red-50/60'
             : dragging
-              ? 'border-brand-500 bg-brand-50'
-              : 'border-ink-900/15 bg-white hover:border-brand-300 hover:bg-brand-50/40'
+              ? 'border-ink-900 bg-cream-50'
+              : 'border-ink-900/15 bg-white hover:border-ink-900/30 hover:bg-cream-50'
         }`}
       >
         {preview ? (
           <>
             <img src={preview} alt="Pratinjau gambar sampul" className="absolute inset-0 size-full object-cover" />
             <span className="absolute inset-0 bg-ink-900/30 transition hover:bg-ink-900/20" />
-            <span className="relative z-10 inline-flex items-center gap-2 rounded-full bg-ink-900/70 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
+            <span className="relative z-10 inline-flex items-center gap-2 rounded-lg bg-ink-900/70 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
               <ImagePlus className="size-4" /> {isBlobPreview ? 'Ganti gambar' : 'Klik untuk mengganti'}
             </span>
           </>
         ) : (
           <>
-            <span className="grid size-12 place-items-center rounded-2xl bg-brand-100 text-brand-600">
+            <span className="grid size-12 place-items-center rounded-2xl bg-ink-100 text-ink-700">
               <ImagePlus className="size-6" />
             </span>
             <div>

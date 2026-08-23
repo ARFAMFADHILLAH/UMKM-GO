@@ -1,28 +1,38 @@
-import { Utensils, Hammer, Shirt, Leaf, Wrench, Store, Sparkles } from 'lucide-react'
+import { UtensilsCrossed, Sparkles, Shirt, Wrench, Sprout, Store } from 'lucide-react'
 import { categoryColor } from '../../lib/format'
 
-const MAP = {
-  'Kuliner': { Icon: Utensils },
-  'Kerajinan Tangan': { Icon: Hammer },
-  'Fashion': { Icon: Shirt },
-  'Pertanian & Perkebunan': { Icon: Leaf },
-  'Jasa & Servis': { Icon: Wrench },
+const ICON_MAP = {
+  'Kuliner': UtensilsCrossed,
+  'Kerajinan Tangan': Sparkles,
+  'Fashion': Shirt,
+  'Jasa & Servis': Wrench,
+  'Pertanian & Perkebunan': Sprout,
 }
 
-export default function CategoryIcon({ name, size = 'size-6', className = '' }) {
-  const Icon = MAP[name]?.Icon || Store
+export default function CategoryIcon({ category, size = 'md', className = '', isActive = false }) {
+  const catColor = categoryColor(category)
+
+  const sizeClasses = {
+    sm: 'w-7 h-7',
+    md: 'w-10 h-10',
+    lg: 'w-12 h-12',
+    xl: 'w-16 h-16',
+  }[size]
+
+  const iconSizes = { sm: 14, md: 20, lg: 24, xl: 30 }[size]
+
+  const Icon = ICON_MAP[category] || Store
+
   return (
-    <span
-      className={`grid place-items-center rounded-2xl text-white shadow-sm ${categoryColor(
-        name,
-      )} ${className}`}
+    <div
+      className={`flex shrink-0 items-center justify-center rounded-full transition-all ${sizeClasses} ${className}`}
+      style={{
+        backgroundColor: isActive ? catColor : `${catColor}18`,
+        color: isActive ? '#ffffff' : catColor,
+        border: `1.5px solid ${isActive ? catColor : `${catColor}35`}`,
+      }}
     >
-      <Icon className={`${size} shrink-0`} />
-    </span>
+      <Icon size={iconSizes} strokeWidth={2.2} />
+    </div>
   )
-}
-
-export function CategoryGlyph({ name, className = '' }) {
-  const Icon = MAP[name]?.Icon || Sparkles
-  return <Icon className={className} />
 }

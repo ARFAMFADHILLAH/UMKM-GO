@@ -5,7 +5,7 @@ export default function Field({ label, error, required, hint, children, classNam
     <label className={`block ${className}`}>
       {label && (
         <span className="label-caption">
-          {label} {required && <span className="text-brand-600">*</span>}
+          {label} {required && <span className="text-cabai-500">*</span>}
         </span>
       )}
       {children}

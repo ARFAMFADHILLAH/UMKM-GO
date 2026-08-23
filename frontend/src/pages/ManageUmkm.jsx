@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, MapPin, Save, Store } from 'lucide-react'
-import Field from '../components/ui/Field'
-import Select from '../components/ui/Select'
-import Spinner from '../components/ui/Spinner'
+import { AlertCircle, CheckCircle2, MapPin, Sparkles } from 'lucide-react'
+import UmkmMap from '../components/map/UmkmMap'
+import UmkmCard from '../components/UmkmCard'
 import FileDropzone from '../components/ui/FileDropzone'
-import MapPicker from '../components/map/MapPicker'
+import Spinner from '../components/ui/Spinner'
 import { createUmkm, extractError, getUmkm, listCategories, updateUmkm } from '../lib/api'
 import { invalidateUmkmCache } from '../lib/cities'
+import { categoryColor } from '../lib/format'
 
 const EMPTY_FORM = {
   name: '',
@@ -19,6 +19,26 @@ const EMPTY_FORM = {
   phone_whatsapp: '',
   instagram: '',
   website_url: '',
+}
+
+function Label({ children, required = false }) {
+  return (
+    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-tight text-ink-700">
+      {children}
+      {required && <span className="ml-0.5 text-cabai-500">*</span>}
+    </label>
+  )
+}
+
+function SectionHeader({ step, title }) {
+  return (
+    <div className="flex items-center gap-3 border-b border-ink-900/5 pb-3">
+      <span className="flex size-7 items-center justify-center rounded-lg bg-ink-900 font-mono text-xs font-black text-accent-400">
+        {step}
+      </span>
+      <h3 className="font-display text-base font-bold text-ink-900">{title}</h3>
+    </div>
+  )
 }
 
 export default function ManageUmkm() {
@@ -36,6 +56,8 @@ export default function ManageUmkm() {
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [submittedName, setSubmittedName] = useState('')
 
   useEffect(() => {
     listCategories().then(setCategories)
@@ -61,16 +83,36 @@ export default function ManageUmkm() {
           setLoaded(u)
           document.title = `Edit ${u.name} — UMKM-Go`
         })
-        .catch((err) => {
-          setMessage(extractError(err).message)
-        })
+        .catch((err) => setMessage(extractError(err).message))
         .finally(() => setLoading(false))
     } else {
-      document.title = 'Daftarkan UMKM — UMKM-Go'
+      document.title = 'Daftarkan Lapak — UMKM-Go'
     }
   }, [isEdit, slug])
 
   const set = (field, value) => setForm((f) => ({ ...f, [field]: value }))
+  const categoryName =
+    categories.find((c) => String(c.id) === String(form.category_id))?.name ?? ''
+
+  // Pratinjau langsung untuk kartu UMKM
+  const preview = {
+    id: 'preview',
+    slug: 'preview',
+    name: form.name || 'Nama Lapak Anda',
+    category: { id: Number(form.category_id) || 0, name: categoryName || 'Kategori' },
+    description:
+      form.description || 'Deskripsi singkat tentang usaha dan keunggulan lapak Anda.',
+    city: form.city || 'Kota Anda',
+    province: form.province || 'Provinsi',
+    address: form.address,
+    latitude: coords?.[0],
+    longitude: coords?.[1],
+    phone_whatsapp: form.phone_whatsapp || '081234567890',
+    instagram: form.instagram || undefined,
+    image_cover:
+      existingImage && !file ? existingImage : file ? URL.createObjectURL(file) : undefined,
+    is_verified: false,
+  }
 
   const submit = async (e) => {
     e.preventDefault()
@@ -90,11 +132,15 @@ export default function ManageUmkm() {
 
       if (isEdit && loaded) {
         await updateUmkm(loaded.id, fd, Boolean(file))
+        invalidateUmkmCache()
+        navigate('/dashboard')
       } else {
         await createUmkm(fd)
+        invalidateUmkmCache()
+        setSubmittedName(form.name)
+        setSubmitted(true)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       }
-      invalidateUmkmCache()
-      navigate('/dashboard')
     } catch (err) {
       const { message: msg, fieldErrors } = extractError(err)
       setMessage(msg)
@@ -107,163 +153,249 @@ export default function ManageUmkm() {
 
   if (loading) return <Spinner className="min-h-[50vh]" />
 
-  return (
-    <div className="container-site max-w-3xl animate-fade-in py-10 sm:py-12">
-      <Link to="/dashboard" className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-500 hover:text-brand-700">
-        <ArrowLeft className="size-4" /> Kembali ke dashboard
-      </Link>
-
-      <div className="mt-4 flex items-center gap-3">
-        <span className="grid size-12 place-items-center rounded-2xl bg-brand-100 text-brand-600">
-          <Store className="size-6" />
-        </span>
+  if (submitted)
+    return (
+      <div className="container-site mx-auto max-w-xl space-y-6 py-16 text-center">
+        <div className="mx-auto flex size-20 items-center justify-center rounded-full border-2 border-wa-500 bg-wa-500/10 text-wa-600">
+          <CheckCircle2 className="size-10" />
+        </div>
         <div>
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl">
-            {isEdit ? 'Edit UMKM' : 'Daftarkan UMKM Baru'}
-          </h1>
-          <p className="mt-0.5 text-sm text-ink-500">
-            {isEdit ? 'Perbarui informasi usaha milikmu.' : 'Lengkapi data usaha agar mudah ditemukan.'}
+          <span className="stamp-verified">LAPAK BARU TERDAFTAR</span>
+          <h2 className="font-display mt-3 text-3xl font-black tracking-tight text-ink-900">
+            Berhasil didaftarkan!
+          </h2>
+          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-500">
+            Kios <strong>{submittedName}</strong> kini menunggu verifikasi admin dan siap tampil di
+            peta interaktif UMKM-Go.
           </p>
         </div>
+        <div className="overflow-hidden rounded-2xl text-left shadow-lg">
+          <UmkmCard umkm={{ ...preview, image_cover: existingImage }} />
+        </div>
+        <div className="flex flex-col justify-center gap-3 sm:flex-row">
+          <Link to="/peta" className="btn btn-primary rounded-xl !px-6 !py-2.5 !text-sm font-bold">
+            <MapPin className="size-4" /> Lihat di Peta
+          </Link>
+          <Link to="/dashboard" className="btn btn-outline rounded-xl !px-6 !py-2.5 !text-sm font-semibold">
+            Buka Dashboard
+          </Link>
+        </div>
+      </div>
+    )
+
+  return (
+    <div className="container-site space-y-8 py-8 sm:py-10">
+      <div className="max-w-2xl">
+        <span className="label-caption">Pendaftaran gratis</span>
+        <h1 className="font-display text-3xl font-black tracking-tight text-ink-900 sm:text-4xl">
+          {isEdit ? 'Edit lapak Anda' : 'Daftarkan lapak UMKM Anda'}
+        </h1>
+        <p className="mt-2 text-sm leading-relaxed text-ink-500">
+          Isi data lapak dalam 2 menit. Pelanggan di sekitar Anda akan langsung bisa menghubungi
+          via WhatsApp — tanpa komisi, tanpa langganan.
+        </p>
       </div>
 
       {message && (
-        <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+        <div className="flex items-center gap-2 rounded-xl border border-cabai-500/30 bg-cabai-500/10 p-4 text-sm text-cabai-600">
+          <AlertCircle className="size-4 shrink-0" />
           {message}
         </div>
       )}
 
-      <form onSubmit={submit} className="mt-8 space-y-6" noValidate>
-        <section className="card space-y-4 p-6">
-          <h2 className="font-display text-lg font-semibold text-ink-900">Informasi dasar</h2>
-          <Field label="Kategori usaha" error={errors.category_id?.[0]} required>
-            <Select
-              value={form.category_id}
-              onChange={(e) => set('category_id', e.target.value)}
-            >
-              <option value="">Pilih kategori</option>
-              {categories.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </Select>
-          </Field>
-          <Field label="Nama usaha" error={errors.name?.[0]} required>
-            <input
-              value={form.name}
-              onChange={(e) => set('name', e.target.value)}
-              className="field"
-              placeholder="contoh: Kripik Tempe Oemah"
-            />
-          </Field>
-          <Field label="Deskripsi usaha" error={errors.description?.[0]} required>
-            <textarea
-              value={form.description}
-              onChange={(e) => set('description', e.target.value)}
-              className="field min-h-28 resize-y"
-              placeholder="Ceritakan produk atau layananmu…"
-            />
-          </Field>
-          <Field label="Foto sampul" hint="Foto yang tampil di kartu dan detail UMKM.">
-            <FileDropzone
-              initialPreview={existingImage}
-              onFile={setFile}
-            />
-          </Field>
-        </section>
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+        <form onSubmit={submit} noValidate className="space-y-8 rounded-2xl border border-ink-900/5 bg-white p-6 shadow-sm sm:p-8 lg:col-span-7">
+          {/* STEP 1 */}
+          <section className="space-y-4">
+            <SectionHeader step={1} title="Informasi lapak" />
+            <div>
+              <Label required>Nama usaha</Label>
+              <input
+                value={form.name}
+                onChange={(e) => set('name', e.target.value)}
+                required
+                placeholder="Contoh: Warung Sate Bu Siti"
+                className="field"
+              />
+              {errors.name?.[0] && <p className="mt-1 text-xs text-red-600">{errors.name[0]}</p>}
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div>
+                <Label required>Kategori</Label>
+                <select
+                  value={form.category_id}
+                  onChange={(e) => set('category_id', e.target.value)}
+                  required
+                  className="field cursor-pointer font-medium"
+                >
+                  <option value="">Pilih kategori</option>
+                  {categories.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <Label>Website / URL</Label>
+                <input
+                  value={form.website_url}
+                  onChange={(e) => set('website_url', e.target.value)}
+                  placeholder="https://..."
+                  className="field"
+                />
+              </div>
+            </div>
+            <div>
+              <Label required>Deskripsi singkat</Label>
+              <textarea
+                rows={2}
+                value={form.description}
+                onChange={(e) => set('description', e.target.value)}
+                required
+                placeholder="Menu andalan, keunikan produk, spesialisasi..."
+                className="field resize-none"
+              />
+              {errors.description?.[0] && (
+                <p className="mt-1 text-xs text-red-600">{errors.description[0]}</p>
+              )}
+            </div>
+            <div>
+              <Label>Foto sampul</Label>
+              <FileDropzone initialPreview={existingImage} onFile={setFile} />
+            </div>
+          </section>
 
-        <section className="card space-y-4 p-6">
-          <h2 className="font-display text-lg font-semibold text-ink-900">Lokasi &amp; kontak</h2>
-          <Field label="Alamat lengkap" error={errors.address?.[0]} required>
-            <textarea
-              value={form.address}
-              onChange={(e) => set('address', e.target.value)}
-              className="field min-h-20 resize-y"
-              placeholder="Jalan, RT/RW, kelurahan…"
-            />
-          </Field>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Provinsi" error={errors.province?.[0]} required>
+          {/* STEP 2 */}
+          <section className="space-y-4">
+            <SectionHeader step={2} title="Lokasi &amp; kontak" />
+            <div>
+              <Label required>Alamat fisik lengkap</Label>
               <input
-                value={form.province}
-                onChange={(e) => set('province', e.target.value)}
+                value={form.address}
+                onChange={(e) => set('address', e.target.value)}
+                required
+                placeholder="Jl. Contoh No. 45, RT/RW, Kelurahan, Kecamatan"
                 className="field"
-                placeholder="contoh: Jawa Timur"
               />
-            </Field>
-            <Field label="Kota / Kabupaten" error={errors.city?.[0]} required>
-              <input
-                value={form.city}
-                onChange={(e) => set('city', e.target.value)}
-                className="field"
-                placeholder="contoh: Kota Malang"
-              />
-            </Field>
-          </div>
-          <Field
-            label="Nomor WhatsApp / HP"
-            error={errors.phone_whatsapp?.[0]}
-            required
-            hint="Format internasional: 6281xxxxx (untuk tombol chat)"
-          >
-            <input
-              value={form.phone_whatsapp}
-              onChange={(e) => set('phone_whatsapp', e.target.value)}
-              className="field"
-              placeholder="contoh: 6281234567890"
-            />
-          </Field>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Instagram" error={errors.instagram?.[0]}>
-              <input
-                value={form.instagram}
-                onChange={(e) => set('instagram', e.target.value)}
-                className="field"
-                placeholder="contoh: kripiktempe_oemah"
-              />
-            </Field>
-            <Field label="Website / URL" error={errors.website_url?.[0]}>
-              <input
-                value={form.website_url}
-                onChange={(e) => set('website_url', e.target.value)}
-                className="field"
-                placeholder="https://…"
-              />
-            </Field>
-          </div>
-        </section>
+              {errors.address?.[0] && <p className="mt-1 text-xs text-red-600">{errors.address[0]}</p>}
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div>
+                <Label required>Provinsi</Label>
+                <input
+                  value={form.province}
+                  onChange={(e) => set('province', e.target.value)}
+                  required
+                  placeholder="Jawa Barat"
+                  className="field"
+                />
+                {errors.province?.[0] && (
+                  <p className="mt-1 text-xs text-red-600">{errors.province[0]}</p>
+                )}
+              </div>
+              <div>
+                <Label required>Kota / Kabupaten</Label>
+                <input
+                  value={form.city}
+                  onChange={(e) => set('city', e.target.value)}
+                  required
+                  placeholder="Kota Malang"
+                  className="field"
+                />
+                {errors.city?.[0] && <p className="mt-1 text-xs text-red-600">{errors.city[0]}</p>}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div>
+                <Label required>Nomor WhatsApp</Label>
+                <input
+                  value={form.phone_whatsapp}
+                  onChange={(e) => set('phone_whatsapp', e.target.value)}
+                  required
+                  placeholder="081234567890 atau 6281234567890"
+                  className="field font-mono"
+                />
+                <span className="mt-1 block font-mono text-[11px] text-ink-400">
+                  Format bebas — otomatis dinormalkan ke +62
+                </span>
+              </div>
+              <div>
+                <Label>Instagram (opsional)</Label>
+                <input
+                  value={form.instagram}
+                  onChange={(e) => set('instagram', e.target.value)}
+                  placeholder="@usernameusaha"
+                  className="field"
+                />
+              </div>
+            </div>
+          </section>
 
-        <section className="card space-y-4 p-6">
-          <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-ink-900">
-            <MapPin className="size-5 text-brand-600" /> Posisi di peta
-          </h2>
-          <p className="text-sm text-ink-500">
-            Tandai lokasi usahamu di peta. Menjadi nilai plus saat juri melihat fitur peta.
-          </p>
-          <MapPicker value={coords} onChange={setCoords} />
-          {coords && (
-            <p className="text-xs font-medium text-wa-700">
-              Lokasi tersimpan: {coords[0].toFixed(5)}, {coords[1].toFixed(5)}
+          {/* STEP 3 */}
+          <section className="space-y-4">
+            <SectionHeader step={3} title="Titik lokasi di peta" />
+            <p className="-mt-1 text-xs text-ink-500">
+              Klik peta untuk memasang pin lokasi kios. Pin bisa digeser sampai posisinya pas.
             </p>
-          )}
-        </section>
+            <div className="h-72 overflow-hidden rounded-2xl border border-ink-900/10">
+              <UmkmMap
+                items={[]}
+                center={coords ?? [-6.2088, 106.8456]}
+                zoom={coords ? 15 : 13}
+                selectableLocation
+                pickedLocation={coords}
+                onMapClick={(lat, lng) => setCoords([lat, lng])}
+                className="h-full w-full !rounded-none !border-0"
+              />
+            </div>
+            <div className="flex items-center justify-between rounded-xl border border-ink-900/5 bg-cream-50 p-3 font-mono text-[11px]">
+              <span className="text-ink-500">Koordinat terpilih:</span>
+              <span className="font-bold tabular-nums text-ink-900">
+                {coords ? `${coords[0].toFixed(5)}, ${coords[1].toFixed(5)}` : 'belum dipilih'}
+              </span>
+            </div>
+          </section>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-ink-900/8 pt-6">
-          <p className="text-xs text-ink-400">
-            <span className="text-brand-600">*</span> wajib diisi
-          </p>
-          <div className="flex gap-3">
-            <Link to="/dashboard" className="btn btn-outline px-5 py-2.5 text-sm">
-              Batal
-            </Link>
-            <button type="submit" disabled={submitting} className="btn btn-primary px-6 py-2.5 text-sm">
-              <Save className="size-4" />
-              {submitting ? 'Menyimpan…' : isEdit ? 'Simpan Perubahan' : 'Daftarkan UMKM'}
-            </button>
+          <button type="submit" disabled={submitting} className="btn btn-primary w-full rounded-xl !py-3.5 !text-sm font-bold shadow-lg">
+            {submitting
+              ? 'Menyimpan…'
+              : isEdit
+                ? 'Simpan Perubahan'
+                : 'Daftarkan Lapak Sekarang (Gratis)'}
+          </button>
+        </form>
+
+        {/* PRATINJAU LANGSUNG */}
+        <aside className="space-y-4 lg:sticky lg:top-20 lg:col-span-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-accent-600">
+              <Sparkles className="size-3.5" />
+              <span>PRATINJAU LANGSUNG</span>
+            </div>
+            {categoryName && (
+              <span className="category-badge text-white" style={{ backgroundColor: categoryColor(categoryName) }}>
+                {categoryName}
+              </span>
+            )}
           </div>
-        </div>
-      </form>
+          <div className="overflow-hidden rounded-2xl shadow-xl">
+            <UmkmCard umkm={preview} />
+          </div>
+          <div className="space-y-1.5 rounded-xl border border-ink-900/5 bg-white p-4 text-[11px] text-ink-600">
+            <p className="font-display flex items-center gap-2 text-sm font-bold text-ink-900">
+              <Sparkles className="size-3.5 text-accent-500" />
+              Keuntungan bergabung
+            </p>
+            <ul className="list-disc space-y-1 pl-4">
+              <li>Muncul di pencarian warga sekitar kota Anda.</li>
+              <li>Tombol WhatsApp langsung ke nomor Anda.</li>
+              <li>Kesempatan cap verifikasi resmi.</li>
+              <li>100% gratis, tanpa komisi, tanpa iklan.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
     </div>
   )
 }
