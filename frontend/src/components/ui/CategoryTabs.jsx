@@ -1,4 +1,4 @@
-import { Crosshair } from 'lucide-react'
+﻿import { Crosshair } from 'lucide-react'
 
 function Tab({ active, color, label, count, onClick }) {
   return (
@@ -21,7 +21,7 @@ function Tab({ active, color, label, count, onClick }) {
       {label}
       {count != null && (
         <span
-          className={`rounded px-1 py-px text-[10px] font-bold tabular-nums ${
+          className={`rounded px-1 py-px text-caption font-bold tabular-nums ${
             active ? 'bg-white/25' : 'bg-cream-100 text-ink-400'
           }`}
         >
@@ -64,7 +64,7 @@ export default function CategoryTabs({
       </nav>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white via-white/80 to-transparent"
+        className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-linear-to-l from-white via-white/80 to-transparent"
       />
     </div>
   )
@@ -77,8 +77,8 @@ export function LocateButton({ loading, onClick }) {
       onClick={onClick}
       title="Lokasi saya"
       aria-label="Lokasi saya"
-      className={`shrink-0 cursor-pointer rounded-lg border p-[7px] transition-all focus-visible:outline-2 focus-visible:outline-offset-1 ${
-        loading ? 'border-map-500/50 bg-map-500/[0.08]' : 'border-ink-900/10 bg-white hover:border-ink-900/25'
+      className={`shrink-0 cursor-pointer rounded-lg border p-1.75 transition-all focus-visible:outline-2 focus-visible:outline-offset-1 ${
+        loading ? 'border-map-500/50 bg-map-500/8' : 'border-ink-900/10 bg-white hover:border-ink-900/25'
       }`}
     >
       <Crosshair className={`size-4 ${loading ? 'animate-spin text-map-600' : 'text-map-600'}`} />

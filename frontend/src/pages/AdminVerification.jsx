@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+﻿import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Check, MapPin, ShieldX, Store as StoreIcon, X } from 'lucide-react'
 import Spinner from '../components/ui/Spinner'
@@ -39,7 +39,7 @@ function PendingRow({ umkm, onVerify, onReject, busy }) {
           type="button"
           disabled={busy}
           onClick={() => onVerify(umkm)}
-          className="btn btn-wa !px-3 !py-2 !text-xs"
+          className="btn btn-wa px-3! py-2! text-xs!"
         >
           <Check className="size-3.5" /> Setujui
         </button>
@@ -47,7 +47,7 @@ function PendingRow({ umkm, onVerify, onReject, busy }) {
           type="button"
           disabled={busy}
           onClick={() => onReject(umkm)}
-          className="btn !px-3 !py-2 !text-xs text-red-600 hover:bg-red-50"
+          className="btn px-3! py-2! text-xs! text-red-600 hover:bg-red-50"
         >
           <X className="size-3.5" /> Tolak
         </button>
@@ -138,15 +138,15 @@ export default function AdminVerification() {
       </div>
 
       {message && (
-        <div className="rounded-xl border border-accent-400/40 bg-accent-400/[0.08] px-4 py-3 text-sm font-medium text-ink-700">
+        <div className="rounded-xl border border-accent-400/40 bg-accent-400/8 px-4 py-3 text-sm font-medium text-ink-700">
           {message}
         </div>
       )}
 
       {loading ? (
-        <Spinner label="Memuat daftar lapak…" />
+        <Spinner label="Memuat daftar lapakâ€¦" />
       ) : endpointMissing ? (
-        <div className="flex items-start gap-3 rounded-xl border border-accent-400/40 bg-accent-400/[0.08] px-4 py-3 text-sm text-ink-700">
+        <div className="flex items-start gap-3 rounded-xl border border-accent-400/40 bg-accent-400/8 px-4 py-3 text-sm text-ink-700">
           <ShieldX className="mt-0.5 size-4 shrink-0 text-accent-600" />
           <p>
             Endpoint admin{' '}

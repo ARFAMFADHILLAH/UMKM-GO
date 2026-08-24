@@ -72,7 +72,7 @@ export default function Footer() {
             </p>
             <Link
               to={user ? '/manage/new' : '/register'}
-              className="btn btn-accent w-full justify-center rounded-xl !py-2.5 !text-sm font-bold"
+              className="btn btn-accent w-full justify-center rounded-xl py-2.5! text-sm! font-bold"
             >
               Daftarkan Lapak Sekarang
             </Link>

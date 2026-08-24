@@ -42,7 +42,7 @@ export default function UmkmCard({ umkm, compact = false }) {
             </div>
           )}
           <div className="absolute left-2 top-2 z-10">
-            <span className="category-badge !px-1.5 text-white !text-caption" style={{ backgroundColor: catColor }}>
+            <span className="category-badge px-1.5! text-white text-caption!" style={{ backgroundColor: catColor }}>
               {umkm.category?.name}
             </span>
           </div>
@@ -56,7 +56,7 @@ export default function UmkmCard({ umkm, compact = false }) {
                 {umkm.name}
               </h3>
               {umkm.is_verified && (
-                <span className="stamp-verified shrink-0 !py-0 !text-caption">
+                <span className="stamp-verified shrink-0 py-0! text-caption!">
                   <ShieldCheck className="size-3" /> Terverifikasi
                 </span>
               )}
@@ -82,7 +82,7 @@ export default function UmkmCard({ umkm, compact = false }) {
               type="button"
               onClick={handleWaClick}
               title="Hubungi via WhatsApp"
-              className="btn btn-wa shrink-0 rounded-lg !px-3 !py-1.5 !text-xs"
+              className="btn btn-wa shrink-0 rounded-lg px-3! py-1.5! text-xs!"
             >
               <MessageCircle className="size-3.5" />
               Chat
@@ -97,7 +97,7 @@ export default function UmkmCard({ umkm, compact = false }) {
   return (
     <article onClick={handleCardClick} className="card group flex cursor-pointer flex-col justify-between bg-white">
       {/* Thumbnail */}
-      <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-cream-100">
+      <div className="relative aspect-4/3 w-full shrink-0 overflow-hidden bg-cream-100">
         {!imgError && umkm.image_cover ? (
           <img
             src={umkm.image_cover}
@@ -131,7 +131,7 @@ export default function UmkmCard({ umkm, compact = false }) {
         </div>
 
         {/* Scrim gradien bawah - teks di atasnya, tidak pernah langsung di foto */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/85 via-black/35 to-transparent" />
 
         <div className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-between gap-2 [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
           <span className="inline-flex items-center gap-1.5 font-bold text-caption tracking-wide text-white">
@@ -151,7 +151,7 @@ export default function UmkmCard({ umkm, compact = false }) {
         <div>
           <div className="mb-1.5 flex items-center justify-between gap-2">
             {umkm.is_verified ? (
-              <span className="stamp-verified !py-0 !text-caption">
+              <span className="stamp-verified py-0! text-caption!">
                 <ShieldCheck className="size-3" />
                 Terverifikasi
               </span>
@@ -179,7 +179,7 @@ export default function UmkmCard({ umkm, compact = false }) {
         {/* Footer dengan aksi WhatsApp (wajib kanan-bawah) */}
         <div className="mt-2 flex items-center justify-between gap-3 border-t border-ink-900/5 pt-3">
           <div className="min-w-0">
-            <span className="label-caption !mb-0 block">Nomor WhatsApp</span>
+            <span className="label-caption mb-0! block">Nomor WhatsApp</span>
             <span className="mt-0.5 block truncate font-bold text-sm leading-tight text-ink-900 tabular-nums">
               {formatPhoneWhatsApp(umkm.phone_whatsapp)}
             </span>
@@ -189,7 +189,7 @@ export default function UmkmCard({ umkm, compact = false }) {
             type="button"
             onClick={handleWaClick}
             title="Hubungi via WhatsApp"
-            className="btn btn-wa h-9 rounded-lg !px-3.5 !py-2 !text-xs"
+            className="btn btn-wa h-9 rounded-lg px-3.5! py-2! text-xs!"
           >
             <MessageCircle className="size-4" />
             <span className="hidden sm:inline">Chat</span>

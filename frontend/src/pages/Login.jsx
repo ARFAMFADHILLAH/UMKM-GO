@@ -12,12 +12,12 @@ function AuthShell({ children }) {
       <aside className="relative hidden overflow-hidden bg-ink-900 lg:block">
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-400/40 to-transparent"
+          className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent-400/40 to-transparent"
         />
         <div className="relative flex h-full flex-col justify-between p-12">
           <Logo dark />
           <div>
-            <span className="label-caption !text-cream-100/70 inline-flex items-center gap-2">
+            <span className="label-caption text-cream-100/70! inline-flex items-center gap-2">
               <Store className="size-3.5 shrink-0 text-accent-400" />
               <span className="text-accent-400">Komunitas UMKM Indonesia</span>
             </span>
@@ -121,7 +121,7 @@ export default function Login() {
           />
         </Field>
 
-        <button type="submit" disabled={loading} className="btn btn-primary w-full !py-3 !text-sm font-bold">
+        <button type="submit" disabled={loading} className="btn btn-primary w-full py-3! text-sm! font-bold">
           <LogIn className="size-4" />
           {loading ? 'Masuk…' : 'Masuk'}
         </button>

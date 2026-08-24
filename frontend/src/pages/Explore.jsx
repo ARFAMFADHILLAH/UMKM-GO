@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+﻿import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { LayoutGrid, List, RotateCcw, Search, X } from 'lucide-react'
 import UmkmCard from '../components/UmkmCard'
@@ -81,8 +81,8 @@ export default function Explore() {
   const activeCategory = categories.find((c) => String(c.id) === String(categoryId))
 
   const heading = useMemo(() => {
-    if (search && activeCategory) return `Hasil â€œ${search}â€ di ${activeCategory.name}`
-    if (search) return `Hasil pencarian â€œ${search}â€`
+    if (search && activeCategory) return `Hasil Ã¢â‚¬Å“${search}Ã¢â‚¬Â di ${activeCategory.name}`
+    if (search) return `Hasil pencarian Ã¢â‚¬Å“${search}Ã¢â‚¬Â`
     if (activeCategory) return `Kategori ${activeCategory.name}`
     if (city) return `Lapak di ${city}`
     return 'Jelajah usaha lokal'
@@ -100,7 +100,7 @@ export default function Explore() {
           </h1>
           <p className="mt-1 text-sm text-ink-500">
             {loading && !result
-              ? 'Memuat dataâ€¦'
+              ? 'Memuat dataÃ¢â‚¬Â¦'
               : `${total} lapak ${city ? `di ${city}` : 'di seluruh Indonesia'}`}
           </p>
         </div>
@@ -207,7 +207,7 @@ export default function Explore() {
       </div>
 
       {loading ? (
-        <Spinner label="Memuat katalogâ€¦" />
+        <Spinner label="Memuat katalogÃ¢â‚¬Â¦" />
       ) : items.length === 0 ? (
         <EmptyState
           title="Tidak ditemukan lapak yang cocok"
@@ -240,9 +240,9 @@ export default function Explore() {
                 type="button"
                 disabled={page <= 1}
                 onClick={() => window.scrollTo({ top: 0 }) || updateParams({ search, category_id: categoryId, city, page: page - 1 })}
-                className="btn btn-outline size-9 !p-0 disabled:pointer-events-none disabled:opacity-40"
+                className="btn btn-outline size-9 p-0! disabled:pointer-events-none disabled:opacity-40"
               >
-                â€¹
+                Ã¢â‚¬Â¹
               </button>
               {Array.from({ length: lastPage }, (_, i) => i + 1).map((p) => (
                 <button
@@ -253,7 +253,7 @@ export default function Explore() {
                     updateParams({ search, category_id: categoryId, city, page: p })
                   }}
                   aria-current={p === page ? 'page' : undefined}
-                  className={`btn size-9 !p-0 font-semibold text-sm tabular-nums ${p === page ? 'btn-primary' : 'btn-outline'}`}
+                  className={`btn size-9 p-0! font-semibold text-sm tabular-nums ${p === page ? 'btn-primary' : 'btn-outline'}`}
                 >
                   {p}
                 </button>
@@ -262,9 +262,9 @@ export default function Explore() {
                 type="button"
                 disabled={page >= lastPage}
                 onClick={() => window.scrollTo({ top: 0 }) || updateParams({ search, category_id: categoryId, city, page: page + 1 })}
-                className="btn btn-outline size-9 !p-0 disabled:pointer-events-none disabled:opacity-40"
+                className="btn btn-outline size-9 p-0! disabled:pointer-events-none disabled:opacity-40"
               >
-                â€º
+                Ã¢â‚¬Âº
               </button>
             </nav>
           )}

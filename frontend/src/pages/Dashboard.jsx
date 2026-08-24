@@ -25,11 +25,11 @@ function MetricCard({ icon, iconBg, label, value }) {
 
 function StatusBadge({ verified }) {
   return verified ? (
-    <span className="stamp-verified !py-0 !text-caption">
+    <span className="stamp-verified py-0! text-caption!">
       <ShieldCheck className="size-3" /> Terverifikasi
     </span>
   ) : (
-    <span className="inline-flex items-center gap-1 rounded border border-dashed border-accent-400/50 bg-accent-400/[0.08] px-2 py-0.5 text-caption font-bold uppercase tracking-wider text-accent-600">
+    <span className="inline-flex items-center gap-1 rounded border border-dashed border-accent-400/50 bg-accent-400/8 px-2 py-0.5 text-caption font-bold uppercase tracking-wider text-accent-600">
       <Clock className="size-3" /> Menunggu verifikasi
     </span>
   )
@@ -66,14 +66,14 @@ function MyUmkmRow({ umkm, onDelete, busy }) {
         </p>
       </div>
       <div className="flex shrink-0 gap-2">
-        <Link to={`/manage/${umkm.slug}`} className="btn btn-outline !px-3 !py-2 !text-xs">
+        <Link to={`/manage/${umkm.slug}`} className="btn btn-outline px-3! py-2! text-xs!">
           <Pencil className="size-3.5" /> Edit
         </Link>
         <button
           type="button"
           disabled={busy}
           onClick={() => onDelete(umkm)}
-          className="btn !px-3 !py-2 !text-xs text-red-600 hover:bg-red-50"
+          className="btn px-3! py-2! text-xs! text-red-600 hover:bg-red-50"
         >
           <Trash2 className="size-3.5" /> Hapus
         </button>
@@ -141,7 +141,7 @@ export default function Dashboard() {
           <p className="mt-1 tracking-[0.08em] text-caption uppercase tracking-[0.12em] text-ink-400">{user?.email}</p>
         </div>
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <Link to="/manage/new" className="btn btn-primary rounded-xl !px-4 !py-2.5 !text-xs font-bold">
+          <Link to="/manage/new" className="btn btn-primary rounded-xl px-4! py-2.5! text-xs! font-bold">
             <Plus className="size-4" /> Tambah Lapak Baru
           </Link>
           <button
@@ -150,7 +150,7 @@ export default function Dashboard() {
               await logout()
               navigate('/')
             }}
-            className="btn btn-outline rounded-xl !px-4 !py-2.5 !text-xs font-semibold"
+            className="btn btn-outline rounded-xl px-4! py-2.5! text-xs! font-semibold"
           >
             <LogOut className="size-3.5" /> Keluar
           </button>
@@ -158,13 +158,13 @@ export default function Dashboard() {
       </div>
 
       {message && (
-        <div className="rounded-xl border border-wa-500/30 bg-wa-500/[0.07] px-4 py-3 text-sm font-medium text-wa-600">
+        <div className="rounded-xl border border-wa-500/30 bg-wa-500/7 px-4 py-3 text-sm font-medium text-wa-600">
           {message}
         </div>
       )}
 
       {endpointMissing && (
-        <div className="flex items-start gap-3 rounded-xl border border-accent-400/40 bg-accent-400/[0.08] px-4 py-3 text-sm text-ink-700">
+        <div className="flex items-start gap-3 rounded-xl border border-accent-400/40 bg-accent-400/8 px-4 py-3 text-sm text-ink-700">
           <AlertTriangle className="mt-0.5 size-4 shrink-0 text-accent-600" />
           <p>
             Halaman ini butuh endpoint{' '}
@@ -215,7 +215,7 @@ export default function Dashboard() {
             title="Belum ada lapak terdaftar"
             description="Daftarkan usaha Anda untuk mulai mengelola kios di peta dan menerima order via WhatsApp."
             action={
-              <Link to="/manage/new" className="btn btn-primary rounded-xl !px-6 !py-2.5 !text-sm font-bold">
+              <Link to="/manage/new" className="btn btn-primary rounded-xl px-6! py-2.5! text-sm! font-bold">
                 Daftarkan UMKM Sekarang
               </Link>
             }

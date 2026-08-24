@@ -61,7 +61,7 @@ export default function Navbar() {
         {/* Brand */}
         <Link to="/" className="group flex items-center gap-2.5 text-left">
           <div className="flex size-9 items-center justify-center rounded-xl bg-ink-900 text-accent-400 shadow-sm transition-colors group-hover:bg-brand-500">
-            <Store className="size-[18px]" strokeWidth={2.4} />
+            <Store className="size-4.5" strokeWidth={2.4} />
           </div>
           <div>
             <span className="font-display text-lg font-black leading-none tracking-tight text-ink-900">
@@ -89,7 +89,7 @@ export default function Navbar() {
             onChange={(v) => setSelectedCity(v)}
             placeholder="Semua kota"
             options={[{ value: '', label: 'Semua kota' }, ...cities.map((c) => ({ value: c, label: c }))]}
-            className="min-w-[140px] shrink-0"
+            className="min-w-35 shrink-0"
             buttonClassName="rounded-xl border border-ink-900/10 bg-cream-50 px-3 py-2.5 font-semibold text-xs text-ink-900 hover:border-ink-900/25 focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-500"
           />
           </div>
@@ -113,7 +113,7 @@ export default function Navbar() {
           ))}
 
           {!user && (
-            <Link to="/login" className="btn btn-ghost !py-2 !text-sm">
+            <Link to="/login" className="btn btn-ghost py-2! text-sm!">
               Masuk
             </Link>
           )}
@@ -169,7 +169,7 @@ export default function Navbar() {
             </div>
           )}
           {!user && (
-            <Link to={ctaTo} className="btn btn-primary ml-2 rounded-xl !px-4 !py-2 !text-sm font-bold">
+            <Link to={ctaTo} className="btn btn-primary ml-2 rounded-xl px-4! py-2! text-sm! font-bold">
               <PlusCircle className="size-4" />
               Daftarkan Lapak
             </Link>
@@ -217,7 +217,7 @@ export default function Navbar() {
             <NavLink
               to="/"
               end
-              className={({ isActive }) => `btn justify-start rounded-lg !py-2.5 !text-xs ${isActive ? 'btn-primary' : 'btn-outline'}`}
+              className={({ isActive }) => `btn justify-start rounded-lg py-2.5! text-xs! ${isActive ? 'btn-primary' : 'btn-outline'}`}
               onClick={() => setMobileMenuOpen(false)}
             >
               <Store className="size-4" /> Beranda
@@ -226,7 +226,7 @@ export default function Navbar() {
               <NavLink
                 key={item.to}
                 to={item.to}
-                className={({ isActive }) => `btn justify-start rounded-lg !py-2.5 !text-xs ${isActive ? 'btn-primary' : 'btn-outline'}`}
+                className={({ isActive }) => `btn justify-start rounded-lg py-2.5! text-xs! ${isActive ? 'btn-primary' : 'btn-outline'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.icon} {item.label}
@@ -238,14 +238,14 @@ export default function Navbar() {
             <button
               type="button"
               onClick={handleLogout}
-              className="btn w-full justify-center rounded-xl !py-3 !text-sm font-semibold text-red-600 hover:bg-red-50"
+              className="btn w-full justify-center rounded-xl py-3! text-sm! font-semibold text-red-600 hover:bg-red-50"
             >
               <LogOut className="size-4" /> Keluar ({user?.name?.split(' ')[0]})
             </button>
           ) : (
             <Link
               to="/login"
-              className="btn btn-outline w-full justify-center rounded-xl !py-3 !text-sm font-semibold"
+              className="btn btn-outline w-full justify-center rounded-xl py-3! text-sm! font-semibold"
               onClick={() => setMobileMenuOpen(false)}
             >
               Masuk
@@ -253,7 +253,7 @@ export default function Navbar() {
           )}
 
           {!user && (
-            <Link to={ctaTo} className="btn btn-primary w-full rounded-xl !py-3 !text-sm font-bold" onClick={() => setMobileMenuOpen(false)}>
+            <Link to={ctaTo} className="btn btn-primary w-full rounded-xl py-3! text-sm! font-bold" onClick={() => setMobileMenuOpen(false)}>
               <PlusCircle className="size-4" />
               Daftarkan Lapak UMKM
             </Link>

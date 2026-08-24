@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AlertCircle, CheckCircle2, Sparkles } from 'lucide-react'
 import UmkmMap from '../components/map/UmkmMap'
@@ -179,10 +179,10 @@ export default function ManageUmkm() {
           <UmkmCard umkm={{ ...preview, image_cover: existingImage }} />
         </div>
         <div className="flex flex-col justify-center gap-3 sm:flex-row">
-          <Link to="/dashboard" className="btn btn-primary rounded-xl !px-6 !py-2.5 !text-sm font-bold">
+          <Link to="/dashboard" className="btn btn-primary rounded-xl px-6! py-2.5! text-sm! font-bold">
             Buka Dashboard
           </Link>
-          <Link to="/explore" className="btn btn-outline rounded-xl !px-6 !py-2.5 !text-sm font-semibold">
+          <Link to="/explore" className="btn btn-outline rounded-xl px-6! py-2.5! text-sm! font-semibold">
             Jelajahi Lapak Lain
           </Link>
         </div>
@@ -348,7 +348,7 @@ export default function ManageUmkm() {
                 selectableLocation
                 pickedLocation={coords}
                 onMapClick={(lat, lng) => setCoords([lat, lng])}
-                className="h-full w-full !rounded-none !border-0"
+                className="h-full w-full rounded-none! border-0!"
               />
             </div>
             <div className="flex items-center justify-between rounded-xl border border-ink-900/5 bg-cream-50 p-3 text-caption">
@@ -359,9 +359,9 @@ export default function ManageUmkm() {
             </div>
           </section>
 
-          <button type="submit" disabled={submitting} className="btn btn-primary w-full rounded-xl !py-3.5 !text-sm font-bold shadow-lg">
+          <button type="submit" disabled={submitting} className="btn btn-primary w-full rounded-xl py-3.5! text-sm! font-bold shadow-lg">
             {submitting
-              ? 'Menyimpan…'
+              ? 'Menyimpanâ€¦'
               : isEdit
                 ? 'Simpan Perubahan'
                 : 'Daftarkan Lapak Sekarang (Gratis)'}

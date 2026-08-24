@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+﻿import { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
 import { categoryColor, makeWhatsAppLink } from '../../lib/format';
 import 'leaflet/dist/leaflet.css';
@@ -97,7 +97,7 @@ export function UmkmMap({
       'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
       {
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://carto.com/attributions">CARTO</a>',
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> Â· <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
         maxZoom: 19,
       }
@@ -323,7 +323,7 @@ export function UmkmMap({
       <div ref={mapContainerRef} className={className} />
 
       {showCategoryLegend && (
-        <div className="absolute top-3 left-3 z-[400] bg-white/95 backdrop-blur-md border border-ink-900/10 rounded-xl p-3 shadow-lg text-caption hidden sm:block">
+        <div className="absolute top-3 left-3 z-400 bg-white/95 backdrop-blur-md border border-ink-900/10 rounded-xl p-3 shadow-lg text-caption hidden sm:block">
           <span className="label-caption block mb-2">Warna Kios</span>
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">

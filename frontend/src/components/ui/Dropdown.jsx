@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { Check, ChevronDown } from 'lucide-react'
 
 /**
@@ -61,7 +61,7 @@ export default function Dropdown({
       {open && (
         <ul
           role="listbox"
-          className={`custom-scroll absolute z-50 mt-1.5 max-h-64 w-full min-w-[10rem] overflow-y-auto rounded-xl border border-ink-900/10 bg-white p-1 shadow-[0_12px_40px_-12px_rgba(16,12,42,0.25)] ${listClassName}`}
+          className={`custom-scroll absolute z-50 mt-1.5 max-h-64 w-full min-w-40 overflow-y-auto rounded-xl border border-ink-900/10 bg-white p-1 shadow-[0_12px_40px_-12px_rgba(16,12,42,0.25)] ${listClassName}`}
         >
           {options.map((o) => {
             const isActive = String(o.value) === String(value)
@@ -76,7 +76,7 @@ export default function Dropdown({
                     setOpen(false)
                   }}
                   className={`flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-xs font-medium transition-colors ${
-                    isActive ? 'bg-brand-500/[0.06] font-bold text-ink-900' : 'text-ink-700 hover:bg-cream-100'
+                    isActive ? 'bg-brand-500/6 font-bold text-ink-900' : 'text-ink-700 hover:bg-cream-100'
                   }`}
                 >
                   <span className="truncate">{o.label}</span>

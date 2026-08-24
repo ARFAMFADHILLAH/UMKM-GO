@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   ArrowRight,
@@ -234,7 +234,7 @@ export default function UmkmDetail() {
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${umkm.address ?? ''}, ${umkm.city ?? ''}`)}`
 
   return (
-    <div className="mx-auto max-w-[1920px] pb-28 sm:pb-24 lg:pb-10">
+    <div className="mx-auto max-w-480 pb-28 sm:pb-24 lg:pb-10">
       <div className="container-site pt-4 sm:pt-6">
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
           {/* KOLOM KIRI - konten utama */}
@@ -250,7 +250,7 @@ export default function UmkmDetail() {
             </span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-900/95 via-ink-900/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-ink-900/95 via-ink-900/40 to-transparent" />
 
         <div className="absolute right-4 top-4 flex items-center gap-2">
           <button
@@ -305,7 +305,7 @@ export default function UmkmDetail() {
                       key={`${src}-${i}`}
                       type="button"
                       onClick={() => setLightbox(i)}
-                      className="group relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-xl border border-ink-900/10 bg-cream-100 focus-visible:outline-2 focus-visible:outline-offset-1"
+                      className="group relative aspect-4/3 cursor-zoom-in overflow-hidden rounded-xl border border-ink-900/10 bg-cream-100 focus-visible:outline-2 focus-visible:outline-offset-1"
                       aria-label={`Perbesar foto ${i + 1}`}
                     >
                       <img
@@ -323,7 +323,7 @@ export default function UmkmDetail() {
             )}
 
             {/* PENILAIAN */}
-            <section className="card space-y-3 !rounded-2xl p-5">
+            <section className="card space-y-3 rounded-2xl! p-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <h2 className="font-display text-base font-bold text-ink-900">Penilaian pengunjung</h2>
@@ -331,7 +331,7 @@ export default function UmkmDetail() {
                       <p className="mt-0.5 text-caption text-ink-500">
                         <strong className="font-bold text-ink-900">{avgRating.toLocaleString('id-ID', { maximumFractionDigits: 1 })}</strong>
                         {' / 5'}
-                        {ratingCount > 0 && ` · dari ${ratingCount} penilaian`}
+                        {ratingCount > 0 && ` Â· dari ${ratingCount} penilaian`}
                       </p>
                     ) : (
                       <p className="mt-0.5 text-caption text-ink-500">Belum ada penilaian - jadilah yang pertama!</p>
@@ -365,7 +365,7 @@ export default function UmkmDetail() {
                     <Link
                       to="/login"
                       state={{ from: `/umkms/${slug}` }}
-                      className="btn btn-outline rounded-lg !py-2 !text-xs font-semibold"
+                      className="btn btn-outline rounded-lg py-2! text-xs! font-semibold"
                     >
                       Masuk
                     </Link>
@@ -396,7 +396,7 @@ export default function UmkmDetail() {
                         <button
                           type="submit"
                           disabled={postingComment || !commentText.trim()}
-                          className="btn btn-primary rounded-lg !px-4 !py-2 !text-xs font-bold"
+                          className="btn btn-primary rounded-lg px-4! py-2! text-xs! font-bold"
                         >
                           {postingComment ? 'Mengirim...' : 'Kirim Komentar'}
                         </button>
@@ -419,7 +419,7 @@ export default function UmkmDetail() {
                             <div className="min-w-0 flex-1 rounded-xl bg-cream-100/70 px-3.5 py-2.5">
                               <div className="flex flex-wrap items-baseline justify-between gap-x-2">
                                 <span className="truncate text-xs font-bold text-ink-900">{name}</span>
-                                <span className="shrink-0 text-[11px] text-ink-400">{formatDate(c.created_at)}</span>
+                                <span className="shrink-0 text-caption text-ink-400">{formatDate(c.created_at)}</span>
                               </div>
                               <p className="mt-0.5 whitespace-pre-line text-xs leading-relaxed text-ink-700">{c.comment}</p>
                             </div>
@@ -444,10 +444,10 @@ export default function UmkmDetail() {
               {hasCoords ? (
                 <>
                   {routeInfo?.distanceM != null && (
-                    <div className="flex items-center gap-2 rounded-xl border border-map-500/30 bg-map-500/[0.08] px-3 py-2 text-xs font-semibold text-ink-900">
+                    <div className="flex items-center gap-2 rounded-xl border border-map-500/30 bg-map-500/8 px-3 py-2 text-xs font-semibold text-ink-900">
                       <Navigation className="size-3.5 shrink-0 text-map-600" />
                       <span className="flex-1">
-                        Rute ke kios: {formatDistance(routeInfo.distanceM)} · sekitar{' '}
+                        Rute ke kios: {formatDistance(routeInfo.distanceM)} Â· sekitar{' '}
                         {formatDuration(routeInfo.durationS)} berkendara
                       </span>
                       <button
@@ -464,7 +464,7 @@ export default function UmkmDetail() {
                     </div>
                   )}
                   {routeInfo?.error && (
-                    <p className="rounded-xl border border-accent-400/40 bg-accent-400/[0.08] px-3 py-2 text-xs text-ink-700">
+                    <p className="rounded-xl border border-accent-400/40 bg-accent-400/8 px-3 py-2 text-xs text-ink-700">
                       Rute tidak bisa dihitung dari lokasi Anda. Coba tombol Petunjuk Arah lagi
                       atau buka Google Maps.
                     </p>
@@ -478,7 +478,7 @@ export default function UmkmDetail() {
                       routeFrom={routeFrom}
                       routeTo={hasCoords ? [Number(umkm.latitude), Number(umkm.longitude)] : null}
                       onRouteInfo={setRouteInfo}
-                      className="h-full w-full !rounded-none !border-0"
+                      className="h-full w-full rounded-none! border-0!"
                     />
                   </div>
                   <div className="flex items-start gap-2 pt-1 text-xs text-ink-700">
@@ -496,13 +496,13 @@ export default function UmkmDetail() {
 
           {/* KOLOM KANAN - kartu kontak sticky */}
           <aside className="space-y-4 self-start lg:sticky lg:top-20">
-            <section className="card space-y-4 !rounded-2xl p-5">
+            <section className="card space-y-4 rounded-2xl! p-5">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="category-badge text-white" style={{ backgroundColor: catColor }}>
                   {umkm.category?.name}
                 </span>
                 {umkm.is_verified && (
-                  <span className="stamp-verified !py-0 !text-caption">
+                  <span className="stamp-verified py-0! text-caption!">
                     Terverifikasi
                   </span>
                 )}
@@ -519,7 +519,7 @@ export default function UmkmDetail() {
               </div>
 
               {wa && (
-                <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-wa w-full justify-center rounded-xl !py-3 !text-sm font-bold">
+                <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-wa w-full justify-center rounded-xl py-3! text-sm! font-bold">
                   <MessageCircle className="size-4" />
                   Hubungi via WhatsApp
                 </a>
@@ -537,7 +537,7 @@ export default function UmkmDetail() {
                   if (!ok) window.open(mapsDirUrl, '_blank', 'noopener,noreferrer')
                 }}
                 disabled={locating}
-                className="btn btn-outline w-full justify-center rounded-xl !py-3 !text-sm font-semibold"
+                className="btn btn-outline w-full justify-center rounded-xl py-3! text-sm! font-semibold"
               >
                 <Navigation className={`size-4 ${locating ? 'animate-pulse text-map-600' : 'text-accent-500'}`} />
                 {locating ? 'Mencari lokasi Anda...' : routeFrom ? 'Lihat Rute di Peta' : 'Petunjuk Arah'}
@@ -546,12 +546,12 @@ export default function UmkmDetail() {
               {(ig || umkm.website_url) && (
                 <div className="grid grid-cols-2 gap-2">
                   {ig && (
-                    <a href={ig} target="_blank" rel="noopener noreferrer" className="btn btn-outline justify-center !py-2 !text-xs">
+                    <a href={ig} target="_blank" rel="noopener noreferrer" className="btn btn-outline justify-center py-2! text-xs!">
                       <InstagramIcon className="size-3.5" /> Instagram
                     </a>
                   )}
                   {umkm.website_url && (
-                    <a href={umkm.website_url} target="_blank" rel="noopener noreferrer" className="btn btn-outline justify-center !py-2 !text-xs">
+                    <a href={umkm.website_url} target="_blank" rel="noopener noreferrer" className="btn btn-outline justify-center py-2! text-xs!">
                       <Globe className="size-3.5" /> Website
                     </a>
                   )}
@@ -587,14 +587,14 @@ export default function UmkmDetail() {
               if (!ok) window.open(mapsDirUrl, '_blank', 'noopener,noreferrer')
             }}
             disabled={locating}
-            className="btn btn-outline rounded-xl !px-4 !py-3 !text-sm font-semibold"
+            className="btn btn-outline rounded-xl px-4! py-3! text-sm! font-semibold"
           >
             <Navigation className={`size-4 ${locating ? 'animate-pulse text-map-600' : 'text-accent-500'}`} />
             <span className="hidden sm:inline">Petunjuk</span>
             <span className="sm:hidden">Arah</span>
           </button>
           {wa && (
-            <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-wa flex-1 justify-center rounded-xl !py-3 !text-sm font-bold">
+            <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-wa flex-1 justify-center rounded-xl py-3! text-sm! font-bold">
               <MessageCircle className="size-4" />
               Hubungi via WhatsApp
             </a>

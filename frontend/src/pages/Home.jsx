@@ -55,11 +55,11 @@ export default function Home() {
       <section className="relative overflow-hidden bg-ink-900 text-white">
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-400/40 to-transparent"
+          className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent-400/40 to-transparent"
         />
         <div className="container-site relative pb-20 pt-10 sm:pb-28 sm:pt-14">
           <div className="mx-auto max-w-3xl space-y-6 text-center">
-            <span className="label-caption !text-cream-100/70 inline-flex items-center gap-2">
+            <span className="label-caption text-cream-100/70! inline-flex items-center gap-2">
               <ShieldCheck className="size-3.5 text-accent-400" />
               <span className="text-accent-400">UMKM Indonesia</span>
             </span>
@@ -105,7 +105,7 @@ export default function Home() {
                   listClassName="z-30"
                 />
               </div>
-              <button type="submit" className="btn btn-primary rounded-xl !px-6 !py-3 !text-sm font-bold">
+              <button type="submit" className="btn btn-primary rounded-xl px-6! py-3! text-sm! font-bold">
                 Cari Lapak
               </button>
             </form>
@@ -173,14 +173,14 @@ export default function Home() {
               <span className="label-caption mb-1.5">Peta live · {pinsWithCoords.length} kios</span>
               <h2 className="font-display text-xl font-bold text-ink-900">Sebaran kios UMKM saat ini</h2>
             </div>
-            <Link to="/peta" className="btn btn-primary self-start rounded-xl !px-4 !py-2.5 !text-xs font-bold sm:self-auto">
+            <Link to="/peta" className="btn btn-primary self-start rounded-xl px-4! py-2.5! text-xs! font-bold sm:self-auto">
               <MapPin className="size-4" />
               Buka Peta Penuh
             </Link>
           </div>
 
           <div className="grid grid-cols-1 gap-0 lg:grid-cols-3">
-            <div className="h-[380px] lg:col-span-2 sm:h-[460px]">
+            <div className="h-95 lg:col-span-2 sm:h-115">
               {loading ? (
                 <Spinner label="Memuat peta…" />
               ) : (
@@ -195,17 +195,17 @@ export default function Home() {
                       : [-2.5489, 118.0149]
                   }
                   showCategoryLegend={true}
-                  className="h-full w-full !rounded-none !border-0"
+                  className="h-full w-full rounded-none! border-0!"
                 />
               )}
             </div>
 
-            <aside className="flex min-h-[260px] flex-col justify-between border-t border-ink-900/5 bg-cream-50/40 p-5 lg:border-l lg:border-t-0">
+            <aside className="flex min-h-65 flex-col justify-between border-t border-ink-900/5 bg-cream-50/40 p-5 lg:border-l lg:border-t-0">
               {selectedPreviewUmkm ? (
                 <div className="space-y-3">
                   <span className="label-caption">Kios yang dipilih</span>
                   {selectedPreviewUmkm.image_cover && (
-                    <div className="aspect-[16/9] overflow-hidden rounded-xl border border-ink-900/10">
+                    <div className="aspect-video overflow-hidden rounded-xl border border-ink-900/10">
                       <img
                         src={selectedPreviewUmkm.image_cover}
                         alt={`Foto ${selectedPreviewUmkm.name}`}
@@ -235,7 +235,7 @@ export default function Home() {
                   <div className="flex gap-2 pt-1">
                     <Link
                       to={`/umkms/${selectedPreviewUmkm.slug}`}
-                      className="btn btn-outline flex-1 rounded-lg !py-2 !text-xs"
+                      className="btn btn-outline flex-1 rounded-lg py-2! text-xs!"
                     >
                       Detail
                     </Link>
@@ -243,7 +243,7 @@ export default function Home() {
                       href={makeWhatsAppLink(selectedPreviewUmkm.phone_whatsapp, selectedPreviewUmkm.name)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-wa rounded-lg !py-2 !text-xs"
+                      className="btn btn-wa rounded-lg py-2! text-xs!"
                     >
                       <MessageCircle className="size-4" />
                       Chat WA
@@ -266,7 +266,7 @@ export default function Home() {
       <section className="container-site space-y-6">
         <div className="flex flex-col justify-between gap-3 border-b border-ink-900/5 pb-4 sm:flex-row sm:items-end">
           <div>
-            <span className="label-caption mb-1.5 !text-accent-600 inline-flex items-center gap-2">
+            <span className="label-caption mb-1.5 text-accent-600! inline-flex items-center gap-2">
               <Sparkles className="size-3.5 shrink-0" />
               Baru bergabung
             </span>
@@ -274,7 +274,7 @@ export default function Home() {
               Lapak UMKM terbaru
             </h2>
           </div>
-          <Link to="/explore" className="btn btn-outline self-start rounded-lg !px-4 !py-2 !text-xs">
+          <Link to="/explore" className="btn btn-outline self-start rounded-lg px-4! py-2! text-xs!">
             <SlidersHorizontal className="size-3.5" />
             Lihat {items.length} lapak
           </Link>
@@ -294,7 +294,7 @@ export default function Home() {
         <div className="relative overflow-hidden rounded-3xl border border-white/5 bg-ink-900 p-8 text-white shadow-[0_20px_60px_-20px_rgba(16,12,42,0.5)] sm:p-12">
           <div className="relative grid grid-cols-1 items-center gap-6 md:grid-cols-2">
             <div>
-              <span className="label-caption !text-cream-100/70 mb-3 inline-flex items-center gap-2">
+              <span className="label-caption text-cream-100/70! mb-3 inline-flex items-center gap-2">
                 <TrendingUp className="size-3 shrink-0 text-accent-400" />
                 <span className="text-accent-400">Untuk pelaku usaha</span>
               </span>
@@ -308,12 +308,12 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col items-center gap-3 md:justify-end sm:flex-row">
-              <Link to="/register" className="btn btn-accent w-full rounded-xl !px-6 !py-3 !text-sm font-bold sm:w-auto">
+              <Link to="/register" className="btn btn-accent w-full rounded-xl px-6! py-3! text-sm! font-bold sm:w-auto">
                 Daftarkan Lapak Sekarang
               </Link>
               <Link
                 to="/dashboard"
-                className="btn w-full rounded-xl border border-white/15 bg-white/10 !px-5 !py-3 !text-sm font-semibold text-white hover:bg-white/20 sm:w-auto"
+                className="btn w-full rounded-xl border border-white/15 bg-white/10 px-5! py-3! text-sm! font-semibold text-white hover:bg-white/20 sm:w-auto"
               >
                 Masuk Dashboard
               </Link>
