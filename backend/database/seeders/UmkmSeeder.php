@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Rating;
 use App\Models\Umkm;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -32,13 +34,56 @@ class UmkmSeeder extends Seeder
             'email' => 'ratnawijaya@gmail.com',
         ]);
 
+        // Pengunjung demo untuk rating & komentar
+        $visitors = collect([
+            ['name' => 'Dinda Ayu Lestari', 'email' => 'dinda.ayu@gmail.com'],
+            ['name' => 'Bagas Prakoso', 'email' => 'bagas.prakoso@gmail.com'],
+            ['name' => 'Nadia Rahmawati', 'email' => 'nadia.rahma@gmail.com'],
+            ['name' => 'Fajar Nugroho', 'email' => 'fajar.nugroho@gmail.com'],
+        ])->map(fn (array $v) => User::factory()->create($v));
+
         $categories = Category::pluck('id', 'name');
 
         // Bersihkan gambar lama supaya re-seed tidak meninggalkan file yatim
         Storage::disk('public')->deleteDirectory('umkms');
         Storage::disk('public')->makeDirectory('umkms');
 
+        $verifiedIds = [];
+
         foreach ($this->umkmData() as $item) {
+            $slug = Str::slug($item['name']);
+            $imagePath = $this->generateCoverImage($item['name'], $item['category'], $slug);
+
+            // Galeri foto jualan: 2 foto tambahan dengan nuansa warna berbeda
+            $gallery = [
+                $this->generateCoverImage($item['name'], $item['category'], "{$slug}-g1", 'Foto Produk 1', 0.82),
+                $this->generateCoverImage($item['name'], $item['category'], "{$slug}-g2", 'Foto Produk 2', 1.18),
+            ];
+
+            $umkm = Umkm::create([
+                'user_id' => $item['owner'] === 'demo' ? $demo->id : $partner->id,
+                'category_id' => $categories[$item['category']],
+                'name' => $item['name'],
+                'slug' => $slug,
+                'description' => $item['description'],
+                'address' => $item['address'],
+                'province' => $item['province'],
+                'city' => $item['city'],
+                'phone_whatsapp' => $item['phone'],
+                'instagram' => $item['instagram'],
+                'website_url' => $item['website'],
+                'image_cover' => $imagePath,
+                'photos' => $gallery,
+                'latitude' => $item['latitude'],
+                'longitude' => $item['longitude'],
+                'is_verified' => true,
+            ]);
+
+            $verifiedIds[] = $umkm->id;
+        }
+
+        // Lapak yang masih menunggu verifikasi admin (isi halaman /admin)
+        foreach ($this->pendingUmkmData() as $item) {
             $slug = Str::slug($item['name']);
             $imagePath = $this->generateCoverImage($item['name'], $item['category'], $slug);
 
@@ -53,12 +98,65 @@ class UmkmSeeder extends Seeder
                 'city' => $item['city'],
                 'phone_whatsapp' => $item['phone'],
                 'instagram' => $item['instagram'],
-                'website_url' => $item['website'],
+                'website_url' => null,
                 'image_cover' => $imagePath,
+                'photos' => null,
                 'latitude' => $item['latitude'],
                 'longitude' => $item['longitude'],
-                'is_verified' => true,
+                'is_verified' => false,
+                'rejected_at' => null,
             ]);
+        }
+
+        $this->seedEngagement($visitors);
+    }
+
+    /**
+     * Rating & komentar contoh dari pengunjung (pola deterministik,
+     * hasil re-seed selalu sama).
+     */
+    private function seedEngagement($visitors): void
+    {
+        $ratingPool = [5, 4, 5, 3, 4, 5, 5, 4];
+
+        $commentPool = [
+            'Rasanya juara, pengiriman cepat dan packing rapi. Pasti order lagi!',
+            'Pelayanan ramah banget, barang sesuai deskripsi. Recommended!',
+            'Kualitas tidak mengecewakan, harga sepadan dengan yang didapat.',
+            'Sudah langganan dari tahun lalu dan belum pernah kecewa. Mantap!',
+            'Tempatnya gampang ditemukan, produknya juga lengkap.',
+            'Respon WhatsApp-nya cepat sekali, sangat membantu.',
+        ];
+
+        $umkms = Umkm::where('is_verified', true)->orderBy('id')->get();
+
+        foreach ($umkms as $i => $umkm) {
+            foreach ($visitors as $j => $visitor) {
+                // Pola selang-seling biar jumlah penilai tiap lapak beda-beda
+                if (($i + $j) % 2 === 0 || ($i + $j) % 3 === 0) {
+                    Rating::create([
+                        'user_id' => $visitor->id,
+                        'umkm_id' => $umkm->id,
+                        'rating' => $ratingPool[($i * 3 + $j) % count($ratingPool)],
+                    ]);
+                }
+            }
+
+            if ($i % 2 === 0) {
+                Comment::create([
+                    'user_id' => $visitors[$i % $visitors->count()]->id,
+                    'umkm_id' => $umkm->id,
+                    'comment' => $commentPool[$i % count($commentPool)],
+                ]);
+            }
+
+            if ($i % 3 === 1) {
+                Comment::create([
+                    'user_id' => $visitors[($i + 2) % $visitors->count()]->id,
+                    'umkm_id' => $umkm->id,
+                    'comment' => $commentPool[($i + 3) % count($commentPool)],
+                ]);
+            }
         }
     }
 
@@ -203,14 +301,52 @@ class UmkmSeeder extends Seeder
         ];
     }
 
+    private function pendingUmkmData(): array
+    {
+        return [
+            [
+                'owner' => 'demo', 'category' => 'Kuliner',
+                'name' => 'Sate Lilit Bu Manik',
+                'description' => 'Sate lilit ikan tuna cincang dengan batang serai, dibakar arang kelapa khas Denpasar. Menerima pesanan untuk acara dan ritual adat.',
+                'address' => 'Jl. Hayam Wuruk No. 21, Denpasar Selatan',
+                'province' => 'Bali', 'city' => 'Kota Denpasar',
+                'phone' => '6281739485120', 'instagram' => 'satelilit.bumanik',
+                'latitude' => -8.6648, 'longitude' => 115.2026,
+            ],
+            [
+                'owner' => 'partner', 'category' => 'Kerajinan Tangan',
+                'name' => 'Gerabah Kasongan Sari',
+                'description' => 'Gerabah tembikar buatan tangan pengrajin Kasongan: vas, tempat pensil, dan perabot dekorasi dengan motif tradisional Jawa.',
+                'address' => 'Jl. Kaliurang KM 4, Bantul',
+                'province' => 'Daerah Istimewa Yogyakarta', 'city' => 'Bantul',
+                'phone' => '6282743889102', 'instagram' => 'gerabah.kasongansari',
+                'latitude' => -7.8301, 'longitude' => 110.3712,
+            ],
+            [
+                'owner' => 'partner', 'category' => 'Jasa & Servis',
+                'name' => 'Laundry Kilat Bersih Wangi',
+                'description' => 'Laundry kilat 6 jam selesai dengan pewangi premium. Melayani antar-jemput gratis untuk area Lowokwaru dan Blimbing.',
+                'address' => 'Jl. Soekarno Hatta No. 9, Lowokwaru',
+                'province' => 'Jawa Timur', 'city' => 'Kota Malang',
+                'phone' => '6281933477215', 'instagram' => 'laundrykilat.bw',
+                'latitude' => -7.9431, 'longitude' => 112.6320,
+            ],
+        ];
+    }
+
     /**
      * Generate gambar sampul placeholder (JPEG) memakai GD:
      * latar warna per kategori + nama usaha sebagai teks.
-     * Mengembalikan path relatif untuk kolom image_cover.
+     * Mengembalikan path relatif untuk kolom image_cover/photos.
      */
-    private function generateCoverImage(string $title, string $category, string $slug): string
+    private function generateCoverImage(string $title, string $category, string $slug, ?string $label = null, float $tint = 1.0): string
     {
         [$r, $g, $b] = self::CATEGORY_COLORS[$category] ?? [90, 90, 90];
+
+        // Variasi terang/gelap untuk foto galeri biar tidak identik
+        $r = max(0, min(255, (int) round($r * $tint)));
+        $g = max(0, min(255, (int) round($g * $tint)));
+        $b = max(0, min(255, (int) round($b * $tint)));
 
         $width = 800;
         $height = 600;
@@ -240,7 +376,7 @@ class UmkmSeeder extends Seeder
                 imagettftext($image, 44, 0, 60, (int) ($startY + $index * $lineHeight), $white, $fontPath, $line);
             }
 
-            imagettftext($image, 24, 0, 60, $height - 42, $white, $fontPath, strtoupper($category));
+            imagettftext($image, 24, 0, 60, $height - 42, $white, $fontPath, strtoupper($label ?? $category));
         } else {
             // Fallback: font bawaan GD (kecil, tapi tetap terbaca)
             $lines = $this->wrapPlainText($title, 68);
@@ -252,7 +388,7 @@ class UmkmSeeder extends Seeder
                 imagestring($image, 5, $x, $startY + $index * $lineHeight, $line, $white);
             }
 
-            imagestring($image, 4, 60, $height - 50, strtoupper($category), $white);
+            imagestring($image, 4, 60, $height - 50, strtoupper($label ?? $category), $white);
         }
 
         $relativePath = "umkms/{$slug}.jpg";

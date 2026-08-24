@@ -15,10 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-        CategorySeeder::class,
-        UmkmSeeder::class,
-       ]);
+        // Akun admin demo (kredensial dikabarkan ke tim frontend)
+        User::create([
+            'name' => 'Admin UMKM-Go',
+            'email' => 'admin@umkmgo.test',
+            'password' => 'adminumkmgo123',
+            'role' => 'admin',
+        ]);
 
+        $this->call([
+            CategorySeeder::class,
+            UmkmSeeder::class,
+        ]);
     }
 }

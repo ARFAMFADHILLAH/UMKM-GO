@@ -13,7 +13,13 @@ class UmkmController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Umkm::with('category')->where('is_verified', true);
+        $query = Umkm::query()
+            ->with('category')
+            ->withCount([
+                'ratings as ratings_count',
+                'ratings as avg_rating' => fn ($q) => $q->selectRaw('coalesce(avg(rating), 0)'),
+            ])
+            ->where('is_verified', true);
 
         // Filter Berdasarkan Pencarian Nama / Deskripsi
         if ($request->has('search') && $request->search != '') {
@@ -41,7 +47,12 @@ class UmkmController extends Controller
 
     public function myUmkms(Request $request)
     {
-        $umkms = Umkm::with('category')
+        $umkms = Umkm::query()
+            ->with('category')
+            ->withCount([
+                'ratings as ratings_count',
+                'ratings as avg_rating' => fn ($q) => $q->selectRaw('coalesce(avg(rating), 0)'),
+            ])
             ->where('user_id', $request->user()->id)
             ->latest()
             ->paginate(10);
@@ -51,7 +62,14 @@ class UmkmController extends Controller
 
     public function show(string $slug)
     {
-        $umkm = Umkm::with('category')->where('slug', $slug)->first();
+        $umkm = Umkm::query()
+            ->with('category')
+            ->withCount([
+                'ratings as ratings_count',
+                'ratings as avg_rating' => fn ($q) => $q->selectRaw('coalesce(avg(rating), 0)'),
+            ])
+            ->where('slug', $slug)
+            ->first();
 
         if (! $umkm) {
             return response()->json([
@@ -105,7 +123,8 @@ class UmkmController extends Controller
             'image_cover' => $imagePath,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'is_verified' => true,
+            // Lapak baru menunggu verifikasi admin sebelum tayang publik
+            'is_verified' => false,
         ]);
 
         return response()->json([
