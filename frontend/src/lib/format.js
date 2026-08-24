@@ -1,5 +1,5 @@
-﻿// Port dari referensi src/lib/format.ts - key kategori disinkronkan dengan nama kategori backend.
-// Nilai warna mengikuti DESIGN.md §2.4 (token @theme) - diperbarui ke palet "Cerah Peta".
+// Port dari referensi src/lib/format.ts - key kategori disinkronkan dengan nama kategori backend.
+// Nilai warna mengikuti DESIGN.md ?2.4 (token @theme) - diperbarui ke palet "Cerah Peta".
 
 export const CATEGORY_COLORS = {
   'Kuliner': '#FF4D4D',          // cabai-500
@@ -47,7 +47,7 @@ export function makeWhatsAppLink(phone, umkmName, customMsg) {
   const cleanPhone = formatRawWaNumber(phone)
   if (!cleanPhone) return null
 
-  const defaultMsg = `Halo ${umkmName}, saya menemukan lapak Anda di UMKM-GO. Apakah saat ini sedang buka dan menerima pesanan?`
+  const defaultMsg = `Halo ${umkmName}, saya menemukan lapak Anda di LOKALINK. Apakah saat ini sedang buka dan menerima pesanan?`
   const text = encodeURIComponent(customMsg || defaultMsg)
 
   return `https://wa.me/${cleanPhone}?text=${text}`

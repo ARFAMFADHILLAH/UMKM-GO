@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserPlus } from 'lucide-react'
 import Field from '../components/ui/Field'
@@ -110,7 +110,7 @@ export default function Register() {
 
           <button type="submit" disabled={loading} className="btn btn-primary w-full py-3! text-sm! font-bold">
             <UserPlus className="size-4" />
-            {loading ? 'Membuat akunâ€¦' : 'Buat Akun'}
+            {loading ? 'Membuat akun...' : 'Buat Akun'}
           </button>
         </form>
 

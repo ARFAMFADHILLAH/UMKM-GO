@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapPin, MessageCircle, ShieldCheck, Store } from 'lucide-react'
 import { categoryColor, formatPhoneWhatsApp, makeWhatsAppLink } from '../lib/format'
@@ -10,7 +10,7 @@ export default function UmkmCard({ umkm, compact = false }) {
   const wa = makeWhatsAppLink(
     umkm.phone_whatsapp,
     umkm.name,
-    `Halo ${umkm.name}, saya melihat profil lapak Anda di UMKM-GO (${window.location.origin}). Boleh tanya informasi produk & pemesanan?`,
+    `Halo ${umkm.name}, saya melihat profil lapak Anda di LOKALINK (${window.location.origin}). Boleh tanya informasi produk & pemesanan?`,
   )
 
   const handleCardClick = () => navigate(`/umkms/${umkm.slug}`)

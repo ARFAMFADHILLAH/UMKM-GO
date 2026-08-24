@@ -10,7 +10,7 @@ export default function Layout() {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [pathname])
 
-  // Halaman peta tanpa footer supaya peta benar-benar penuh (DESIGN.md §11)
+  // Halaman peta tanpa footer supaya peta benar-benar penuh (DESIGN.md ?11)
   const isMapPage = pathname === '/peta'
 
   return (

@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   ArrowRight,
@@ -224,7 +224,7 @@ export default function UmkmDetail() {
   const wa = makeWhatsAppLink(
     umkm.phone_whatsapp,
     umkm.name,
-    `Halo ${umkm.name}, saya melihat lapak Anda di UMKM-GO.`,
+    `Halo ${umkm.name}, saya melihat lapak Anda di LOKALINK.`,
   )
   const ig = instagramLink(umkm.instagram)
   const hasCoords = umkm.latitude != null && umkm.longitude != null
@@ -331,7 +331,7 @@ export default function UmkmDetail() {
                       <p className="mt-0.5 text-caption text-ink-500">
                         <strong className="font-bold text-ink-900">{avgRating.toLocaleString('id-ID', { maximumFractionDigits: 1 })}</strong>
                         {' / 5'}
-                        {ratingCount > 0 && ` Â· dari ${ratingCount} penilaian`}
+                        {ratingCount > 0 && ` · dari ${ratingCount} penilaian`}
                       </p>
                     ) : (
                       <p className="mt-0.5 text-caption text-ink-500">Belum ada penilaian - jadilah yang pertama!</p>
@@ -447,7 +447,7 @@ export default function UmkmDetail() {
                     <div className="flex items-center gap-2 rounded-xl border border-map-500/30 bg-map-500/8 px-3 py-2 text-xs font-semibold text-ink-900">
                       <Navigation className="size-3.5 shrink-0 text-map-600" />
                       <span className="flex-1">
-                        Rute ke kios: {formatDistance(routeInfo.distanceM)} Â· sekitar{' '}
+                        Rute ke kios: {formatDistance(routeInfo.distanceM)} · sekitar{' '}
                         {formatDuration(routeInfo.durationS)} berkendara
                       </span>
                       <button

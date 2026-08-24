@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   ChevronUp,
@@ -118,7 +118,7 @@ export default function MapPage() {
   if (loading)
     return (
       <div className="mx-auto grid h-[calc(100vh-64px)] min-h-140 max-w-480 place-items-center bg-cream-50">
-        <Spinner label="Memuat petaÃ¢â‚¬Â¦" />
+        <Spinner label="Memuat peta..." />
       </div>
     )
 
@@ -195,7 +195,7 @@ export default function MapPage() {
             <div className="absolute left-4 top-4 z-400 flex items-center gap-2 rounded-lg border border-map-500/30 bg-white px-3 py-1.5 text-caption font-bold shadow-md">
               <Navigation className="size-3.5 text-map-600" />
               <span>
-                {formatDistance(routeInfo.distanceM)} Ã‚Â· {formatDuration(routeInfo.durationS)}
+                {formatDistance(routeInfo.distanceM)} ·{formatDuration(routeInfo.durationS)}
               </span>
               <button
                 type="button"
@@ -290,7 +290,7 @@ export default function MapPage() {
 
               <div className="space-y-2 border-t border-ink-900/5 bg-white p-4">
                 <a
-                  href={makeWhatsAppLink(selectedUmkm.phone_whatsapp, selectedUmkm.name, `Halo ${selectedUmkm.name}, saya melihat lapak Anda di peta UMKM-GO.`)}
+                  href={makeWhatsAppLink(selectedUmkm.phone_whatsapp, selectedUmkm.name, `Halo ${selectedUmkm.name}, saya melihat lapak Anda di peta LOKALINK.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-wa w-full justify-center rounded-xl py-3! text-sm! font-bold"

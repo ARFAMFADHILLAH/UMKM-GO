@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, MapPin, MessageCircle, Search, ShieldCheck, SlidersHorizontal, Sparkles, TrendingUp } from 'lucide-react'
 import CategoryIcon from '../components/ui/CategoryIcon'
@@ -170,7 +170,7 @@ export default function Home() {
         <div className="overflow-hidden rounded-2xl border border-ink-900/5 bg-white shadow-[0_8px_30px_-12px_rgba(16,12,42,0.1)]">
           <div className="flex flex-col justify-between gap-3 border-b border-ink-900/5 p-5 sm:flex-row sm:items-center sm:p-6">
             <div>
-              <span className="label-caption mb-1.5">Peta live · {pinsWithCoords.length} kios</span>
+              <span className="label-caption mb-1.5">Peta live ? {pinsWithCoords.length} kios</span>
               <h2 className="font-display text-xl font-bold text-ink-900">Sebaran kios UMKM saat ini</h2>
             </div>
             <Link to="/peta" className="btn btn-primary self-start rounded-xl px-4! py-2.5! text-xs! font-bold sm:self-auto">
@@ -182,7 +182,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-0 lg:grid-cols-3">
             <div className="h-95 lg:col-span-2 sm:h-115">
               {loading ? (
-                <Spinner label="Memuat peta…" />
+                <Spinner label="Memuat peta." />
               ) : (
                 <UmkmMap
                   items={pinsWithCoords}

@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
 import { categoryColor, makeWhatsAppLink } from '../../lib/format';
 import 'leaflet/dist/leaflet.css';
@@ -97,7 +97,7 @@ export function UmkmMap({
       'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
       {
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> Â· <a href="https://carto.com/attributions">CARTO</a>',
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
         maxZoom: 19,
       }
@@ -153,7 +153,7 @@ export function UmkmMap({
       const waLink = makeWhatsAppLink(
         umkm.phone_whatsapp,
         umkm.name,
-        `Halo ${umkm.name}, saya melihat lapak Anda di peta UMKM-GO.`
+        `Halo ${umkm.name}, saya melihat lapak Anda di peta LOKALINK.`
       );
 
       const popupHtml = `

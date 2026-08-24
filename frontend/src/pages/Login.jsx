@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LogIn, MapPin, MessageCircle, Store } from 'lucide-react'
 import Field from '../components/ui/Field'
@@ -44,7 +44,7 @@ function AuthShell({ children }) {
               ))}
             </div>
           </div>
-          <p className="text-caption tracking-wider text-cream-200/50">© {new Date().getFullYear()} UMKM-GO</p>
+          <p className="text-caption tracking-wider text-cream-200/50">? {new Date().getFullYear()} LOKALINK</p>
         </div>
       </aside>
 
@@ -117,13 +117,13 @@ export default function Login() {
             value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
             className="field"
-            placeholder="••••••••"
+            placeholder="........"
           />
         </Field>
 
         <button type="submit" disabled={loading} className="btn btn-primary w-full py-3! text-sm! font-bold">
           <LogIn className="size-4" />
-          {loading ? 'Masuk…' : 'Masuk'}
+          {loading ? 'Masuk.' : 'Masuk'}
         </button>
       </form>
 

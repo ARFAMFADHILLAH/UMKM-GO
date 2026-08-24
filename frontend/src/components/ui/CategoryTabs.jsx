@@ -1,4 +1,4 @@
-﻿import { Crosshair } from 'lucide-react'
+import { Crosshair } from 'lucide-react'
 
 function Tab({ active, color, label, count, onClick }) {
   return (

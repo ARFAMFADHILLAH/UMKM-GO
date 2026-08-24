@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AlertCircle, CheckCircle2, Sparkles } from 'lucide-react'
 import UmkmMap from '../components/map/UmkmMap'
@@ -82,12 +82,12 @@ export default function ManageUmkm() {
           }
           setExistingImage(u.image_cover ?? null)
           setLoaded(u)
-          document.title = `Edit ${u.name} - UMKM-GO`
+          document.title = `Edit ${u.name} - LOKALINK`
         })
         .catch((err) => setMessage(extractError(err).message))
         .finally(() => setLoading(false))
     } else {
-      document.title = 'Daftarkan Lapak - UMKM-GO'
+      document.title = 'Daftarkan Lapak - LOKALINK'
     }
   }, [isEdit, slug])
 
@@ -171,7 +171,7 @@ export default function ManageUmkm() {
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-500">
             Kios <strong>{submittedName}</strong> berhasil didaftarkan dan sedang menunggu
-            verifikasi admin. Setelah disetujui, lapak akan tayang di peta interaktif UMKM-GO.
+            verifikasi admin. Setelah disetujui, lapak akan tayang di peta interaktif LOKALINK.
             Statusnya bisa kamu pantau di Dashboard.
           </p>
         </div>
@@ -361,7 +361,7 @@ export default function ManageUmkm() {
 
           <button type="submit" disabled={submitting} className="btn btn-primary w-full rounded-xl py-3.5! text-sm! font-bold shadow-lg">
             {submitting
-              ? 'Menyimpanâ€¦'
+              ? 'Menyimpan...'
               : isEdit
                 ? 'Simpan Perubahan'
                 : 'Daftarkan Lapak Sekarang (Gratis)'}

@@ -87,8 +87,8 @@ export default function FileDropzone({
             <div>
               <p className="text-sm font-semibold text-ink-900">Tarik &amp; letakkan foto di sini</p>
               <p className="mt-1 text-xs text-ink-500">
-                atau klik untuk memilih file · JPEG, PNG, WEBP · maks 2 MB · disarankan lanskap
-                ±1200×800 px (16:9)
+                atau klik untuk memilih file ? JPEG, PNG, WEBP ? maks 2 MB ? disarankan lanskap
+                ?1200?800 px (16:9)
               </p>
             </div>
           </>

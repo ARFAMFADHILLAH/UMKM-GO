@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { MapPin, ShieldCheck, Store } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
@@ -24,7 +24,7 @@ export default function Footer() {
                 <Store className="size-5" strokeWidth={2.5} />
               </div>
               <span className="font-display text-2xl font-black tracking-tight text-white">
-                UMKM<span className="text-accent-400">GO</span>
+                LOKA<span className="text-accent-400">LINK</span>
               </span>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-cream-100/70">
@@ -78,13 +78,13 @@ export default function Footer() {
             </Link>
             <div className="flex items-center gap-2 pt-2 text-caption text-cream-100/50">
               <MapPin className="size-3.5 text-accent-400" />
-              <span>38 Provinsi · Seluruh Indonesia</span>
+              <span>38 Provinsi ? Seluruh Indonesia</span>
             </div>
           </div>
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 pt-6 text-caption text-cream-100/50 sm:flex-row">
-          <p>© {new Date().getFullYear()} UMKM-GO Indonesia.</p>
+          <p>? {new Date().getFullYear()} LOKALINK Indonesia.</p>
         </div>
       </div>
     </footer>

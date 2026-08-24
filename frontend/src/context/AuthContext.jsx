@@ -18,8 +18,8 @@ export function AuthProvider({ children }) {
       .finally(() => setBooting(false))
 
     const onUnauthorized = () => setUser(null)
-    window.addEventListener('umkmgo:unauthorized', onUnauthorized)
-    return () => window.removeEventListener('umkmgo:unauthorized', onUnauthorized)
+    window.addEventListener('lokalink:unauthorized', onUnauthorized)
+    return () => window.removeEventListener('lokalink:unauthorized', onUnauthorized)
   }, [])
 
   const login = useCallback(async (payload) => {

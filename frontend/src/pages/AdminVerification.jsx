@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Check, MapPin, ShieldX, Store as StoreIcon, X } from 'lucide-react'
 import Spinner from '../components/ui/Spinner'
@@ -144,7 +144,7 @@ export default function AdminVerification() {
       )}
 
       {loading ? (
-        <Spinner label="Memuat daftar lapakâ€¦" />
+        <Spinner label="Memuat daftar lapak???" />
       ) : endpointMissing ? (
         <div className="flex items-start gap-3 rounded-xl border border-accent-400/40 bg-accent-400/8 px-4 py-3 text-sm text-ink-700">
           <ShieldX className="mt-0.5 size-4 shrink-0 text-accent-600" />

@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { ChevronDown, Compass, LayoutDashboard, LogOut, MapPin, Menu, PlusCircle, Search, ShieldCheck, Store, X } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
@@ -65,7 +65,7 @@ export default function Navbar() {
           </div>
           <div>
             <span className="font-display text-lg font-black leading-none tracking-tight text-ink-900">
-              UMKM<span className="text-accent-500">GO</span>
+              LOKA<span className="text-accent-500">LINK</span>
             </span>
           </div>
         </Link>

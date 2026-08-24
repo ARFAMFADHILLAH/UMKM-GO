@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AlertTriangle, Clock, LogOut, MapPin, Pencil, Plus, ShieldCheck, Store as StoreIcon, Trash2, TrendingUp } from 'lucide-react'
 import Spinner from '../components/ui/Spinner'
@@ -62,7 +62,7 @@ function MyUmkmRow({ umkm, onDelete, busy }) {
           {umkm.is_verified != null && <StatusBadge verified={Boolean(umkm.is_verified)} />}
         </div>
         <p className="mt-1 flex items-center gap-1 text-caption text-ink-500">
-          {umkm.category?.name} · <MapPin className="size-3" /> {umkm.city}, {umkm.province}
+          {umkm.category?.name} ? <MapPin className="size-3" /> {umkm.city}, {umkm.province}
         </p>
       </div>
       <div className="flex shrink-0 gap-2">
@@ -180,13 +180,13 @@ export default function Dashboard() {
           icon={<StoreIcon className="size-5" />}
           iconBg="bg-brand-500/10 text-brand-500"
           label="Lapak milikmu"
-          value={loading ? '…' : String(total ?? 0)}
+          value={loading ? '.' : String(total ?? 0)}
         />
         <MetricCard
           icon={<MapPin className="size-5" />}
           iconBg="bg-agro-500/10 text-agro-500"
           label="Kota terdaftar"
-          value={loading ? '…' : String(new Set(items.filter((u) => u.city).map((u) => u.city)).size)}
+          value={loading ? '.' : String(new Set(items.filter((u) => u.city).map((u) => u.city)).size)}
         />
         <MetricCard
           icon={<TrendingUp className="size-5" />}
