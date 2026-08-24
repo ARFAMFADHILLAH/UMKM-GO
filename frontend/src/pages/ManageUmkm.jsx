@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { AlertCircle, CheckCircle2, MapPin, Sparkles } from 'lucide-react'
+import { AlertCircle, CheckCircle2, Sparkles } from 'lucide-react'
 import UmkmMap from '../components/map/UmkmMap'
 import UmkmCard from '../components/UmkmCard'
 import FileDropzone from '../components/ui/FileDropzone'
 import Spinner from '../components/ui/Spinner'
+import Dropdown from '../components/ui/Dropdown'
 import { createUmkm, extractError, getUmkm, listCategories, updateUmkm } from '../lib/api'
 import { invalidateUmkmCache } from '../lib/cities'
 import { categoryColor } from '../lib/format'
@@ -23,7 +24,7 @@ const EMPTY_FORM = {
 
 function Label({ children, required = false }) {
   return (
-    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-tight text-ink-700">
+    <label className="mb-1.5 block text-caption font-bold uppercase tracking-tight text-ink-700">
       {children}
       {required && <span className="ml-0.5 text-cabai-500">*</span>}
     </label>
@@ -33,7 +34,7 @@ function Label({ children, required = false }) {
 function SectionHeader({ step, title }) {
   return (
     <div className="flex items-center gap-3 border-b border-ink-900/5 pb-3">
-      <span className="flex size-7 items-center justify-center rounded-lg bg-ink-900 font-mono text-xs font-black text-accent-400">
+      <span className="flex size-7 items-center justify-center rounded-lg bg-ink-900 text-xs font-black text-accent-400">
         {step}
       </span>
       <h3 className="font-display text-base font-bold text-ink-900">{title}</h3>
@@ -81,12 +82,12 @@ export default function ManageUmkm() {
           }
           setExistingImage(u.image_cover ?? null)
           setLoaded(u)
-          document.title = `Edit ${u.name} — UMKM-Go`
+          document.title = `Edit ${u.name} - UMKM-GO`
         })
         .catch((err) => setMessage(extractError(err).message))
         .finally(() => setLoading(false))
     } else {
-      document.title = 'Daftarkan Lapak — UMKM-Go'
+      document.title = 'Daftarkan Lapak - UMKM-GO'
     }
   }, [isEdit, slug])
 
@@ -118,6 +119,10 @@ export default function ManageUmkm() {
     e.preventDefault()
     setErrors({})
     setMessage('')
+    if (!form.category_id) {
+      setErrors({ category_id: ['Pilih kategori usaha terlebih dahulu.'] })
+      return
+    }
     setSubmitting(true)
     try {
       const fd = new FormData()
@@ -165,19 +170,20 @@ export default function ManageUmkm() {
             Berhasil didaftarkan!
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-500">
-            Kios <strong>{submittedName}</strong> kini menunggu verifikasi admin dan siap tampil di
-            peta interaktif UMKM-Go.
+            Kios <strong>{submittedName}</strong> berhasil didaftarkan dan sedang menunggu
+            verifikasi admin. Setelah disetujui, lapak akan tayang di peta interaktif UMKM-GO.
+            Statusnya bisa kamu pantau di Dashboard.
           </p>
         </div>
         <div className="overflow-hidden rounded-2xl text-left shadow-lg">
           <UmkmCard umkm={{ ...preview, image_cover: existingImage }} />
         </div>
         <div className="flex flex-col justify-center gap-3 sm:flex-row">
-          <Link to="/peta" className="btn btn-primary rounded-xl !px-6 !py-2.5 !text-sm font-bold">
-            <MapPin className="size-4" /> Lihat di Peta
-          </Link>
-          <Link to="/dashboard" className="btn btn-outline rounded-xl !px-6 !py-2.5 !text-sm font-semibold">
+          <Link to="/dashboard" className="btn btn-primary rounded-xl !px-6 !py-2.5 !text-sm font-bold">
             Buka Dashboard
+          </Link>
+          <Link to="/explore" className="btn btn-outline rounded-xl !px-6 !py-2.5 !text-sm font-semibold">
+            Jelajahi Lapak Lain
           </Link>
         </div>
       </div>
@@ -192,7 +198,7 @@ export default function ManageUmkm() {
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-ink-500">
           Isi data lapak dalam 2 menit. Pelanggan di sekitar Anda akan langsung bisa menghubungi
-          via WhatsApp — tanpa komisi, tanpa langganan.
+          via WhatsApp, tanpa komisi, tanpa langganan.
         </p>
       </div>
 
@@ -222,19 +228,15 @@ export default function ManageUmkm() {
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div>
                 <Label required>Kategori</Label>
-                <select
+                <Dropdown
                   value={form.category_id}
-                  onChange={(e) => set('category_id', e.target.value)}
-                  required
-                  className="field cursor-pointer font-medium"
-                >
-                  <option value="">Pilih kategori</option>
-                  {categories.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(v) => set('category_id', v)}
+                  placeholder="Pilih kategori"
+                  disabled={categories.length === 0}
+                  options={categories.map((c) => ({ value: String(c.id), label: c.name }))}
+                  buttonClassName="field font-medium"
+                  error={errors.category_id?.[0]}
+                />
               </div>
               <div>
                 <Label>Website / URL</Label>
@@ -314,10 +316,10 @@ export default function ManageUmkm() {
                   onChange={(e) => set('phone_whatsapp', e.target.value)}
                   required
                   placeholder="081234567890 atau 6281234567890"
-                  className="field font-mono"
+                  className="field tabular-nums"
                 />
-                <span className="mt-1 block font-mono text-[11px] text-ink-400">
-                  Format bebas — otomatis dinormalkan ke +62
+                <span className="mt-1 block text-caption text-ink-400">
+                  Format bebas, otomatis dinormalkan ke +62
                 </span>
               </div>
               <div>
@@ -349,7 +351,7 @@ export default function ManageUmkm() {
                 className="h-full w-full !rounded-none !border-0"
               />
             </div>
-            <div className="flex items-center justify-between rounded-xl border border-ink-900/5 bg-cream-50 p-3 font-mono text-[11px]">
+            <div className="flex items-center justify-between rounded-xl border border-ink-900/5 bg-cream-50 p-3 text-caption">
               <span className="text-ink-500">Koordinat terpilih:</span>
               <span className="font-bold tabular-nums text-ink-900">
                 {coords ? `${coords[0].toFixed(5)}, ${coords[1].toFixed(5)}` : 'belum dipilih'}
@@ -369,7 +371,7 @@ export default function ManageUmkm() {
         {/* PRATINJAU LANGSUNG */}
         <aside className="space-y-4 lg:sticky lg:top-20 lg:col-span-5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-accent-600">
+            <div className="flex items-center gap-1.5 font-bold text-xs tracking-wider text-accent-600">
               <Sparkles className="size-3.5" />
               <span>PRATINJAU LANGSUNG</span>
             </div>
@@ -382,7 +384,7 @@ export default function ManageUmkm() {
           <div className="overflow-hidden rounded-2xl shadow-xl">
             <UmkmCard umkm={preview} />
           </div>
-          <div className="space-y-1.5 rounded-xl border border-ink-900/5 bg-white p-4 text-[11px] text-ink-600">
+          <div className="space-y-1.5 rounded-xl border border-ink-900/5 bg-white p-4 text-caption text-ink-600">
             <p className="font-display flex items-center gap-2 text-sm font-bold text-ink-900">
               <Sparkles className="size-3.5 text-accent-500" />
               Keuntungan bergabung

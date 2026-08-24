@@ -1,46 +1,62 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: 'Switzer', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Palet disegarkan: indigo modern sebagai chrome, krem lebih terang/kertas, aksen lebih tajam */
-  --color-brand-500: #1F334F;
-  --color-brand-600: #1A2A42;
-  --color-brand-700: #132033;
-  --color-brand-800: #0C1726;
-  --color-brand-900: #060E1A;
+  /* Skala tipografi resmi - jangan pakai text-[Npx] arbitrary */
+  --text-caption: 0.6875rem; /* 11px */
+  --text-xs: 0.75rem;        /* 12px */
+  --text-sm: 0.8125rem;      /* 13px */
+  --text-base: 0.9375rem;    /* 15px */
 
-  --color-accent-400: #F1B23A;
-  --color-accent-500: #E39B17;
-  --color-accent-600: #C07F0F;
+  /* Palet "Cerah Peta": navy dongker + kuning sinar + sian */
+  --color-brand-500: #100C2A;
+  --color-brand-600: #0C0920;
+  --color-brand-700: #080617;
+  --color-brand-800: #050410;
+  --color-brand-900: #030208;
 
-  --color-wa-500: #1F8A5B;
-  --color-wa-600: #166E48;
-  --color-wa-700: #105638;
+  --color-accent-400: #FFC300;
+  --color-accent-500: #EDB200;
+  --color-accent-600: #C99A00;
 
-  --color-cabai-500: #D1432B;
-  --color-cabai-600: #A8321D;
-  --color-fashion-500: #824FA5;
-  --color-fashion-600: #683D85;
-  --color-kerajinan-500: #D1772F;
-  --color-kerajinan-600: #A65A21;
-  --color-agro-500: #78893F;
-  --color-agro-600: #5D6A30;
+  --color-map-400: #33C6EA;
+  --color-map-500: #00B4D8;
+  --color-map-600: #0092B2;
 
-  --color-cream-50: #FBF7EE;
-  --color-cream-100: #F2EBD9;
-  --color-cream-200: #E4D9C1;
-  --color-cream-300: #CFC0A3;
+  --color-wa-500: #25A56A;
+  --color-wa-600: #1D8A56;
+  --color-wa-700: #166E45;
 
-  --color-ink-900: #151914;
-  --color-ink-700: #30362C;
-  --color-ink-500: #5C6256;
-  --color-ink-400: #808573;
-  --color-ink-300: #A8AC9C;
-  --color-ink-200: #D0D3C6;
-  --color-ink-100: #E9EBE3;
+  --color-jasa-500: #3E7BFA;
+  --color-jasa-600: #2F66DB;
+
+  --color-cabai-500: #FF4D4D;
+  --color-cabai-600: #E03E3E;
+
+  --color-fashion-500: #9B51E0;
+  --color-fashion-600: #863FD8;
+
+  --color-kerajinan-500: #FF7A00;
+  --color-kerajinan-600: #E06A00;
+
+  --color-agro-500: #5CB85C;
+  --color-agro-600: #4AA34A;
+
+  --color-cream-50: #FFFFFF;
+  --color-cream-100: #F4F5F7;
+  --color-cream-200: #E7E9EF;
+  --color-cream-300: #D5D8E0;
+
+  --color-ink-900: #100C2A;
+  --color-ink-700: #2A2547;
+  --color-ink-500: #55506E;
+  --color-ink-400: #7A7691;
+  --color-ink-300: #A5A2B8;
+  --color-ink-200: #CFCDDB;
+  --color-ink-100: #E9E8F0;
 }
 
 @layer base {
@@ -52,7 +68,7 @@
   }
 
   body {
-    background: linear-gradient(180deg, #FBF7EE 0%, #F6F0E3 100%);
+    background: #FFFFFF;
     background-attachment: fixed;
     letter-spacing: -0.005em;
   }
@@ -63,34 +79,39 @@
   }
 
   ::selection {
-    background: #F1B23A;
-    color: #151914;
+    background: #FFC300;
+    color: #100C2A;
   }
 }
 
 @layer components {
   .container-site {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Full-bleed untuk chrome halaman (navbar/footer) - konten tetap lewat .container-site */
+  .container-full {
+    @apply w-full px-4 sm:px-6 lg:px-8;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-1.5 px-3.5 py-2 text-[13px] font-semibold rounded-lg transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer select-none;
+    @apply inline-flex items-center justify-center gap-1.5 px-3.5 py-2 text-sm font-semibold rounded-lg transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer select-none;
   }
 
   .btn-primary {
-    @apply bg-ink-900 text-cream-50 hover:bg-brand-500 focus-visible:outline-ink-900 shadow-[0_1px_0_rgba(255,255,255,0.1)_inset,0_3px_8px_-3px_rgba(21,25,20,0.3)] hover:shadow-[0_1px_0_rgba(255,255,255,0.1)_inset,0_8px_20px_-6px_rgba(21,25,20,0.4)] active:translate-y-px;
+    @apply bg-accent-400 text-ink-900 hover:bg-accent-500 focus-visible:outline-accent-500 shadow-[0_1px_0_rgba(255,255,255,0.3)_inset,0_3px_10px_-4px_rgba(255,195,0,0.5)] font-bold active:translate-y-px;
   }
 
   .btn-wa {
-    @apply bg-wa-500 text-white hover:bg-wa-600 focus-visible:outline-wa-600 shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_3px_8px_-3px_rgba(22,110,72,0.4)] hover:shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_8px_18px_-4px_rgba(22,110,72,0.5)] active:translate-y-px font-semibold;
+    @apply bg-wa-500 text-white hover:bg-wa-600 focus-visible:outline-wa-600 shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_3px_8px_-3px_rgba(37,165,106,0.4)] hover:shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_8px_18px_-4px_rgba(37,165,106,0.5)] active:translate-y-px font-semibold;
   }
 
   .btn-accent {
-    @apply bg-accent-400 text-ink-900 hover:bg-accent-500 focus-visible:outline-accent-500 shadow-[0_1px_0_rgba(255,255,255,0.3)_inset,0_3px_10px_-4px_rgba(227,155,23,0.5)] font-bold active:translate-y-px;
+    @apply bg-accent-400 text-ink-900 hover:bg-accent-500 focus-visible:outline-accent-500 shadow-[0_1px_0_rgba(255,255,255,0.3)_inset,0_3px_10px_-4px_rgba(255,195,0,0.5)] font-bold active:translate-y-px;
   }
 
   .btn-outline {
-    @apply border border-ink-900/10 bg-white text-ink-900 hover:bg-cream-50 hover:border-ink-900/20 focus-visible:outline-brand-500 shadow-sm;
+    @apply border border-ink-900/10 bg-white text-ink-900 hover:bg-cream-100 hover:border-ink-900/20 focus-visible:outline-brand-500 shadow-sm;
   }
 
   .btn-ghost {
@@ -101,39 +122,40 @@
     @apply w-full border border-ink-900/10 bg-white rounded-lg px-3.5 py-2.5 text-sm text-ink-900 placeholder:text-ink-400/80 focus:outline-none focus:ring-2 focus:ring-ink-900 focus:border-ink-900 transition-all shadow-sm;
   }
 
+  /* Dropdown <select> - pakai bareng .field atau sendiri.
+     Chevron kustom karena appearance:none membuang ikon bawaan browser. */
+  .select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A7691' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 13px;
+  }
+
+  .select:focus {
+    background-position: right 10px center;
+  }
+
   .label-caption {
-    @apply text-[10px] font-mono font-bold text-ink-400 uppercase tracking-[0.14em];
+    @apply text-caption font-bold text-ink-500 uppercase tracking-[0.08em];
+  }
+
+  .hero-title {
+    font-size: clamp(1.875rem, 5vw + 1rem, 3.75rem);
   }
 
   .card {
-    @apply bg-white rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(21,25,20,0.04),0_4px_12px_-6px_rgba(21,25,20,0.08)] border border-ink-900/[0.07] hover:shadow-[0_2px_4px_rgba(21,25,20,0.05),0_12px_28px_-10px_rgba(21,25,20,0.15)] hover:border-ink-900/10 transition-all duration-300 hover:-translate-y-0.5;
+    @apply bg-white rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(16,12,42,0.04),0_4px_12px_-6px_rgba(16,12,42,0.08)] border border-ink-900/[0.07] hover:shadow-[0_2px_4px_rgba(16,12,42,0.05),0_12px_28px_-10px_rgba(16,12,42,0.15)] hover:border-ink-900/10 transition-all duration-300 hover:-translate-y-0.5;
   }
 
   .stamp-verified {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider text-wa-600 border border-dashed border-wa-500/40 bg-wa-500/[0.07] rounded;
+    @apply inline-flex items-center gap-1 px-2 py-0.5 text-caption font-bold uppercase tracking-wider text-wa-600 border border-dashed border-wa-500/40 bg-wa-500/[0.07] rounded;
   }
 
-  /* Badge kategori tegas (rounded-md, bukan pil) */
   .category-badge {
-    @apply inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider shadow-sm;
-  }
-
-  /* Tag/label eyebrow — tanpa kapsul */
-  .eyebrow {
-    @apply inline-flex items-center gap-2 text-[11px] font-mono font-bold text-ink-500 uppercase tracking-[0.18em];
-  }
-
-  .eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 1.5px;
-    background: currentColor;
-    opacity: 0.5;
-  }
-
-  .eyebrow-accent {
-    @apply text-accent-600;
+    @apply inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-caption font-bold tracking-wider shadow-sm;
   }
 
   .divider-dot {
@@ -141,49 +163,32 @@
   }
 }
 
-/* ======== Map Pin (Stall/Kios) — Refined modern look ========= */
+/* ======== Map Pin (Stall/Kios) ========= */
+/* Posisi pin SUDAH ditangani iconAnchor Leaflet - jangan tambah translate di sini,
+   supaya pin tidak dobel geser dan tetap nempel di koordinat saat zoom. */
 .stall-pin-wrapper {
   cursor: pointer;
-  transform: translate(-50%, -100%);
-  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), filter 0.2s;
   position: relative;
   user-select: none;
-  will-change: transform;
+  transform-origin: 50% 100%;
 }
 
 .stall-pin-wrapper:hover {
-  transform: translate(-50%, -106%) scale(1.08);
+  transform: scale(1.08);
   z-index: 1000 !important;
-  filter: drop-shadow(0 6px 14px rgba(21,25,20,0.25));
+  filter: drop-shadow(0 6px 14px rgba(16,12,42,0.25));
 }
 
 .stall-pin-wrapper.selected {
-  transform: translate(-50%, -112%) scale(1.18);
+  transform: scale(1.18);
   z-index: 1001 !important;
-  filter: drop-shadow(0 8px 20px rgba(31,51,79,0.45));
-}
-
-.stall-pin-anchor {
-  position: absolute;
-  bottom: -3px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 5px;
-  height: 5px;
-  border-radius: 9999px;
-  background-color: #151914;
-  box-shadow: 0 0 0 2px #ffffff;
-}
-
-.stall-pin-anchor.selected {
-  background-color: #F1B23A;
-  box-shadow: 0 0 0 3px #1F334F;
+  filter: drop-shadow(0 8px 20px rgba(0,180,216,0.45));
 }
 
 /* Leaflet polish */
 .leaflet-container {
-  font-family: 'Inter', system-ui, sans-serif;
-  background: #F2EBD9 !important;
+  font-family: 'Switzer', system-ui, sans-serif;
+  background: #F4F5F7 !important;
   outline: none;
 }
 
@@ -191,8 +196,8 @@
   padding: 0;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 20px 50px -12px rgba(21,25,20,0.25);
-  border: 1px solid rgba(21,25,20,0.08);
+  box-shadow: 0 20px 50px -12px rgba(16,12,42,0.25);
+  border: 1px solid rgba(16,12,42,0.08);
 }
 
 .leaflet-popup-content {
@@ -206,15 +211,15 @@
 }
 
 .leaflet-control-zoom {
-  border: 1px solid rgba(21,25,20,0.08) !important;
+  border: 1px solid rgba(16,12,42,0.08) !important;
   border-radius: 10px !important;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(21,25,20,0.1) !important;
+  box-shadow: 0 2px 8px rgba(16,12,42,0.1) !important;
 }
 
 .leaflet-control-zoom a {
   background: #ffffff !important;
-  color: #151914 !important;
+  color: #100C2A !important;
   border: none !important;
   width: 32px !important;
   height: 32px !important;
@@ -224,15 +229,15 @@
 }
 
 .leaflet-control-zoom a:hover {
-  background: #FBF7EE !important;
-  color: #1F334F !important;
+  background: #F4F5F7 !important;
+  color: #00B4D8 !important;
 }
 
 .leaflet-control-attribution {
   background: rgba(255,255,255,0.85) !important;
   backdrop-filter: blur(8px);
   font-size: 10px !important;
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   padding: 2px 8px !important;
   border-radius: 6px 0 0 0;
 }
@@ -246,15 +251,20 @@
   background: transparent;
 }
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: rgba(21,25,20,0.15);
+  background: rgba(16,12,42,0.15);
   border-radius: 99px;
 }
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(21,25,20,0.25);
+  background: rgba(16,12,42,0.25);
 }
 
-/* Subtle grid pattern for dashboard empty states? Tidak — aturan melarang dekoratif.
-   Kami hanya memakai gradien linear very subtle di body */
+/* Sembunyikan scrollbar total (tab bar kategori di peta) */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
 
 @keyframes ping-user {
   75%, 100% {

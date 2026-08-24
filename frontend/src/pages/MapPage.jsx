@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   ChevronUp,
-  Crosshair,
   MapPin,
   MessageCircle,
   Navigation,
@@ -13,26 +12,10 @@ import {
 import UmkmMap from '../components/map/UmkmMap'
 import Spinner from '../components/ui/Spinner'
 import EmptyState from '../components/ui/EmptyState'
+import CategoryTabs, { LocateButton } from '../components/ui/CategoryTabs'
 import { listCategories } from '../lib/api'
 import { fetchAllUmkms } from '../lib/cities'
-import { categoryColor, formatPhoneWhatsApp, makeWhatsAppLink } from '../lib/format'
-
-function CategoryTab({ active, color, label, count, onClick }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`relative -mb-px flex cursor-pointer items-center gap-1.5 whitespace-nowrap border-b-2 px-3 py-2 text-[11px] font-semibold transition-colors ${
-        active ? 'text-ink-900' : 'text-ink-500 hover:text-ink-900'
-      }`}
-      style={{ borderColor: active ? color : 'transparent' }}
-    >
-      <span aria-hidden className="size-1.5" style={{ backgroundColor: active ? color : '#A8AC9C' }} />
-      {label}
-      <span className="font-mono text-[10px] tabular-nums text-ink-400">{count}</span>
-    </button>
-  )
-}
+import { categoryColor, formatDistance, formatDuration, formatPhoneWhatsApp, makeWhatsAppLink } from '../lib/format'
 
 export default function MapPage() {
   const navigate = useNavigate()
@@ -45,6 +28,8 @@ export default function MapPage() {
   const [locLoading, setLocLoading] = useState(false)
   const [mobileSheetExpanded, setMobileSheetExpanded] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [routeTo, setRouteTo] = useState(null)
+  const [routeInfo, setRouteInfo] = useState(null)
 
   useEffect(() => {
     Promise.all([fetchAllUmkms(), listCategories()])
@@ -97,10 +82,43 @@ export default function MapPage() {
 
   const openDetail = (umkm) => navigate(`/umkms/${umkm.slug}`)
 
+  const selectUmkm = (umkm) => {
+    setSelectedUmkm(umkm)
+    // Rute lama tidak relevan kalau targetnya berubah
+    const sameTarget =
+      umkm && routeTo && Number(umkm.latitude) === routeTo[0] && Number(umkm.longitude) === routeTo[1]
+    if (!sameTarget) {
+      setRouteTo(null)
+      setRouteInfo(null)
+    }
+  }
+
+  // Rute in-app: pakai lokasi user yang sudah ada, kalau belum minta dulu (presisi tinggi)
+  const handleDirections = async (umkm) => {
+    const target = [Number(umkm.latitude), Number(umkm.longitude)]
+    if (userLoc) {
+      setRouteInfo(null)
+      setRouteTo(target)
+      return
+    }
+    if (!navigator.geolocation) return
+    setLocLoading(true)
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLoc([pos.coords.latitude, pos.coords.longitude])
+        setRouteInfo(null)
+        setRouteTo(target)
+        setLocLoading(false)
+      },
+      () => setLocLoading(false),
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 },
+    )
+  }
+
   if (loading)
     return (
-      <div className="grid h-[calc(100vh-64px)] min-h-[560px] place-items-center bg-cream-50">
-        <Spinner label="Memuat peta…" />
+      <div className="mx-auto grid h-[calc(100vh-64px)] min-h-[560px] max-w-[1920px] place-items-center bg-cream-50">
+        <Spinner label="Memuat petaâ€¦" />
       </div>
     )
 
@@ -122,7 +140,7 @@ export default function MapPage() {
   const selectedCatColor = selectedUmkm ? categoryColor(selectedUmkm.category?.name) : null
 
   return (
-    <div className="flex h-[calc(100vh-64px)] min-h-[560px] flex-col bg-cream-50">
+    <div className="mx-auto flex h-[calc(100vh-64px)] min-h-[560px] max-w-[1920px] flex-col bg-cream-50">
       {/* Top filter bar */}
       <div className="z-20 shrink-0 border-b border-ink-900/5 bg-white/90 px-3 py-2.5 backdrop-blur-md sm:px-6">
         <div className="flex flex-wrap items-center gap-2">
@@ -137,34 +155,21 @@ export default function MapPage() {
             />
           </div>
 
-          {/* Tab bar kategori — underline indicator */}
-          <nav className="scrollbar-none ml-auto flex items-center gap-0.5 overflow-x-auto">
-            <CategoryTab
-              active={activeCategory === 'all'}
-              color="#151914"
-              label="Semua"
-              count={items.filter((u) => u.latitude != null).length}
-              onClick={() => setActiveCategory('all')}
+          {/* Tab bar kategori - chip berwarna, scroll horizontal dengan fade */}
+          <div className="relative ml-auto min-w-0 sm:flex-none">
+            <CategoryTabs
+              categories={categories.map((cat) => ({
+                id: String(cat.id),
+                label: cat.name.split(' ')[0],
+                color: categoryColor(cat.name),
+                count: items.filter((i) => i.category?.name === cat.name).length,
+              }))}
+              activeId={String(activeCategory)}
+              allCount={items.filter((u) => u.latitude != null).length}
+              onSelect={(id) => setActiveCategory(id)}
+              actions={<LocateButton loading={locLoading} onClick={handleLocate} />}
             />
-            {categories.map((cat) => (
-              <CategoryTab
-                key={cat.id}
-                active={String(activeCategory) === String(cat.id)}
-                color={categoryColor(cat.name)}
-                label={cat.name.split(' ')[0]}
-                count={items.filter((i) => i.category?.name === cat.name).length}
-                onClick={() => setActiveCategory(activeCategory === String(cat.id) ? 'all' : String(cat.id))}
-              />
-            ))}
-            <button
-              type="button"
-              onClick={handleLocate}
-              title="Lokasi saya"
-              className="rounded-lg border border-ink-900/10 bg-white p-2 text-ink-700 transition-colors hover:bg-cream-50"
-            >
-              <Crosshair className={`size-4 ${locLoading ? 'animate-spin text-accent-500' : 'text-accent-500'}`} />
-            </button>
-          </nav>
+          </div>
         </div>
       </div>
 
@@ -174,16 +179,43 @@ export default function MapPage() {
             items={filteredItems}
             selectedUmkm={selectedUmkm}
             onSelectUmkm={(umkm) => {
-              setSelectedUmkm(umkm)
+              selectUmkm(umkm)
               setMobileSheetExpanded(true)
             }}
             center={currentCenter}
             zoom={selectedUmkm ? 15 : 12}
             userLocation={userLoc}
             showCategoryLegend
+            routeFrom={routeTo ? userLoc : null}
+            routeTo={routeTo}
+            onRouteInfo={setRouteInfo}
             className="h-full w-full !rounded-none !border-0"
           />
-          <div className="absolute right-4 top-4 z-[400] flex items-center gap-1.5 rounded-lg border border-ink-900/10 bg-white px-3 py-1.5 font-mono text-[11px] font-semibold shadow-md">
+          {routeInfo?.distanceM != null && selectedUmkm && (
+            <div className="absolute left-4 top-4 z-[400] flex items-center gap-2 rounded-lg border border-map-500/30 bg-white px-3 py-1.5 text-caption font-bold shadow-md">
+              <Navigation className="size-3.5 text-map-600" />
+              <span>
+                {formatDistance(routeInfo.distanceM)} Â· {formatDuration(routeInfo.durationS)}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setRouteTo(null)
+                  setRouteInfo(null)
+                }}
+                aria-label="Hapus rute"
+                className="cursor-pointer rounded p-0.5 text-ink-400 hover:bg-cream-100 hover:text-ink-900"
+              >
+                <X className="size-3" />
+              </button>
+            </div>
+          )}
+          {routeInfo?.error && (
+            <div className="absolute left-4 top-4 z-[400] max-w-[240px] rounded-lg border border-accent-400/40 bg-white px-3 py-1.5 text-caption text-ink-700 shadow-md">
+              Rute tidak bisa dihitung. Coba lagi atau geser pin lokasi Anda.
+            </div>
+          )}
+          <div className="absolute right-4 top-4 flex items-center gap-1.5 rounded-lg border border-ink-900/10 bg-white px-3 py-1.5 text-caption font-semibold shadow-md">
             <Store className="size-3.5 text-accent-500" />
             <span>
               <strong>{filteredItems.length}</strong> kios
@@ -198,14 +230,14 @@ export default function MapPage() {
               <div className="flex items-start justify-between gap-3 border-b border-ink-900/5 p-5">
                 <div className="min-w-0">
                   <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <span className="category-badge text-white !text-[9px]" style={{ backgroundColor: selectedCatColor }}>
+                    <span className="category-badge text-white !text-caption" style={{ backgroundColor: selectedCatColor }}>
                       {selectedUmkm.category?.name}
                     </span>
                   </div>
                   <h3 className="font-display text-lg font-extrabold leading-tight text-ink-900">
                     {selectedUmkm.name}
                   </h3>
-                  <p className="mt-0.5 font-mono text-[11px] text-ink-500">
+                  <p className="mt-0.5 tabular-nums text-caption text-ink-500">
                     {selectedUmkm.city}, {selectedUmkm.province}
                   </p>
                 </div>
@@ -231,9 +263,9 @@ export default function MapPage() {
                   </div>
                 )}
 
-                <p className="text-[13px] leading-relaxed text-ink-700">{selectedUmkm.description}</p>
+                <p className="text-sm leading-relaxed text-ink-700">{selectedUmkm.description}</p>
 
-                <div className="grid grid-cols-2 gap-2 rounded-xl border border-ink-900/5 bg-white p-3 font-mono text-[11px]">
+                <div className="grid grid-cols-2 gap-2 rounded-xl border border-ink-900/5 bg-white p-3 text-caption">
                   <span className="text-ink-500">Kota</span>
                   <span className="truncate text-right font-bold text-ink-900">{selectedUmkm.city}</span>
                   <span className="text-ink-500">WhatsApp</span>
@@ -250,7 +282,7 @@ export default function MapPage() {
                   </span>
                 </div>
 
-                <div className="flex items-start gap-2 text-[12px] text-ink-700">
+                <div className="flex items-start gap-2 text-xs text-ink-700">
                   <MapPin className="mt-0.5 size-4 shrink-0 text-accent-500" />
                   <span>{selectedUmkm.address || 'Alamat belum dicantumkan.'}</span>
                 </div>
@@ -258,7 +290,7 @@ export default function MapPage() {
 
               <div className="space-y-2 border-t border-ink-900/5 bg-white p-4">
                 <a
-                  href={makeWhatsAppLink(selectedUmkm.phone_whatsapp, selectedUmkm.name, `Halo ${selectedUmkm.name}, saya melihat lapak Anda di peta UMKM-Go.`)}
+                  href={makeWhatsAppLink(selectedUmkm.phone_whatsapp, selectedUmkm.name, `Halo ${selectedUmkm.name}, saya melihat lapak Anda di peta UMKM-GO.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-wa w-full justify-center rounded-xl !py-3 !text-sm font-bold"
@@ -274,15 +306,14 @@ export default function MapPage() {
                   >
                     Profil lengkap
                   </button>
-                  <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${Number(selectedUmkm.latitude)},${Number(selectedUmkm.longitude)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => handleDirections(selectedUmkm)}
                     className="btn btn-outline rounded-lg !py-2 !text-xs"
                   >
-                    <Navigation className="size-3.5 text-accent-500" />
-                    Petunjuk arah
-                  </a>
+                    <Navigation className={`size-3.5 ${locLoading ? 'animate-pulse text-map-600' : 'text-accent-500'}`} />
+                    {routeTo ? 'Rute aktif' : 'Petunjuk arah'}
+                  </button>
                 </div>
               </div>
             </div>
@@ -293,7 +324,7 @@ export default function MapPage() {
                 <h3 className="font-display text-base font-bold text-ink-900">
                   {filteredItems.length} kios di area ini
                 </h3>
-                <p className="mt-0.5 text-[11px] text-ink-500">
+                <p className="mt-0.5 text-caption text-ink-500">
                   Klik kios di daftar atau pin di peta untuk melihat detail.
                 </p>
               </div>
@@ -304,7 +335,7 @@ export default function MapPage() {
                     <button
                       key={item.id}
                       type="button"
-                      onClick={() => setSelectedUmkm(item)}
+                      onClick={() => selectUmkm(item)}
                       className="flex w-full gap-3 rounded-xl border border-ink-900/5 bg-white p-3 text-left transition-all hover:border-ink-900/15 hover:bg-cream-50/80"
                     >
                       <div className="size-14 shrink-0 overflow-hidden rounded-lg border border-ink-900/5 bg-cream-100">
@@ -318,14 +349,14 @@ export default function MapPage() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="mb-1 flex flex-wrap items-center gap-2">
-                          <span className="category-badge !py-0 text-white !text-[8px]" style={{ backgroundColor: col }}>
+                          <span className="category-badge !py-0 text-white !text-caption" style={{ backgroundColor: col }}>
                             {item.category?.name}
                           </span>
                         </div>
                         <h4 className="font-display truncate text-xs font-bold leading-tight text-ink-900">
                           {item.name}
                         </h4>
-                        <span className="mt-0.5 block truncate text-[11px] text-ink-500">
+                        <span className="mt-0.5 block truncate text-caption text-ink-500">
                           {item.city}, {item.province}
                         </span>
                       </div>
@@ -351,10 +382,10 @@ export default function MapPage() {
             >
               <div aria-hidden className="absolute left-1/2 top-2 h-1 w-10 -translate-x-1/2 rounded-full bg-ink-200" />
               <div className="mt-1.5 flex min-w-0 flex-1 items-center gap-2 pr-2">
-                <span className="category-badge shrink-0 text-white !text-[9px]" style={{ backgroundColor: selectedCatColor }}>
+                <span className="category-badge shrink-0 text-white !text-caption" style={{ backgroundColor: selectedCatColor }}>
                   {selectedUmkm.category?.name}
                 </span>
-                <h4 className="font-display truncate text-[13px] font-bold leading-tight text-ink-900">
+                <h4 className="font-display truncate text-sm font-bold leading-tight text-ink-900">
                   {selectedUmkm.name}
                 </h4>
               </div>
@@ -384,8 +415,8 @@ export default function MapPage() {
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="line-clamp-2 text-[12px] leading-relaxed text-ink-700">{selectedUmkm.description}</p>
-                  <div className="mt-2 flex items-center justify-between font-mono text-[11px]">
+                  <p className="line-clamp-2 text-xs leading-relaxed text-ink-700">{selectedUmkm.description}</p>
+                  <div className="mt-2 flex items-center justify-between tabular-nums text-caption">
                     <span className="truncate font-bold text-ink-900">{selectedUmkm.city}</span>
                     <span className="font-bold tabular-nums text-wa-600">
                       {formatPhoneWhatsApp(selectedUmkm.phone_whatsapp)}
@@ -396,14 +427,24 @@ export default function MapPage() {
 
               {mobileSheetExpanded && (
                 <div className="space-y-3 border-t border-ink-900/5 pt-2">
-                  <div className="flex items-start gap-2 text-[11px] text-ink-700">
+                  <div className="flex items-start gap-2 text-caption text-ink-700">
                     <MapPin className="mt-0.5 size-3.5 shrink-0 text-accent-500" />
                     <span>{selectedUmkm.address || 'Alamat belum dicantumkan.'}</span>
                   </div>
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-2 pt-1">
+              <div className="grid grid-cols-3 gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => handleDirections(selectedUmkm)}
+                  className={`btn justify-center rounded-lg !py-2.5 !text-xs font-bold ${
+                    routeTo ? 'btn-primary' : 'btn-outline'
+                  }`}
+                >
+                  <Navigation className={`size-4 ${locLoading ? 'animate-pulse text-map-600' : 'text-map-600'}`} />
+                  Rute
+                </button>
                 <a
                   href={makeWhatsAppLink(selectedUmkm.phone_whatsapp, selectedUmkm.name)}
                   target="_blank"
@@ -416,9 +457,9 @@ export default function MapPage() {
                 <button
                   type="button"
                   onClick={() => openDetail(selectedUmkm)}
-                  className="btn btn-primary justify-center rounded-lg !py-2.5 !text-xs font-bold"
+                  className="btn btn-outline justify-center rounded-lg !py-2.5 !text-xs font-bold"
                 >
-                  Detail Lapak
+                  Detail
                 </button>
               </div>
             </div>

@@ -24,7 +24,7 @@ export default function FileDropzone({
       return
     }
     if (f.size > MAX_SIZE) {
-      setError(`Ukuran gambar ${(f.size / 1024 / 1024).toFixed(1)} MB — maksimal 2 MB.`)
+      setError(`Ukuran gambar ${(f.size / 1024 / 1024).toFixed(1)} MB, maksimal 2 MB.`)
       return
     }
 

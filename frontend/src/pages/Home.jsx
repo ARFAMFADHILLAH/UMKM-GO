@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, MapPin, MessageCircle, Search, ShieldCheck, SlidersHorizontal, Sparkles, TrendingUp } from 'lucide-react'
 import CategoryIcon from '../components/ui/CategoryIcon'
 import UmkmCard from '../components/UmkmCard'
 import UmkmMap from '../components/map/UmkmMap'
 import Spinner from '../components/ui/Spinner'
+import Dropdown from '../components/ui/Dropdown'
 import { listCategories } from '../lib/api'
 import { fetchAllUmkms } from '../lib/cities'
 import { formatPhoneWhatsApp, makeWhatsAppLink } from '../lib/format'
@@ -50,7 +51,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* 1. HERO — ink pekat, tipografi tebal, chrome bersih */}
+      {/* 1. HERO - ink pekat, tipografi tebal, chrome bersih */}
       <section className="relative overflow-hidden bg-ink-900 text-white">
         <div
           aria-hidden
@@ -58,18 +59,18 @@ export default function Home() {
         />
         <div className="container-site relative pb-20 pt-10 sm:pb-28 sm:pt-14">
           <div className="mx-auto max-w-3xl space-y-6 text-center">
-            <span className="eyebrow text-cream-100/70">
+            <span className="label-caption !text-cream-100/70 inline-flex items-center gap-2">
               <ShieldCheck className="size-3.5 text-accent-400" />
-              <span className="text-accent-400">Direktori UMKM Indonesia</span>
+              <span className="text-accent-400">UMKM Indonesia</span>
             </span>
 
-            <h1 className="font-display text-3xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+            <h1 className="hero-title font-display font-black leading-[1.05] tracking-tight">
               Cari lapak lokal di
               <span className="mt-1 block text-accent-400">sekitar Anda.</span>
             </h1>
 
             <p className="mx-auto max-w-xl text-sm leading-relaxed text-cream-100/70 sm:text-base">
-              Peta interaktif UMKM — kuliner, kriya, fashion, jasa, dan pertanian. Temukan
+              Peta interaktif UMKM: kuliner, kriya, fashion, jasa, dan pertanian. Temukan UMKM
               terdekat, hubungi langsung via <span className="font-semibold text-wa-500">WhatsApp</span>,
               tanpa iklan &amp; tanpa perantara.
             </p>
@@ -92,18 +93,17 @@ export default function Home() {
               <div aria-hidden className="my-2 hidden w-px bg-ink-900/10 sm:block" />
               <div className="flex items-center gap-1.5 px-2">
                 <MapPin className="size-4 shrink-0 text-accent-500" />
-                <select
+                <Dropdown
                   value={selectedCity}
-                  onChange={(e) => setSelectedCity(e.target.value)}
-                  className="w-full cursor-pointer bg-transparent py-2.5 text-sm font-semibold text-ink-900 focus:outline-none sm:w-auto"
-                >
-                  <option value="">Semua kota</option>
-                  {[...new Set(items.map((i) => i.city).filter(Boolean))].map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(v) => setSelectedCity(v)}
+                  placeholder="Semua kota"
+                  options={[
+                    { value: '', label: 'Semua kota' },
+                    ...[...new Set(items.map((i) => i.city).filter(Boolean))].map((c) => ({ value: c, label: c })),
+                  ]}
+                  buttonClassName="bg-transparent py-2.5 pr-1 text-sm font-semibold text-ink-900 hover:text-brand-500"
+                  listClassName="z-30"
+                />
               </div>
               <button type="submit" className="btn btn-primary rounded-xl !px-6 !py-3 !text-sm font-bold">
                 Cari Lapak
@@ -111,7 +111,7 @@ export default function Home() {
             </form>
 
             {/* Statistik live */}
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 pt-3 font-mono text-[11px] text-cream-100/60">
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 pt-3 text-caption text-cream-100/60">
               <span className="flex items-center gap-2">
                 <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-accent-400" />
                 <strong className="text-sm font-bold text-white">{items.length}</strong> lapak terdaftar
@@ -129,7 +129,7 @@ export default function Home() {
 
       {/* 2. Grid kategori mengambang di atas hero */}
       <section className="container-site relative z-10 -mt-12">
-        <div className="rounded-2xl border border-ink-900/5 bg-white p-4 shadow-[0_20px_60px_-20px_rgba(21,25,20,0.25)] sm:p-6">
+        <div className="rounded-2xl border border-ink-900/5 bg-white p-4 shadow-[0_20px_60px_-20px_rgba(16,12,42,0.25)] sm:p-6">
           <div className="mb-4 flex items-center justify-between gap-2">
             <div>
               <span className="label-caption">Jelajahi sektor</span>
@@ -154,7 +154,7 @@ export default function Home() {
                     <span className="block truncate font-display text-sm font-bold text-ink-900">
                       {cat.name}
                     </span>
-                    <span className="font-mono text-[11px] text-ink-400">{cat.count} lapak</span>
+                    <span className="text-caption text-ink-400">{cat.count} lapak</span>
                   </div>
                 </Link>
               ))}
@@ -167,10 +167,10 @@ export default function Home() {
 
       {/* 3. Peta interaktif terbagi */}
       <section className="container-site">
-        <div className="overflow-hidden rounded-2xl border border-ink-900/5 bg-white shadow-[0_8px_30px_-12px_rgba(21,25,20,0.1)]">
+        <div className="overflow-hidden rounded-2xl border border-ink-900/5 bg-white shadow-[0_8px_30px_-12px_rgba(16,12,42,0.1)]">
           <div className="flex flex-col justify-between gap-3 border-b border-ink-900/5 p-5 sm:flex-row sm:items-center sm:p-6">
             <div>
-              <span className="eyebrow mb-1.5">Peta live · {pinsWithCoords.length} kios</span>
+              <span className="label-caption mb-1.5">Peta live · {pinsWithCoords.length} kios</span>
               <h2 className="font-display text-xl font-bold text-ink-900">Sebaran kios UMKM saat ini</h2>
             </div>
             <Link to="/peta" className="btn btn-primary self-start rounded-xl !px-4 !py-2.5 !text-xs font-bold sm:self-auto">
@@ -203,7 +203,7 @@ export default function Home() {
             <aside className="flex min-h-[260px] flex-col justify-between border-t border-ink-900/5 bg-cream-50/40 p-5 lg:border-l lg:border-t-0">
               {selectedPreviewUmkm ? (
                 <div className="space-y-3">
-                  <span className="eyebrow">Kios yang dipilih</span>
+                  <span className="label-caption">Kios yang dipilih</span>
                   {selectedPreviewUmkm.image_cover && (
                     <div className="aspect-[16/9] overflow-hidden rounded-xl border border-ink-900/10">
                       <img
@@ -222,7 +222,7 @@ export default function Home() {
                       {selectedPreviewUmkm.description}
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 gap-2 rounded-lg border border-ink-900/5 bg-white p-2.5 font-mono text-[11px]">
+                  <div className="grid grid-cols-2 gap-2 rounded-lg border border-ink-900/5 bg-white p-2.5 text-caption">
                     <span className="text-ink-500">Kota</span>
                     <span className="truncate text-right font-bold text-ink-900">
                       {selectedPreviewUmkm.city}
@@ -266,8 +266,8 @@ export default function Home() {
       <section className="container-site space-y-6">
         <div className="flex flex-col justify-between gap-3 border-b border-ink-900/5 pb-4 sm:flex-row sm:items-end">
           <div>
-            <span className="eyebrow eyebrow-accent mb-1.5">
-              <Sparkles className="size-3.5" />
+            <span className="label-caption mb-1.5 !text-accent-600 inline-flex items-center gap-2">
+              <Sparkles className="size-3.5 shrink-0" />
               Baru bergabung
             </span>
             <h2 className="font-display text-2xl font-black tracking-tight text-ink-900 sm:text-3xl">
@@ -291,11 +291,11 @@ export default function Home() {
 
       {/* 5. CTA pemilik usaha */}
       <section className="container-site">
-        <div className="relative overflow-hidden rounded-3xl border border-white/5 bg-ink-900 p-8 text-white shadow-[0_20px_60px_-20px_rgba(21,25,20,0.5)] sm:p-12">
+        <div className="relative overflow-hidden rounded-3xl border border-white/5 bg-ink-900 p-8 text-white shadow-[0_20px_60px_-20px_rgba(16,12,42,0.5)] sm:p-12">
           <div className="relative grid grid-cols-1 items-center gap-6 md:grid-cols-2">
             <div>
-              <span className="eyebrow mb-3 text-cream-100/70">
-                <TrendingUp className="size-3 text-accent-400" />
+              <span className="label-caption !text-cream-100/70 mb-3 inline-flex items-center gap-2">
+                <TrendingUp className="size-3 shrink-0 text-accent-400" />
                 <span className="text-accent-400">Untuk pelaku usaha</span>
               </span>
               <h3 className="font-display text-2xl font-black leading-tight tracking-tight text-white sm:text-3xl">

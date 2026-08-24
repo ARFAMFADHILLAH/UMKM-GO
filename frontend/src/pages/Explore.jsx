@@ -4,6 +4,8 @@ import { LayoutGrid, List, RotateCcw, Search, X } from 'lucide-react'
 import UmkmCard from '../components/UmkmCard'
 import EmptyState from '../components/ui/EmptyState'
 import Spinner from '../components/ui/Spinner'
+import Dropdown from '../components/ui/Dropdown'
+import CategoryTabs from '../components/ui/CategoryTabs'
 import { categoryColor } from '../lib/format'
 import { listCategories, listUmkms } from '../lib/api'
 import { gatherCities } from '../lib/cities'
@@ -72,11 +74,15 @@ export default function Explore() {
     return raw
   }, [result, sortBy])
 
+  // Paginasi Laravel API Resource: total & last_page ada di dalam meta
+  const total = result?.meta?.total ?? result?.total ?? items.length
+  const lastPage = result?.meta?.last_page ?? result?.last_page ?? 1
+
   const activeCategory = categories.find((c) => String(c.id) === String(categoryId))
 
   const heading = useMemo(() => {
-    if (search && activeCategory) return `Hasil “${search}” di ${activeCategory.name}`
-    if (search) return `Hasil pencarian “${search}”`
+    if (search && activeCategory) return `Hasil â€œ${search}â€ di ${activeCategory.name}`
+    if (search) return `Hasil pencarian â€œ${search}â€`
     if (activeCategory) return `Kategori ${activeCategory.name}`
     if (city) return `Lapak di ${city}`
     return 'Jelajah usaha lokal'
@@ -88,14 +94,14 @@ export default function Explore() {
     <div className="container-site space-y-6 py-8">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
-          <span className="label-caption">Direktori UMKM</span>
+          <span className="label-caption">UMKM Indonesia</span>
           <h1 className="font-display text-3xl font-black tracking-tight text-ink-900 sm:text-4xl">
             {heading}
           </h1>
           <p className="mt-1 text-sm text-ink-500">
             {loading && !result
-              ? 'Memuat data…'
-              : `${result?.total ?? 0} lapak ${city ? `di ${city}` : 'di seluruh Indonesia'}`}
+              ? 'Memuat dataâ€¦'
+              : `${total} lapak ${city ? `di ${city}` : 'di seluruh Indonesia'}`}
           </p>
         </div>
         <div className="flex items-center gap-2 self-start rounded-xl border border-ink-900/10 bg-white p-1 shadow-sm">
@@ -148,73 +154,60 @@ export default function Explore() {
             )}
           </div>
           <div className="sm:col-span-3">
-            <select
+            <Dropdown
               value={city}
-              onChange={(e) => updateParams({ search, category_id: categoryId, city: e.target.value })}
-              className="field cursor-pointer font-medium"
+              onChange={(v) => updateParams({ search, category_id: categoryId, city: v })}
+              placeholder="Semua kota"
               disabled={cities.length === 0}
-            >
-              <option value="">Semua kota</option>
-              {cities.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
+              options={[{ value: '', label: 'Semua kota' }, ...cities.map((c) => ({ value: c, label: c }))]}
+              buttonClassName="field font-medium"
+            />
           </div>
           <div className="sm:col-span-3">
-            <select
+            <Dropdown
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="field cursor-pointer font-medium"
-            >
-              <option value="recommended">Urut: Rekomendasi</option>
-              <option value="name">Urut: Nama A–Z</option>
-            </select>
+              onChange={(v) => setSortBy(v)}
+              options={[
+                { value: 'recommended', label: 'Urut: Rekomendasi' },
+                { value: 'name', label: 'Urut: Nama A-Z' },
+              ]}
+              buttonClassName="field font-medium"
+            />
           </div>
 
-          {/* Tab bar kategori — garis bawah warna kategori, bukan kapsul */}
+          {/* Tab bar kategori - chip berwarna (sama dengan halaman peta) */}
           <div className="border-t border-ink-900/5 pt-3 sm:col-span-12">
             <div className="mb-3 flex items-center justify-between gap-3">
-              <span className="eyebrow">Kategori</span>
+              <span className="label-caption">Kategori</span>
               {hasActiveFilters && (
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex cursor-pointer items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold text-cabai-500 hover:text-cabai-600"
+                  className="flex cursor-pointer items-center gap-1 px-2.5 py-1.5 text-caption font-semibold text-cabai-500 hover:text-cabai-600"
                 >
                   <RotateCcw className="size-3" /> Reset
                 </button>
               )}
             </div>
-            <nav className="-mb-px flex items-center gap-1 overflow-x-auto border-b border-ink-900/5">
-              {tabs.map((cat) => {
-                const isSelected = categoryId === cat.id
-                const col = cat.id === '' ? '#151914' : categoryColor(cat.name)
-                return (
-                  <button
-                    key={cat.id || 'all'}
-                    type="button"
-                    onClick={() => updateParams({ search, category_id: cat.id, city })}
-                    className={`relative flex cursor-pointer items-center gap-1.5 whitespace-nowrap border-b-2 px-3.5 py-2.5 text-xs font-semibold transition-colors ${
-                      isSelected ? 'text-ink-900' : 'text-ink-500 hover:text-ink-900'
-                    }`}
-                    style={{ borderColor: isSelected ? col : 'transparent' }}
-                  >
-                    {cat.id !== '' && (
-                      <span aria-hidden className="size-1.5" style={{ backgroundColor: isSelected ? col : '#A8AC9C' }} />
-                    )}
-                    {cat.name}
-                  </button>
-                )
-              })}
-            </nav>
+            <CategoryTabs
+              categories={tabs
+                .filter((t) => t.id !== '')
+                .map((t) => ({
+                  id: t.id,
+                  label: t.name.split(' ')[0],
+                  color: categoryColor(t.name),
+                  count: result?.data?.filter((i) => String(i.category?.id ?? i.category_id) === t.id).length,
+                }))}
+              activeId={categoryId}
+              allCount={total}
+              onSelect={(id) => updateParams({ search, category_id: id, city })}
+            />
           </div>
         </form>
       </div>
 
       {loading ? (
-        <Spinner label="Memuat katalog…" />
+        <Spinner label="Memuat katalogâ€¦" />
       ) : items.length === 0 ? (
         <EmptyState
           title="Tidak ditemukan lapak yang cocok"
@@ -234,14 +227,14 @@ export default function Explore() {
         />
       ) : (
         <>
-          <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2'}`}>
+          <div className={viewMode === 'grid' ? 'grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'flex flex-col gap-3'}>
             {items.map((umkm) => (
               <UmkmCard key={umkm.id} umkm={umkm} compact={viewMode === 'compact'} />
             ))}
           </div>
 
           {/* Paginasi server-side */}
-          {result?.last_page > 1 && (
+          {lastPage > 1 && (
             <nav className="flex items-center justify-center gap-1.5 pt-2" aria-label="Paginasi">
               <button
                 type="button"
@@ -249,9 +242,9 @@ export default function Explore() {
                 onClick={() => window.scrollTo({ top: 0 }) || updateParams({ search, category_id: categoryId, city, page: page - 1 })}
                 className="btn btn-outline size-9 !p-0 disabled:pointer-events-none disabled:opacity-40"
               >
-                ‹
+                â€¹
               </button>
-              {Array.from({ length: result.last_page }, (_, i) => i + 1).map((p) => (
+              {Array.from({ length: lastPage }, (_, i) => i + 1).map((p) => (
                 <button
                   key={p}
                   type="button"
@@ -260,18 +253,18 @@ export default function Explore() {
                     updateParams({ search, category_id: categoryId, city, page: p })
                   }}
                   aria-current={p === page ? 'page' : undefined}
-                  className={`btn size-9 !p-0 font-mono text-[13px] ${p === page ? 'btn-primary' : 'btn-outline'}`}
+                  className={`btn size-9 !p-0 font-semibold text-sm tabular-nums ${p === page ? 'btn-primary' : 'btn-outline'}`}
                 >
                   {p}
                 </button>
               ))}
               <button
                 type="button"
-                disabled={page >= result.last_page}
+                disabled={page >= lastPage}
                 onClick={() => window.scrollTo({ top: 0 }) || updateParams({ search, category_id: categoryId, city, page: page + 1 })}
                 className="btn btn-outline size-9 !p-0 disabled:pointer-events-none disabled:opacity-40"
               >
-                ›
+                â€º
               </button>
             </nav>
           )}

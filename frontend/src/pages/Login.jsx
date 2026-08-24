@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LogIn, MapPin, MessageCircle, Store } from 'lucide-react'
 import Field from '../components/ui/Field'
@@ -17,15 +17,15 @@ function AuthShell({ children }) {
         <div className="relative flex h-full flex-col justify-between p-12">
           <Logo dark />
           <div>
-            <span className="eyebrow text-cream-100/70">
-              <Store className="size-3.5 text-accent-400" />
+            <span className="label-caption !text-cream-100/70 inline-flex items-center gap-2">
+              <Store className="size-3.5 shrink-0 text-accent-400" />
               <span className="text-accent-400">Komunitas UMKM Indonesia</span>
             </span>
             <h2 className="font-display mt-4 max-w-md text-4xl font-black leading-tight tracking-tight text-white">
               Satu peta untuk
               <span className="block text-accent-400">usaha lokal.</span>
             </h2>
-            <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-cream-100/70">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream-100/70">
               Bergabung dan tampilkan usahamu ke ribuan pengunjung yang mencari produk dan jasa
               lokal terbaik.
             </p>
@@ -44,7 +44,7 @@ function AuthShell({ children }) {
               ))}
             </div>
           </div>
-          <p className="font-mono text-[11px] text-cream-200/50">© {new Date().getFullYear()} UMKM-Go</p>
+          <p className="text-caption tracking-wider text-cream-200/50">© {new Date().getFullYear()} UMKM-GO</p>
         </div>
       </aside>
 
@@ -135,7 +135,7 @@ export default function Login() {
       </p>
       <p className="mt-3 rounded-xl border border-ink-900/[0.07] bg-ink-100 px-4 py-3 text-center text-xs text-ink-500">
         Akun demo:{' '}
-        <span className="font-mono font-semibold text-ink-700">tempemendoanmasadam@gmail.com</span>
+        <span className="font-semibold text-ink-700">tempemendoanmasadam@gmail.com</span>
       </p>
     </AuthShell>
   )

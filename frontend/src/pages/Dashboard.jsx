@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { AlertTriangle, MapPin, Pencil, Plus, Store as StoreIcon, Trash2, TrendingUp } from 'lucide-react'
+﻿import { useCallback, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { AlertTriangle, Clock, LogOut, MapPin, Pencil, Plus, ShieldCheck, Store as StoreIcon, Trash2, TrendingUp } from 'lucide-react'
 import Spinner from '../components/ui/Spinner'
 import EmptyState from '../components/ui/EmptyState'
 import { deleteUmkm, listMyUmkms } from '../lib/api'
@@ -13,13 +13,25 @@ function MetricCard({ icon, iconBg, label, value }) {
     <div className="rounded-2xl border border-ink-900/5 bg-white p-5 shadow-sm">
       <div className="mb-3 flex items-start justify-between">
         <div className={`flex size-10 items-center justify-center rounded-xl ${iconBg}`}>{icon}</div>
-        <span className="flex items-center gap-0.5 font-mono text-[10px] font-semibold text-wa-600">
+        <span className="flex items-center gap-0.5 text-caption font-semibold text-wa-600">
           <TrendingUp className="size-3" /> aktif
         </span>
       </div>
       <span className="label-caption mb-1 block">{label}</span>
       <span className="font-display text-2xl font-black leading-none text-ink-900">{value}</span>
     </div>
+  )
+}
+
+function StatusBadge({ verified }) {
+  return verified ? (
+    <span className="stamp-verified !py-0 !text-caption">
+      <ShieldCheck className="size-3" /> Terverifikasi
+    </span>
+  ) : (
+    <span className="inline-flex items-center gap-1 rounded border border-dashed border-accent-400/50 bg-accent-400/[0.08] px-2 py-0.5 text-caption font-bold uppercase tracking-wider text-accent-600">
+      <Clock className="size-3" /> Menunggu verifikasi
+    </span>
   )
 }
 
@@ -47,13 +59,9 @@ function MyUmkmRow({ umkm, onDelete, busy }) {
           >
             {umkm.name}
           </Link>
-          {umkm.is_verified != null && (
-            <span className="stamp-verified !py-0 !text-[9px]">
-              {umkm.is_verified ? 'Terverifikasi' : 'Menunggu verifikasi'}
-            </span>
-          )}
+          {umkm.is_verified != null && <StatusBadge verified={Boolean(umkm.is_verified)} />}
         </div>
-        <p className="mt-1 flex items-center gap-1 text-[11px] text-ink-500">
+        <p className="mt-1 flex items-center gap-1 text-caption text-ink-500">
           {umkm.category?.name} · <MapPin className="size-3" /> {umkm.city}, {umkm.province}
         </p>
       </div>
@@ -75,7 +83,8 @@ function MyUmkmRow({ umkm, onDelete, busy }) {
 }
 
 export default function Dashboard() {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
   const [items, setItems] = useState([])
   const [total, setTotal] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -129,11 +138,23 @@ export default function Dashboard() {
         <div>
           <span className="label-caption">Area pemilik lapak</span>
           <h1 className="font-display text-3xl font-black tracking-tight text-ink-900">Dashboard Kios</h1>
-          <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-400">{user?.email}</p>
+          <p className="mt-1 tracking-[0.08em] text-caption uppercase tracking-[0.12em] text-ink-400">{user?.email}</p>
         </div>
-        <Link to="/manage/new" className="btn btn-primary self-start rounded-xl !px-4 !py-2.5 !text-xs font-bold sm:self-auto">
-          <Plus className="size-4" /> Tambah Lapak Baru
-        </Link>
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <Link to="/manage/new" className="btn btn-primary rounded-xl !px-4 !py-2.5 !text-xs font-bold">
+            <Plus className="size-4" /> Tambah Lapak Baru
+          </Link>
+          <button
+            type="button"
+            onClick={async () => {
+              await logout()
+              navigate('/')
+            }}
+            className="btn btn-outline rounded-xl !px-4 !py-2.5 !text-xs font-semibold"
+          >
+            <LogOut className="size-3.5" /> Keluar
+          </button>
+        </div>
       </div>
 
       {message && (
@@ -171,7 +192,7 @@ export default function Dashboard() {
           icon={<TrendingUp className="size-5" />}
           iconBg="bg-accent-400/15 text-accent-600"
           label="Bergabung sejak"
-          value={user?.created_at ? formatDate(user.created_at) : '—'}
+          value={user?.created_at ? formatDate(user.created_at) : '-'}
         />
       </div>
 
@@ -183,7 +204,7 @@ export default function Dashboard() {
             <p className="text-xs text-ink-500">Edit profil, lokasi, dan foto lapak milikmu.</p>
           </div>
           {!loading && !endpointMissing && (
-            <span className="font-mono text-[11px] font-bold tabular-nums text-ink-500">{items.length} lapak</span>
+            <span className="text-caption font-bold tabular-nums text-ink-500">{items.length} lapak</span>
           )}
         </div>
 

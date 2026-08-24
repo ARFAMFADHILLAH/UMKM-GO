@@ -12,6 +12,7 @@ const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const ManageUmkm = lazy(() => import('./pages/ManageUmkm'))
+const AdminVerification = lazy(() => import('./pages/AdminVerification'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 function fullPageSpinner() {
@@ -52,6 +53,7 @@ export default function App() {
             <Route path="dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
             <Route path="manage/new" element={<RequireAuth><ManageUmkm /></RequireAuth>} />
             <Route path="manage/:slug" element={<RequireAuth><ManageUmkm /></RequireAuth>} />
+            <Route path="admin" element={<RequireAuth><AdminVerification /></RequireAuth>} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

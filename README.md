@@ -1,4 +1,4 @@
-# UMKM-Go
+# UMKM-GO
 
 Website direktori UMKM Indonesia. Monorepo berisi **backend API** dan **frontend web**.
 
@@ -49,8 +49,10 @@ Buka http://localhost:5173. Vite sudah mem-proxy `/api` dan `/storage` ke `local
 
 ## Desain
 
-Palet warna terracotta-panas, font *Inter Tight* (display) + *Inter* (body),
-dengan aksen hijau WhatsApp. Jika font tidak termuat (offline), fallback ke system font.
+Palet "Cerah Peta": background putih bersih, chrome gelap biru dongker `#100C2A`,
+aksen kuning sinar `#FFC300` untuk CTA, dan sian `#00B4D8` khusus elemen peta.
+Font *Poppins* (display, Google Fonts) + *Switzer* (body, Fontshare - gratis komersial).
+Jika font tidak termuat (offline), fallback ke system font.
 
 ## Runnning
 

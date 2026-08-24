@@ -1,4 +1,4 @@
-import axios from 'axios'
+﻿import axios from 'axios'
 
 const TOKEN_KEY = 'umkmgo_token'
 
@@ -69,7 +69,7 @@ export async function listUmkms(params = {}) {
   return data
 }
 
-// NOTE: endpoint `/my-umkms` belum ada di backend — minta temen backend
+// NOTE: endpoint `/my-umkms` belum ada di backend - minta temen backend
 // tambahkan `GET /api/my-umkms` (auth:sanctum) yang mengembalikan daftar
 // UMKM milik user login (shape: paginasi seperti /umkms).
 export async function listMyUmkms() {
@@ -95,5 +95,49 @@ export async function updateUmkm(id, formData, withImage) {
 
 export async function deleteUmkm(id) {
   const { data } = await client.delete(`/umkms/${id}`)
+  return data
+}
+
+// ---- Admin (verifikasi lapak) ----
+// NOTE: endpoint /admin/* belum ada di backend - lihat catatan Obsidian
+// "Catatan Backend" untuk spesifikasi lengkapnya. Frontend sudah menangani
+// 404/405 dengan fallback empty state.
+export async function listPendingUmkms() {
+  const { data } = await client.get('/admin/umkms/pending')
+  return data
+}
+
+export async function verifyUmkm(id) {
+  const { data } = await client.patch(`/admin/umkms/${id}/verify`)
+  return data
+}
+
+export async function rejectUmkm(id) {
+  const { data } = await client.patch(`/admin/umkms/${id}/reject`)
+  return data
+}
+
+// ---- Rating ----
+// NOTE: endpoint rating belum ada di backend - spesifikasi di catatan Obsidian.
+// Frontend menyembunyikan UI rating secara halus kalau endpoint 404.
+export async function rateUmkm(slug, rating) {
+  const { data } = await client.post(`/umkms/${slug}/rate`, { rating })
+  return data
+}
+
+export async function fetchMyRating(slug) {
+  const { data } = await client.get(`/umkms/${slug}/my-rating`)
+  return data
+}
+
+// ---- Komentar ----
+// NOTE: endpoint komentar belum ada di backend - spesifikasi di catatan Obsidian.
+export async function fetchComments(slug, page = 1) {
+  const { data } = await client.get(`/umkms/${slug}/comments`, { params: { page } })
+  return data
+}
+
+export async function postComment(slug, comment) {
+  const { data } = await client.post(`/umkms/${slug}/comments`, { comment })
   return data
 }

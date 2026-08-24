@@ -16,10 +16,9 @@ export default function CategoryIcon({ category, size = 'md', className = '', is
     sm: 'w-7 h-7',
     md: 'w-10 h-10',
     lg: 'w-12 h-12',
-    xl: 'w-16 h-16',
   }[size]
 
-  const iconSizes = { sm: 14, md: 20, lg: 24, xl: 30 }[size]
+  const iconSizes = { sm: 14, md: 20, lg: 24 }[size]
 
   const Icon = ICON_MAP[category] || Store
 

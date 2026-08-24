@@ -4,7 +4,7 @@ import { Home } from 'lucide-react'
 export default function NotFound() {
   return (
     <div className="container-site flex flex-col items-center justify-center py-28 text-center">
-      <p className="rounded-md border border-dashed border-accent-400/50 bg-accent-400/10 px-3 py-1 font-mono text-sm font-bold tracking-widest text-accent-600">404</p>
+      <p className="rounded-md border border-dashed border-accent-400/50 bg-accent-400/10 px-3 py-1 text-sm font-bold tracking-widest text-accent-600">404</p>
       <h1 className="mt-4 font-display text-4xl font-black tracking-tight text-ink-900">
         Halaman tidak ditemukan
       </h1>

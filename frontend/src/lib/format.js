@@ -1,52 +1,18 @@
-// Port dari referensi src/lib/format.ts — key kategori disinkronkan dengan nama kategori backend.
-// Nilai warna mengikuti DESIGN.md §2.4 (token @theme).
+﻿// Port dari referensi src/lib/format.ts - key kategori disinkronkan dengan nama kategori backend.
+// Nilai warna mengikuti DESIGN.md §2.4 (token @theme) - diperbarui ke palet "Cerah Peta".
 
 export const CATEGORY_COLORS = {
-  'Kuliner': '#D1432B', // cabai-500
-  'Kerajinan Tangan': '#D1772F', // kerajinan-500
-  'Fashion': '#824FA5', // fashion-500
-  'Jasa & Servis': '#1F8A5B', // wa-500
-  'Pertanian & Perkebunan': '#78893F', // agro-500
+  'Kuliner': '#FF4D4D',          // cabai-500
+  'Kerajinan Tangan': '#FF7A00', // kerajinan-500
+  'Fashion': '#9B51E0',          // fashion-500
+  'Jasa & Servis': '#3E7BFA',    // jasa-500 (dipisah dari hijau WA)
+  'Pertanian & Perkebunan': '#5CB85C', // agro-500
 }
 
-const FALLBACK_COLOR = '#1F334F'
+const FALLBACK_COLOR = '#100C2A'
 
 export function categoryColor(name) {
   return CATEGORY_COLORS[name] || FALLBACK_COLOR
-}
-
-export function categoryTextColor(name) {
-  switch (name) {
-    case 'Kuliner':
-      return 'text-cabai-500'
-    case 'Kerajinan Tangan':
-      return 'text-kerajinan-500'
-    case 'Fashion':
-      return 'text-fashion-500'
-    case 'Jasa & Servis':
-      return 'text-wa-500'
-    case 'Pertanian & Perkebunan':
-      return 'text-agro-500'
-    default:
-      return 'text-brand-500'
-  }
-}
-
-export function categoryBgLight(name) {
-  switch (name) {
-    case 'Kuliner':
-      return 'bg-cabai-500/10 text-cabai-500 border-cabai-500/30'
-    case 'Kerajinan Tangan':
-      return 'bg-kerajinan-500/10 text-kerajinan-500 border-kerajinan-500/30'
-    case 'Fashion':
-      return 'bg-fashion-500/10 text-fashion-500 border-fashion-500/30'
-    case 'Jasa & Servis':
-      return 'bg-wa-500/10 text-wa-500 border-wa-500/30'
-    case 'Pertanian & Perkebunan':
-      return 'bg-agro-500/10 text-agro-500 border-agro-500/30'
-    default:
-      return 'bg-cream-200 text-ink-900 border-cream-300'
-  }
 }
 
 export function formatPhoneWhatsApp(phone) {
@@ -81,14 +47,11 @@ export function makeWhatsAppLink(phone, umkmName, customMsg) {
   const cleanPhone = formatRawWaNumber(phone)
   if (!cleanPhone) return null
 
-  const defaultMsg = `Halo ${umkmName}, saya menemukan lapak Anda di UMKM-Go. Apakah saat ini sedang buka dan menerima pesanan?`
+  const defaultMsg = `Halo ${umkmName}, saya menemukan lapak Anda di UMKM-GO. Apakah saat ini sedang buka dan menerima pesanan?`
   const text = encodeURIComponent(customMsg || defaultMsg)
 
   return `https://wa.me/${cleanPhone}?text=${text}`
 }
-
-// Alias lama
-export const waLink = makeWhatsAppLink
 
 export function instagramLink(handle) {
   if (!handle) return null
@@ -96,14 +59,22 @@ export function instagramLink(handle) {
   return clean ? `https://instagram.com/${clean}` : null
 }
 
-export function withBase(url) {
-  if (!url) return null
-  if (/^https?:\/\//.test(url)) return url
-  return url
-}
-
 export function formatDate(iso) {
   if (!iso) return ''
   const d = new Date(String(iso).replace(' ', 'T'))
   return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+export function formatDistance(meters) {
+  if (!Number.isFinite(meters)) return ''
+  if (meters < 1000) return `${Math.round(meters)} m`
+  return `${(meters / 1000).toLocaleString('id-ID', { maximumFractionDigits: 1 })} km`
+}
+
+export function formatDuration(seconds) {
+  if (!Number.isFinite(seconds)) return ''
+  const mins = Math.round(seconds / 60)
+  if (mins < 60) return `${mins} menit`
+  const h = Math.floor(mins / 60)
+  return `${h} jam ${mins % 60} menit`
 }
