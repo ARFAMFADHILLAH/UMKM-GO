@@ -1,6 +1,6 @@
-﻿import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { LayoutGrid, List, RotateCcw, Search, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, LayoutGrid, List, RotateCcw, Search, X } from 'lucide-react'
 import UmkmCard from '../components/UmkmCard'
 import EmptyState from '../components/ui/EmptyState'
 import Spinner from '../components/ui/Spinner'
@@ -62,6 +62,14 @@ export default function Explore() {
 
   const hasActiveFilters = Boolean(search || categoryId || city)
 
+  // Navigasi halaman eksplisit (dipakai angka & chevron) - tanpa trik || yang rentan
+  const goToPage = (target) => {
+    const clamped = Math.min(Math.max(Number(target) || 1, 1), Math.max(lastPage, 1))
+    if (clamped === page) return
+    window.scrollTo({ top: 0 })
+    updateParams({ search, category_id: categoryId, city, page: clamped })
+  }
+
   const handleReset = () => {
     setInput('')
     setSortBy('recommended')
@@ -81,8 +89,8 @@ export default function Explore() {
   const activeCategory = categories.find((c) => String(c.id) === String(categoryId))
 
   const heading = useMemo(() => {
-    if (search && activeCategory) return `Hasil Ã¢â‚¬Å“${search}Ã¢â‚¬Â di ${activeCategory.name}`
-    if (search) return `Hasil pencarian Ã¢â‚¬Å“${search}Ã¢â‚¬Â`
+if (search && activeCategory) return `Hasil "${search}" di ${activeCategory.name}`
+    if (search) return `Hasil pencarian "${search}"`
     if (activeCategory) return `Kategori ${activeCategory.name}`
     if (city) return `Lapak di ${city}`
     return 'Jelajah usaha lokal'
@@ -100,7 +108,7 @@ export default function Explore() {
           </h1>
           <p className="mt-1 text-sm text-ink-500">
             {loading && !result
-              ? 'Memuat dataÃ¢â‚¬Â¦'
+              ? 'Memuat data...'
               : `${total} lapak ${city ? `di ${city}` : 'di seluruh Indonesia'}`}
           </p>
         </div>
@@ -207,7 +215,7 @@ export default function Explore() {
       </div>
 
       {loading ? (
-        <Spinner label="Memuat katalogÃ¢â‚¬Â¦" />
+        <Spinner label="Memuat katalog..." />
       ) : items.length === 0 ? (
         <EmptyState
           title="Tidak ditemukan lapak yang cocok"
@@ -239,19 +247,18 @@ export default function Explore() {
               <button
                 type="button"
                 disabled={page <= 1}
-                onClick={() => window.scrollTo({ top: 0 }) || updateParams({ search, category_id: categoryId, city, page: page - 1 })}
+                onClick={() => goToPage(page - 1)}
+                aria-label="Halaman sebelumnya"
                 className="btn btn-outline size-9 p-0! disabled:pointer-events-none disabled:opacity-40"
               >
-                Ã¢â‚¬Â¹
+                <ChevronLeft className="size-4" />
               </button>
+
               {Array.from({ length: lastPage }, (_, i) => i + 1).map((p) => (
                 <button
                   key={p}
                   type="button"
-                  onClick={() => {
-                    window.scrollTo({ top: 0 })
-                    updateParams({ search, category_id: categoryId, city, page: p })
-                  }}
+                  onClick={() => goToPage(p)}
                   aria-current={p === page ? 'page' : undefined}
                   className={`btn size-9 p-0! font-semibold text-sm tabular-nums ${p === page ? 'btn-primary' : 'btn-outline'}`}
                 >
@@ -261,10 +268,11 @@ export default function Explore() {
               <button
                 type="button"
                 disabled={page >= lastPage}
-                onClick={() => window.scrollTo({ top: 0 }) || updateParams({ search, category_id: categoryId, city, page: page + 1 })}
+                onClick={() => goToPage(page + 1)}
+                aria-label="Halaman berikutnya"
                 className="btn btn-outline size-9 p-0! disabled:pointer-events-none disabled:opacity-40"
               >
-                Ã¢â‚¬Âº
+                <ChevronRight className="size-4" />
               </button>
             </nav>
           )}
