@@ -44,7 +44,7 @@ function AuthShell({ children }) {
               ))}
             </div>
           </div>
-          <p className="text-caption tracking-wider text-cream-200/50">? {new Date().getFullYear()} LOKALINK</p>
+          <p className="text-caption tracking-wider text-cream-200/50">? {new Date().getFullYear()} UKMVERSE</p>
         </div>
       </aside>
 

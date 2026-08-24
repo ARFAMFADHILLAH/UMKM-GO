@@ -224,7 +224,7 @@ export default function UmkmDetail() {
   const wa = makeWhatsAppLink(
     umkm.phone_whatsapp,
     umkm.name,
-    `Halo ${umkm.name}, saya melihat lapak Anda di LOKALINK.`,
+    `Halo ${umkm.name}, saya melihat lapak Anda di UKMVERSE.`,
   )
   const ig = instagramLink(umkm.instagram)
   const hasCoords = umkm.latitude != null && umkm.longitude != null

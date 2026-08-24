@@ -17,7 +17,7 @@ export default function Logo({ dark = false, className = '' }) {
           dark ? 'text-white' : 'text-ink-900'
         }`}
       >
-        LOKAL<span className="text-brand-600">LINK</span>
+        UKM<span className="text-brand-600">VERSE</span>
       </span>
     </Link>
   )

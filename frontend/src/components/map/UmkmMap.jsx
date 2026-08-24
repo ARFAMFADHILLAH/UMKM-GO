@@ -153,7 +153,7 @@ export function UmkmMap({
       const waLink = makeWhatsAppLink(
         umkm.phone_whatsapp,
         umkm.name,
-        `Halo ${umkm.name}, saya melihat lapak Anda di peta LOKALINK.`
+        `Halo ${umkm.name}, saya melihat lapak Anda di peta UKMVERSE.`
       );
 
       const popupHtml = `

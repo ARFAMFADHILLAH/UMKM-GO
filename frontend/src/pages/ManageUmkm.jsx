@@ -82,12 +82,12 @@ export default function ManageUmkm() {
           }
           setExistingImage(u.image_cover ?? null)
           setLoaded(u)
-          document.title = `Edit ${u.name} - LOKALINK`
+          document.title = `Edit ${u.name} - UKMVERSE`
         })
         .catch((err) => setMessage(extractError(err).message))
         .finally(() => setLoading(false))
     } else {
-      document.title = 'Daftarkan Lapak - LOKALINK'
+      document.title = 'Daftarkan Lapak - UKMVERSE'
     }
   }, [isEdit, slug])
 
@@ -171,7 +171,7 @@ export default function ManageUmkm() {
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-500">
             Kios <strong>{submittedName}</strong> berhasil didaftarkan dan sedang menunggu
-            verifikasi admin. Setelah disetujui, lapak akan tayang di peta interaktif LOKALINK.
+            verifikasi admin. Setelah disetujui, lapak akan tayang di peta interaktif UKMVERSE.
             Statusnya bisa kamu pantau di Dashboard.
           </p>
         </div>

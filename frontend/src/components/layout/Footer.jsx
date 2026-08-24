@@ -24,7 +24,7 @@ export default function Footer() {
                 <Store className="size-5" strokeWidth={2.5} />
               </div>
               <span className="font-display text-2xl font-black tracking-tight text-white">
-                LOKA<span className="text-accent-400">LINK</span>
+                UKM<span className="text-accent-400">VERSE</span>
               </span>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-cream-100/70">
@@ -84,7 +84,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 pt-6 text-caption text-cream-100/50 sm:flex-row">
-          <p>? {new Date().getFullYear()} LOKALINK Indonesia.</p>
+          <p>? {new Date().getFullYear()} UKMVERSE Indonesia.</p>
         </div>
       </div>
     </footer>

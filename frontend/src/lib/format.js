@@ -47,7 +47,7 @@ export function makeWhatsAppLink(phone, umkmName, customMsg) {
   const cleanPhone = formatRawWaNumber(phone)
   if (!cleanPhone) return null
 
-  const defaultMsg = `Halo ${umkmName}, saya menemukan lapak Anda di LOKALINK. Apakah saat ini sedang buka dan menerima pesanan?`
+  const defaultMsg = `Halo ${umkmName}, saya menemukan lapak Anda di UKMVERSE. Apakah saat ini sedang buka dan menerima pesanan?`
   const text = encodeURIComponent(customMsg || defaultMsg)
 
   return `https://wa.me/${cleanPhone}?text=${text}`

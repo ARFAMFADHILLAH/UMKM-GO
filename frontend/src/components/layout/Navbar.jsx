@@ -65,7 +65,7 @@ export default function Navbar() {
           </div>
           <div>
             <span className="font-display text-lg font-black leading-none tracking-tight text-ink-900">
-              LOKA<span className="text-accent-500">LINK</span>
+              UKM<span className="text-accent-500">VERSE</span>
             </span>
           </div>
         </Link>

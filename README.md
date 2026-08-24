@@ -1,4 +1,4 @@
-# LOKALINK
+# UKMVERSE
 
 Website direktori UMKM Indonesia. Monorepo berisi **backend API** dan **frontend web**.
 

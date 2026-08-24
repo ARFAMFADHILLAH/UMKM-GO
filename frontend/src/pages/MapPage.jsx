@@ -290,7 +290,7 @@ export default function MapPage() {
 
               <div className="space-y-2 border-t border-ink-900/5 bg-white p-4">
                 <a
-                  href={makeWhatsAppLink(selectedUmkm.phone_whatsapp, selectedUmkm.name, `Halo ${selectedUmkm.name}, saya melihat lapak Anda di peta LOKALINK.`)}
+                  href={makeWhatsAppLink(selectedUmkm.phone_whatsapp, selectedUmkm.name, `Halo ${selectedUmkm.name}, saya melihat lapak Anda di peta UKMVERSE.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-wa w-full justify-center rounded-xl py-3! text-sm! font-bold"

@@ -10,7 +10,7 @@ export default function UmkmCard({ umkm, compact = false }) {
   const wa = makeWhatsAppLink(
     umkm.phone_whatsapp,
     umkm.name,
-    `Halo ${umkm.name}, saya melihat profil lapak Anda di LOKALINK (${window.location.origin}). Boleh tanya informasi produk & pemesanan?`,
+    `Halo ${umkm.name}, saya melihat profil lapak Anda di UKMVERSE (${window.location.origin}). Boleh tanya informasi produk & pemesanan?`,
   )
 
   const handleCardClick = () => navigate(`/umkms/${umkm.slug}`)
