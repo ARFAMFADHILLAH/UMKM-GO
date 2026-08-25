@@ -133,10 +133,6 @@ export default function Login() {
           Daftar gratis
         </Link>
       </p>
-      <p className="mt-3 rounded-xl border border-ink-900/[0.07] bg-ink-100 px-4 py-3 text-center text-xs text-ink-500">
-        Akun demo:{' '}
-        <span className="font-semibold text-ink-700">tempemendoanmasadam@gmail.com</span>
-      </p>
     </AuthShell>
   )
 }

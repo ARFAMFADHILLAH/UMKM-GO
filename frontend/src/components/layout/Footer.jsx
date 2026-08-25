@@ -83,8 +83,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 pt-6 text-caption text-cream-100/50 sm:flex-row">
-          <p>? {new Date().getFullYear()} UKMVERSE Indonesia.</p>
+        <div classN ame="flex flex-col items-center justify-between gap-3 pt-6 text-caption text-cream-100/50 sm:flex-row">
+          <p>&copy; {new Date().getFullYear()} UKMVERSE Indonesia.</p>
         </div>
       </div>
     </footer>

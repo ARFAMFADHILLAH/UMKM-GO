@@ -37,6 +37,8 @@ Buka http://localhost:5173. Vite sudah mem-proxy `/api` dan `/storage` ke `local
 |---|---|
 | `tempemendoanmasadam@gmail.com` | `tempemendo@nmas@d4m26` |
 
+Daftarkan akun sendiri via **Register** atau gunakan seeder (`php artisan migrate --seed` di backend) untuk data dummy.
+
 ## Fitur Frontend
 
 - Beranda: hero + pencarian cepat + kategori populer + UMKM terbaru

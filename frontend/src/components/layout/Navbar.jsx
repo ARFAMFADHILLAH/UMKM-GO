@@ -58,16 +58,11 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink-900/[0.07] bg-white/85 shadow-[0_1px_0_rgba(0,0,0,0.02),0_1px_2px_rgba(16,12,42,0.04)] backdrop-blur-xl">
       <div className="container-full flex items-center justify-between gap-4 py-3">
-        {/* Brand */}
+        {/* Brand (text only) */}
         <Link to="/" className="group flex items-center gap-2.5 text-left">
-          <div className="flex size-9 items-center justify-center rounded-xl bg-ink-900 text-accent-400 shadow-sm transition-colors group-hover:bg-brand-500">
-            <Store className="size-4.5" strokeWidth={2.4} />
-          </div>
-          <div>
-            <span className="font-display text-lg font-black leading-none tracking-tight text-ink-900">
-              UKM<span className="text-accent-500">VERSE</span>
-            </span>
-          </div>
+          <span className="font-display text-lg font-black leading-none tracking-tight text-ink-900">
+            UKM<span className="text-accent-500">VERSE</span>
+          </span>
         </Link>
 
         {/* Desktop search bar - disembunyikan di Home (hero sudah punya versi besar) */}

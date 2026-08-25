@@ -55,13 +55,16 @@ php artisan serve
 
 Server akan berjalan di `http://localhost:8000`.
 
+### Seeder Data
+
+Seeder mengisi 15 UMKM milik 2 user yang tersebar di berbagai kota di Indonesia — lengkap dengan gambar sampul (placeholder yang digenerate otomatis ke `storage/app/public/umkms`) serta koordinat latitude/longitude untuk peta. Jalankan `php artisan migrate --seed` untuk mengisi data.
+
 ### Kredensial Seeder
 
 | Email | Password |
 |---|---|
 | `tempemendoanmasadam@gmail.com` | `tempemendo@nmas@d4m26` |
-
-Seeder mengisi 15 UMKM milik 2 user (10 milik akun demo di atas, 5 milik `ratnawijaya@gmail.com`) yang tersebar di berbagai kota di Indonesia — lengkap dengan gambar sampul (placeholder yang digenerate otomatis ke `storage/app/public/umkms`) serta koordinat latitude/longitude untuk peta.
+| `ratnawijaya@gmail.com` | `tempemendo@nmas@d4m26` |
 
 ## Dokumentasi API
 
